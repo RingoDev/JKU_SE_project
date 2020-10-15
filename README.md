@@ -24,9 +24,10 @@
   * ACHTUNG! wenn kein SSH key mit GitHub ausgetauscht wurde dann muss stattdessen dieser BEfehl verwendet werden: `git remote add origin https://github.com/RingoDev/JKU_SE_project.git`
 * pullen des teamspezifischen Branches ZB: `git pull origin team2`
 
+## Änderungen speichern
 
-
-
+Befehle `git add .` und `git commit -m "commit message"` Committen alle Änderungen zum derzeit ausgewählten branch
+pushen auf das Github repository mit `git push origin team2`
 
 
 # Available Scripts
