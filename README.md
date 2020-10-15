@@ -23,6 +23,7 @@
 * Remote Repository url hinzufügen mit `git remote add origin git@github.com:RingoDev/JKU_SE_project.git`
   * ACHTUNG! wenn kein SSH key mit GitHub ausgetauscht wurde dann muss stattdessen dieser BEfehl verwendet werden: `git remote add origin https://github.com/RingoDev/JKU_SE_project.git`
 * pullen des teamspezifischen Branches ZB: `git pull origin team2`
+* wechseln in den team branch mit `git checkout team2`
 * npm module installieren mit `npm install`
 
 ## Änderungen speichern
