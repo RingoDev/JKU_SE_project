@@ -6,12 +6,12 @@
 
 * Git installieren
 
-### Unsichere Methode User und PW in Text speichern: 
+* Unsichere Methode User und PW in Text speichern: 
 
 ```git config --global user.name "your username"
    git config --global user.password "your password"
 ```
-### Sichere Methode SSH Key erstellen und Public Key auf Github hinzufügen: 
+* Sichere Methode SSH Key erstellen und Public Key auf Github hinzufügen: 
 
 [Tutorial](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
@@ -26,8 +26,8 @@
 
 ## Änderungen speichern
 
-Befehle `git add .` und `git commit -m "commit message"` Committen alle Änderungen zum derzeit ausgewählten branch
-pushen auf das Github repository mit `git push origin team2`
+* Befehle `git add .` und `git commit -m "commit message"` Committen alle Änderungen zum derzeit ausgewählten branch
+* Pushen auf das Github repository mit `git push origin team2`
 
 
 # Available Scripts
