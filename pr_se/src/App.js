@@ -12,15 +12,13 @@ export class App extends React.Component {
             counter:0,
             userList: [
                 {name: "Hugo", votes: 0},
-                {name: "Max", votes: 0},
-                {name: "Hans", votes: 0},
-                {name: "Müller", votes: 0},
             ],
             contactsList: [
                 {GID: 1, X: 843738, Y: 3453},
                 {GID: 2, X: 8437328, Y: 34353},
             ]
-
+            ,
+            contactsRead: [{GID: 1, X: 843738, Y: 3453},]
         }
     }
 
@@ -34,37 +32,48 @@ export class App extends React.Component {
         this.setState({userList: listCopy})
 
     }
-/*
+
     getData() {
         fetch('./json/data.json')
             .then(res => res.json())
             .then(data => {
                 //     console.log(data)
-                this.setState({ contacts: data })
+                this.setState({ contactsRead: data })
             })
             //.catch(err => console.error(err));
             .catch(console.log)
     }
-*/
+
 
 
     render() {
         return (
             <div>
-                <h1>Hello World</h1> {"Any JS between {}"}<br />
-
-                {this.state.contactsList.map((user, idx) =>
+                <h1>Hello World</h1> <br />
+                <br /><br /><br /><br />
+                Testdaten
+                {this.state.contactsList.map((user) =>
                     <UserGPS
-                        GID = {idx}
+                        GID = {user.GID}
                         X = {user.X}
                         Y = {user.Y}
                     />
                 )}
+                <br /><br />Test Read-Daten
+                {this.getData()}
+                {this.state.contactsRead.map((user) =>
+                    <UserGPS
+                    GID = {user.GID}
+                    X = {user.X}
+                    Y = {user.Y}
+                    />
+                )}
 
+                <br /><br /><br /><br />
                 {this.props.name} <br />
                 {this.props.id}<br />
                 {this.state.counter}<br />
-                <button onClick = {() => this.doClick()}>My Button</button>
+
 
                 {this.state.userList.map((user, idx) =>
                     <User
@@ -75,8 +84,6 @@ export class App extends React.Component {
                     />
                 )}
 
-
-                <h1>Hello World</h1> {"Any JS between {}"}<br />
             </div>
         )
     }
