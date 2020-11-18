@@ -1,4 +1,5 @@
 import React from "react";
+import {Button} from "reactstrap";
 
 export default class Location extends React.Component {
 
@@ -13,8 +14,8 @@ export default class Location extends React.Component {
     render() {
         return (
             <>
-                <button onClick={() => this.getLocation()}>Get My Location</button>
-                <button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</button>
+                <Button onClick={() => this.getLocation()}>Get My Location</Button>
+                <Button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</Button>
             </>
         )
 

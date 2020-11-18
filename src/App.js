@@ -1,7 +1,9 @@
 import React from 'react';
 import Location from './Location'
+import Map from "./Map";
+import {Container} from "reactstrap";
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,13 +14,20 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <Location
-                    app={this}
-                    interval={50}
-                />
-                <p>{this.getLatitude()}</p>
-                <p>{this.getLongitude()}</p>
-                <p>{this.getTimeStamp()}</p>
+                <Container className={'p-5'}>
+                    <Location
+                        app={this}
+                        interval={500}
+                    />
+                    {/*<p>{this.getLatitude()}</p>*/}
+                    {/*<p>{this.getLongitude()}</p>*/}
+                    {/*<p>{this.getTimeStamp()}</p>*/}
+                    {/*render Map if we have location of user*/}
+
+                    {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
+                </Container>
+
+
             </div>
         );
     }
@@ -47,4 +56,3 @@ class App extends React.Component {
     }
 }
 
-export default App;
