@@ -5,7 +5,7 @@ import Delete from "./Delete";
 import Put from "./Put";
 
 
-export class App extends React.Component {
+export class Requests extends React.Component {
 
     constructor(props) {
         super(props)
