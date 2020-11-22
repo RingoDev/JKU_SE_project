@@ -24,4 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .idea
-.env
+/client/.env
+/client/node_modules/
+/server/node_modules/
