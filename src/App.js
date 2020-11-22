@@ -17,7 +17,7 @@ export class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>Key Component 3 - REST</h1>
+                <h1>MyEvents</h1>
 
                 <h3>1. GET-Request</h3>
                 <Get></Get>
