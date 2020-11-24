@@ -10,6 +10,11 @@
 
 }
 
+/*removes links bottom right*/
+.mapboxgl-ctrl-attrib{
+    display: none;
+}
+
 .marker {
   background-image: url('Location-marker.svg');
   background-size: cover;
