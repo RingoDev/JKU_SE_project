@@ -12,7 +12,6 @@ interface MapProps {
 
 const Map = (props: MapProps) => {
 
-    console.log(props)
     const mapContainerRef = useRef<HTMLDivElement>(null);
     // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
 
