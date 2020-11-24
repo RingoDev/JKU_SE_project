@@ -7,27 +7,28 @@ import "./App.css";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ? process.env.REACT_APP_MAPBOX_ACCESS_TOKEN : '';
 
-interface MapProps{
-    location:GeolocationPosition
+interface MapProps {
+    location: GeolocationPosition
 }
-const Map = (props:MapProps) => {
+
+const Map = (props: MapProps) => {
 
     console.log(props)
-    const mapContainerRef = useRef('map');
+    // const mapContainerRef = useRef<HTMLDivElement>(null);
     const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
 
     // initialize map when component mounts
     useEffect(() => {
         const map = new mapboxgl.Map({
-            container: mapContainerRef.current,
+            container: 'map',
             // See style options here: https://docs.mapbox.com/api/maps/#styles
-            style: "mapbox://styles/mapbox/streets-v11",
+            style: "mapbox://styles/mapbox/dark-v10",
             center: [props.location.coords.longitude, props.location.coords.latitude],
             zoom: 10
         });
 
         // add navigation control (zoom buttons)
-        map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
+        // map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
         // creates a Marker at the Location of the passed in location object
         new mapboxgl.Marker()
@@ -38,7 +39,7 @@ const Map = (props:MapProps) => {
         return () => map.remove();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    return <div className="map-container" ref={mapContainerRef.current}/>;
+    return <div className="map-container"  id={'map'}/>;
 };
 
 export default Map;
