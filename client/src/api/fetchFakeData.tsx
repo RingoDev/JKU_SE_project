@@ -11,7 +11,13 @@
  * @param {CoordinatePair} centerCoordinates - the {@link CoordinatePair} for the map center
  * @return {results} GeoJSON FeatureCollection
  */
-const fetchFakeData = centerCoordinates => {
+
+interface CoordinatePair{
+longitude:number,
+  latitude:number
+}
+
+const fetchFakeData = (centerCoordinates:CoordinatePair) => {
   const newFeaturesList = [];
   for (let i = 0; i < 20; i++) {
     const id = i;
@@ -38,14 +44,14 @@ const fetchFakeData = centerCoordinates => {
 
 /**
  * Generates a random point within 0.025 radius of map center coordinates.
- * @param {CoordinatePair} centerCoordinates - the {@link CoordinatePair} for the map center
  * @return {CoordinatePair} randomly generated coordinate pair
+ * @param centerPair
  */
-const getRandomCoordinate = ({ longitude: centerLon, latitude: centerLat }) => {
+const getRandomCoordinate = (centerPair:CoordinatePair) => {
   const r = 0.025 * Math.sqrt(Math.random());
   const theta = Math.random() * 2 * Math.PI;
-  const latitude = centerLat + r * Math.cos(theta);
-  const longitude = centerLon + r * Math.sin(theta);
+  const latitude = centerPair.latitude + r * Math.cos(theta);
+  const longitude = centerPair.longitude + r * Math.sin(theta);
   return { longitude, latitude };
 };
 

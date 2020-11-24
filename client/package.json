@@ -1,11 +1,18 @@
 {
-  "name": "se_project_client",
+  "name": "client2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^26.0.15",
+    "@types/mapbox-gl": "^1.12.8",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "@types/reactstrap": "^8.7.2",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
@@ -14,8 +21,9 @@
     "popper.js": "^1.16.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "4.0.0",
+    "react-scripts": "4.0.1",
     "reactstrap": "^8.7.1",
+    "typescript": "^4.0.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

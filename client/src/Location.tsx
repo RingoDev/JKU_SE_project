@@ -1,12 +1,19 @@
 import React from "react";
 import {Button} from "reactstrap";
 
-export default class Location extends React.Component {
+interface LocationProps{
+    setLocation: (location: GeolocationPosition) => void
+    interval : number
+}
+interface LocationState{
+    grabLocation:boolean
+}
+export default class Location extends React.Component<LocationProps,LocationState> {
 
-    constructor(props) {
+
+    constructor(props:LocationProps) {
         super(props);
         this.state = {
-            app: {},
             grabLocation: true,
         }
     }
@@ -27,7 +34,7 @@ export default class Location extends React.Component {
             this.setState({grabLocation: true})
             while (this.state.grabLocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    this.props.app.setState({location: position})
+                    this.props.setLocation(position);
                 });
                 await sleep(this.props.interval)
             }
@@ -38,6 +45,6 @@ export default class Location extends React.Component {
 
 }
 
-function sleep(ms) {
+function sleep(ms:number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
