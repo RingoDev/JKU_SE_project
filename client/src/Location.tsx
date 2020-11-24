@@ -1,17 +1,20 @@
 import React from "react";
 import {Button} from "reactstrap";
 
-interface LocationProps{
-    setLocation: (location: GeolocationPosition) => void
-    interval : number
+interface LocationProps {
+    setLocation: (location?: GeolocationPosition) => void
+    interval: number
 }
-interface LocationState{
-    grabLocation:boolean
+
+interface LocationState {
+    grabLocation: boolean
 }
-export default class Location extends React.Component<LocationProps,LocationState> {
 
+export default class Location extends React.Component<LocationProps, LocationState> {
 
-    constructor(props:LocationProps) {
+    private intervalID: NodeJS.Timeout | undefined;
+
+    constructor(props: LocationProps) {
         super(props);
         this.state = {
             grabLocation: true,
@@ -21,30 +24,33 @@ export default class Location extends React.Component<LocationProps,LocationStat
     render() {
         return (
             <>
-                <Button onClick={() => this.getLocation()}>Get My Location</Button>
-                <Button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</Button>
+                {/*<Button onClick={() => this.getLocation()}>Get My Location</Button>*/}
+                {/*<Button onClick={() =>  this.stopGettingLocation()}> Stop It !</Button>*/}
             </>
         )
 
     }
 
-
-    async getLocation() {
-        if (navigator.geolocation) {
-            this.setState({grabLocation: true})
-            while (this.state.grabLocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    this.props.setLocation(position);
-                });
-                await sleep(this.props.interval)
-            }
-        } else {
-            // Todo show alert
-        }
+    componentDidMount() {
+        this.tick();
+        this.intervalID = setInterval(
+            () => this.tick(),
+            this.props.interval
+        );
     }
 
+    tick() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.props.setLocation(position);
+        });
+    }
+
+    // stopGettingLocation(){
+    //     // this.setState({grabLocation: false});
+    //     this.props.setLocation(undefined);
+    // }
 }
 
-function sleep(ms:number) {
+function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

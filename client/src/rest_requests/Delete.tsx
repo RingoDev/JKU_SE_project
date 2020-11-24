@@ -8,12 +8,11 @@ export default class Delete extends React.Component {
         feedback: '',
     }
 
-    handleChange = event => {
-        this.setState({ id: event.target.value });
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({id: event.target.value});
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = () => {
 
         // Delete-Request
         axios.delete(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/deleteMember?${this.state.id}`)
@@ -35,10 +34,10 @@ export default class Delete extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Person ID:
-                        <input className={"ip-field"} type="text" name="id" onChange={this.handleChange} />
+                        <input className={"ip-field"} type="text" name="id" onChange={this.handleChange}/>
                     </label>
-                    <br />
-                    <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
+                    <br/>
+                    <p className={"fb-field"}>{this.state.feedback}</p>
                     <button type="submit">Delete</button>
                 </form>
             </div>

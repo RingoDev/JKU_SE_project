@@ -1,6 +1,13 @@
-.map-container {
- height: 300px;
-  width: 300px;
+#map-container {
+    min-height: 300px;
+    min-width: 300px;
+    flex-grow: 2;
+}
+
+.map{
+    height:100%;
+    width:100%;
+
 }
 
 .marker {
@@ -10,4 +17,17 @@
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 100%
+}
+#container > div{
+    padding: 0.5em;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
 }

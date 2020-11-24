@@ -1,11 +1,26 @@
 import React from 'react';
 import axios from 'axios';
+
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Get extends React.Component {
-    state = {
-        persons: []
+interface Person {
+    Vorname: string,
+    Nachname: string
+}
+
+interface GetState {
+    persons: Person[]
+}
+
+export default class Get extends React.Component<any, GetState> {
+
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            persons: []
+        }
     }
+
 
     componentDidMount() {
 
@@ -28,7 +43,7 @@ export default class Get extends React.Component {
                  */
                 const persons = res.data;
 
-                this.setState({ persons }); // Speichern in Array
+                this.setState({persons}); // Speichern in Array
             })
             .catch(function (error) {
                 // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
@@ -45,9 +60,9 @@ export default class Get extends React.Component {
                 Vorname: 'Max',
             }
         })
-        .then(function (response) {
-            console.log(response);
-        })
+            .then(function (response) {
+                console.log(response);
+            })
     }
 
     /*
@@ -58,7 +73,7 @@ export default class Get extends React.Component {
     render() {
         return (
             <ul>
-                { this.state.persons.map(person => <li>{person.Vorname} {person.Nachname}</li>)}
+                {this.state.persons.map(person => <li>{person.Vorname} {person.Nachname}</li>)}
             </ul>
         )
     }

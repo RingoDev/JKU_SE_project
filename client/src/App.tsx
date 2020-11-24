@@ -1,7 +1,7 @@
 import React from 'react';
 import Location from './Location'
 import Map from "./Map";
-import {Container} from "reactstrap";
+import {Requests} from "./rest_requests/Requests";
 
 interface AppState {
     location: GeolocationPosition | undefined
@@ -16,29 +16,27 @@ export default class App extends React.Component<any, AppState> {
 
     }
 
-    setLocation(location: GeolocationPosition) {
+    setLocation(location?: GeolocationPosition) {
         this.setState({location: location})
     }
 
     render() {
         return (
             <div className="App">
-                <Container className={'p-5'}>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                        <div>
-                            <Location
-                                setLocation={(location) => this.setLocation(location)}
-                                interval={500}
-                            />
-                        </div>
-                        <div>
-                            {/*render Map if we have location of user*/}
-                            {this.state.location ? <Map location={this.state.location}/> : <></>}
-                        </div>
+                <div id={'container'} className={'p-5'}>
+                    <div>
+                        <Requests/>
                     </div>
+                    <div id={'map-container'}>
+                        <Location
+                            setLocation={(location?) => this.setLocation(location)}
+                            interval={500}
+                        />
 
-                    {/*<Requests/>*/}
-                </Container>
+                        {this.state.location ? <Map location={this.state.location}/> : <>You have to activate Location
+                            Services to use this App</>}
+                    </div>
+                </div>
             </div>
         );
     }

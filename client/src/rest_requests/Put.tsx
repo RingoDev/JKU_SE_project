@@ -9,15 +9,14 @@ export default class Put extends React.Component {
         feedback: '',
     }
 
-    handleChangeId = event => {
+    handleChangeId = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ userId: event.target.value });
     }
-    handleChangeMail = event => {
+    handleChangeMail = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({ mail: event.target.value });
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = () => {
 
         const userMail = {
             userId: this.state.userId,
@@ -56,7 +55,7 @@ export default class Put extends React.Component {
                         <input className={"ip-field"} type="text" name="mail" onChange={this.handleChangeMail} />
                     </label>
                     <br />
-                    <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
+                    <p className={"fb-field"}>{this.state.feedback}</p>
                     <button type="submit">Add</button>
                 </form>
             </div>

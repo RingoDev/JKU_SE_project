@@ -9,16 +9,15 @@ export default class Post extends React.Component {
         feedback: '',
     }
 
-    handleChangeVorname = event => {
-        this.setState({ vorname: event.target.value });
+    handleChangeVorname = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({vorname: event.target.value});
     }
 
-    handleChangeNachname = event => {
-        this.setState({ nachname: event.target.value });
+    handleChangeNachname = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({nachname: event.target.value});
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = () => {
 
         const member = {
             vorname: this.state.vorname,
@@ -27,7 +26,7 @@ export default class Post extends React.Component {
         };
 
         // Post-Request
-        axios.post(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/addMember`, { member })
+        axios.post(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/addMember`, {member})
             .then(res => {
                 // Ergebnisbehandlung
                 console.log(res);
@@ -68,15 +67,15 @@ export default class Post extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Vorame:
-                        <input className={"ip-field"} type="text" name="vorname" onChange={this.handleChangeVorname} />
+                        <input className={"ip-field"} type="text" name="vorname" onChange={this.handleChangeVorname}/>
                     </label>
-                    <br />
+                    <br/>
                     <label>
                         Nachname:
-                        <input type="text" className={"ip-field"} name="nachname" onChange={this.handleChangeNachname} />
+                        <input type="text" className={"ip-field"} name="nachname" onChange={this.handleChangeNachname}/>
                     </label>
-                    <br />
-                    <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
+                    <br/>
+                    <p className={"fb-field"}>{this.state.feedback}</p>
                     <button type="submit">Add</button>
                 </form>
             </div>
