@@ -1,5 +1,4 @@
 import React from "react";
-import {Button} from "reactstrap";
 
 interface LocationProps {
     setLocation: (location?: GeolocationPosition) => void
@@ -49,8 +48,4 @@ export default class Location extends React.Component<LocationProps, LocationSta
     //     // this.setState({grabLocation: false});
     //     this.props.setLocation(undefined);
     // }
-}
-
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

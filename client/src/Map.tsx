@@ -1,7 +1,6 @@
 import React, {useRef, useEffect} from "react";
 import mapboxgl from "mapbox-gl";
 
-import Marker from "./components/Marker";
 import "./App.css";
 
 
@@ -15,7 +14,7 @@ const Map = (props: MapProps) => {
 
     console.log(props)
     const mapContainerRef = useRef<HTMLDivElement>(null);
-    const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
+    // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
 
     // initialize map when component mounts
     useEffect(() => {
@@ -39,7 +38,7 @@ const Map = (props: MapProps) => {
 
         // clean up on unmount
         return () => map.remove();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    },[]);// eslint-disable-line
 
     return <div className="map" ref={mapContainerRef} id={'map'}/>;
 };
