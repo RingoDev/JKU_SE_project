@@ -1,5 +1,7 @@
 import axios from 'axios';
 
-// export default axios.create({baseURL: 'http://localhost:3001'})
+let baseURL = 'https://backend.ringodev.com:3000'
 
-export default axios.create({baseURL: 'https://backend.ringodev.com:3000'})
+if (process.env.NODE_ENV === 'development') baseURL = 'http://localhost:3001'
+
+export default axios.create({baseURL})
