@@ -73,7 +73,7 @@ export default class Get extends React.Component<any, GetState> {
     render() {
         return (
             <ul>
-                {this.state.persons.map(person => <li>{person.Vorname} {person.Nachname}</li>)}
+                {this.state.persons.map((person, idx) => <li key={idx}>{person.Vorname} {person.Nachname}</li>)}
             </ul>
         )
     }

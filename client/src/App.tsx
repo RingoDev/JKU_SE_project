@@ -1,17 +1,27 @@
 import React from 'react';
 import Location from './Location'
 import Map from "./Map";
-import {Requests} from "./rest_requests/Requests";
+import Users from "./Users";
 
 interface AppState {
     location: GeolocationPosition | undefined
+    users: User[]
+}
+
+export interface User {
+    position: {
+        longitude: number,
+        latitude: number,
+    }
+    name: string
 }
 
 export default class App extends React.Component<any, AppState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            location: undefined
+            location: undefined,
+            users: [],
         }
 
     }
@@ -20,12 +30,18 @@ export default class App extends React.Component<any, AppState> {
         this.setState({location: location})
     }
 
+    setUsers(users: User[]) {
+        this.setState({users})
+    }
+
     render() {
         return (
             <div className="App">
                 <div id={'container'} className={'p-5'}>
-                    <div>
-                        <Requests/>
+                    <div id={'userContainer'} className={'p-5'}>
+                        {/*<Requests/>*/}
+                        <Users users={this.state.users} fetchInterval={15000}
+                               setUsers={(users) => this.setUsers(users)}/>
                     </div>
                     <div id={'map-container'}>
                         <Location
@@ -33,8 +49,10 @@ export default class App extends React.Component<any, AppState> {
                             interval={500}
                         />
 
-                        {this.state.location ? <Map location={this.state.location}/> : <>You have to activate Location
-                            Services to use this App</>}
+
+                        {this.state.location ? <Map users={this.state.users} location={this.state.location}/> :
+                            <div>You have to activate Location
+                                Services to use this App</div>}
                     </div>
                 </div>
             </div>
