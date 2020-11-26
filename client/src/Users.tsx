@@ -56,6 +56,7 @@ const Users: React.FC<UsersProps> = (props) => {
 
     useEffect(() => {
         getUsers()
+        postLocation()
         const interval = setInterval(() => {
             // will run every fetchInterval/1000 seconds
             // do a get request and a post request

@@ -46,7 +46,7 @@ export default class App extends React.Component<{ name: string }, AppState> {
                         <div id={'userContainer'} className={'p-5'}>
                             {/*<Requests/>*/}
                             <Users location={this.state.location} username={this.props.name} users={this.state.users}
-                                   fetchInterval={15000}
+                                   fetchInterval={5000}
                                    setUsers={(users) => this.setUsers(users)}/>
                         </div>
                         <div id={'map-container'}>
