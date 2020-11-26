@@ -10,6 +10,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ? process.env.R
 interface MapProps {
     location: GeolocationPosition,
     users: User[]
+    myUsername:string
 }
 
 interface UserMarker {
@@ -58,6 +59,10 @@ const Map = (props: MapProps) => {
     // adding other users to map
     if (map) {
         for (let user of props.users) {
+
+            // dont show myself with others
+            if(user.name === props.myUsername) continue;
+
             let foundMarker = false;
             for (let userMarker of userMarkers) {
                 if (userMarker.name === user.name) {

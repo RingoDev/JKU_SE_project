@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
-import App from './App';
+import LandingPage from "./LandingPage";
 
 
 require('dotenv').config();
@@ -11,7 +11,7 @@ require('dotenv').config();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LandingPage />
   </React.StrictMode>,
   document.getElementById('root')
 );

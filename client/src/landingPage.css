@@ -1,0 +1,18 @@
+#landingContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%
+}
+#landingContainer > div{
+    width:20em;
+    padding:1em;
+}
+
+.card-content{
+    text-align: center;
+}
+#landingContainer input{
+    text-align: center;
+}

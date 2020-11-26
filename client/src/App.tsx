@@ -16,7 +16,7 @@ export interface User {
     name: string
 }
 
-export default class App extends React.Component<any, AppState> {
+export default class App extends React.Component<{ name: string }, AppState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -37,24 +37,28 @@ export default class App extends React.Component<any, AppState> {
     render() {
         return (
             <div className="App">
-                <div id={'container'} className={'p-5'}>
-                    <div id={'userContainer'} className={'p-5'}>
-                        {/*<Requests/>*/}
-                        <Users users={this.state.users} fetchInterval={15000}
-                               setUsers={(users) => this.setUsers(users)}/>
-                    </div>
-                    <div id={'map-container'}>
-                        <Location
-                            setLocation={(location?) => this.setLocation(location)}
-                            interval={500}
-                        />
+                <Location
+                    setLocation={(location?) => this.setLocation(location)}
+                    interval={500}
+                />
+                {this.state.location ?
+                    <div id={'container'} className={'p-5'}>
+                        <div id={'userContainer'} className={'p-5'}>
+                            {/*<Requests/>*/}
+                            <Users location={this.state.location} username={this.props.name} users={this.state.users}
+                                   fetchInterval={15000}
+                                   setUsers={(users) => this.setUsers(users)}/>
+                        </div>
+                        <div id={'map-container'}>
 
 
-                        {this.state.location ? <Map users={this.state.users} location={this.state.location}/> :
-                            <div>You have to activate Location
-                                Services to use this App</div>}
+                            <Map myUsername={this.props.name} users={this.state.users}
+                                 location={this.state.location}/> :
+
+                        </div>
                     </div>
-                </div>
+                    : <div>You have to activate Location
+                        Services to use this App</div>}
             </div>
         );
     }

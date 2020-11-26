@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, {useEffect} from "react";
 import {User} from "./App";
 
 // axios with baseURL set
@@ -8,6 +8,8 @@ interface UsersProps {
     setUsers: (users: User[]) => void
     fetchInterval: number
     users: User[]
+    username: string
+    location?: GeolocationPosition
 }
 
 const Users: React.FC<UsersProps> = (props) => {
@@ -35,12 +37,30 @@ const Users: React.FC<UsersProps> = (props) => {
             })
     }
 
+    const postLocation = () => {
+
+        console.log(props)
+        const userData = {
+            name: props.username,
+            latitude: props.location?.coords.latitude,
+            longitude: props.location?.coords.longitude
+        }
+        axios.post('/users', userData)
+            .then(res => {
+                console.log(res.data)
+            })
+            .catch(function (error) {
+                console.log(error + ' Fehler! Code: ' + error.staus);
+            })
+    }
+
     useEffect(() => {
         getUsers()
         const interval = setInterval(() => {
             // will run every fetchInterval/1000 seconds
             // do a get request and a post request
             getUsers()
+            postLocation()
         }, props.fetchInterval);
         return () => {
             if (interval) {
@@ -50,7 +70,11 @@ const Users: React.FC<UsersProps> = (props) => {
     }, [])// eslint-disable-line
     return (
         <>
+            <div>
+                {props.username}
+            </div>
             {props.users.map((user, idx) => {
+                if (user.name === props.username) return (<></>)
                 return (
                     <div key={idx}>
                         <div>{user.name}
