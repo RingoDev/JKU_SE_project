@@ -38,6 +38,7 @@ const Map = (props: MapProps) => {
         });
         setMap(myMap)
         const myMarker = new mapboxgl.Marker()
+            .setPopup(new mapboxgl.Popup().setText(props.myUsername))
             .setLngLat({lng: props.location.coords.longitude, lat: props.location.coords.latitude})
             .addTo(myMap);
         setMyMarker(myMarker);
@@ -72,8 +73,11 @@ const Map = (props: MapProps) => {
                 }
             }
             if (!foundMarker) {
+
+                const popUp = new mapboxgl.Popup().setText(user.name)
                 // create a marker for user
                 const marker = new mapboxgl.Marker()
+                    .setPopup(popUp)
                     .setLngLat({lng: user.position.longitude, lat: user.position.latitude})
                     .addTo(map)
 
