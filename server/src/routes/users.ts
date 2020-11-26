@@ -6,18 +6,27 @@ const router = express.Router();
 
 //GETS BACK ALL THE USER/ENTRIES
 router.get('/', (req, res) => {
-    User.find().then((users) => res.json(users))
+    User.find().then((users) => {
+        res.json(users)
+    })
         .catch(err => res.json({message: err}))
+
 });
 
 //SUBMITS A USER/ENTRY
 router.post('/', async (req, res) => {
     console.log("Somebody posted a user")
+
+    const date = Date.now()
+
+    console.log("Updating user to time:" + date)
     // try to update existing user
     User.findOneAndUpdate({name: req.body.name}, {
+        date: date,
         longitude: req.body.longitude,
         latitude: req.body.latitude
     }, {new: true}, (_error, doc, _result) => {
+        console.log("Updated user to ",doc)
         // if there was no user with the name -> create User
         if (doc === null) {
             const newUser = new User({
