@@ -29,8 +29,9 @@ mongoose.connect(
     .then((_value) => {
         console.log('connected to DB')
 
-        // run a cleanup every 30 seconds and delete old entries
-        const interval = 1000 * 15;
+        // run a cleanup every 45 seconds and delete old entries
+        const interval = 1000 * 45;
+        const ageInMilliseconds = 1000 * 60
         setInterval(() => {
             console.log("Running cleanup")
             User.find().then((users: any[]) => {
@@ -38,10 +39,7 @@ mongoose.connect(
                     const userDate: Date = user.date
                     // if entry is older then a minute
                     const now = Date.now()
-                    if ((now - userDate.getTime()) > 1000 * 60) {
-                        console.log(now)
-                        console.log(userDate.getTime())
-                        console.log((now - userDate.getTime())/1000)
+                    if ((now - userDate.getTime()) > ageInMilliseconds) {
                         User.deleteOne({name: user.name})
                             .then((value) => console.log("Cleaned up " + value.deletedCount + " User"))
                     } else {
