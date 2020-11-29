@@ -79,7 +79,7 @@ const Users: React.FC<UsersProps> = (props) => {
                     <p>First Line <br/>
                         Second Line
                     </p>
-                    <a href="#" className="secondary-content"><i className="material-icons">grade</i></a>
+                    <span className="secondary-content"><i className="material-icons">grade</i></span>
                 </li>
 
                 {props.users.map((user, idx) => {
@@ -92,7 +92,7 @@ const Users: React.FC<UsersProps> = (props) => {
                                 <p>First Line <br/>
                                     Second Line
                                 </p>
-                                <a href="#" className="secondary-content"><i className="material-icons">grade</i></a>
+                                <span className="secondary-content"><i className="material-icons">grade</i></span>
                             </div>
                         </li>
                     )
