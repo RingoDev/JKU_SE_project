@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import {User} from "./App";
+import "./Users.css"
 
 // axios with baseURL set
 import axios from "./axios";
@@ -71,24 +72,32 @@ const Users: React.FC<UsersProps> = (props) => {
     }, [])// eslint-disable-line
     return (
         <>
-            <div>
-                {props.username}
-            </div>
-            {props.users.map((user, idx) => {
-                if (user.name === props.username) return (<></>)
-                return (
-                    <div key={idx}>
-                        <div>{user.name}
-                        </div>
-                        <div>
-                            {user.position.latitude}
-                        </div>
-                        <div>
-                            {user.position.longitude}
-                        </div>
-                    </div>
-                )
-            })}
+            <ul className="collection">
+                <li className="collection-item avatar">
+                    <i className="material-icons circle green">insert_chart</i>
+                    <span className="title">{props.username}</span>
+                    <p>First Line <br/>
+                        Second Line
+                    </p>
+                    <a href="#" className="secondary-content"><i className="material-icons">grade</i></a>
+                </li>
+
+                {props.users.map((user, idx) => {
+                    if (user.name === props.username) return (<></>)
+                    return (
+                        <li key={idx}>
+                            <div>
+                                <i className="material-icons circle red">insert_chart</i>
+                                <span className="title">{user.name}</span>
+                                <p>First Line <br/>
+                                    Second Line
+                                </p>
+                                <a href="#" className="secondary-content"><i className="material-icons">grade</i></a>
+                            </div>
+                        </li>
+                    )
+                })}
+            </ul>
         </>
     )
 }

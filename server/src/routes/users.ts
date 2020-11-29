@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User';
+import {Model} from "mongoose";
 
 
 const router = express.Router();
@@ -26,7 +27,7 @@ router.post('/', async (req, res) => {
         longitude: req.body.longitude,
         latitude: req.body.latitude
     }, {new: true}, (_error, doc, _result) => {
-        console.log("Updated user to ",doc)
+        console.log("Updated user to ", doc)
         // if there was no user with the name -> create User
         if (doc === null) {
             const newUser = new User({
@@ -81,5 +82,27 @@ router.post('/', async (req, res) => {
 //         res.json({message: err});
 //     }
 // });
+
+
+export function getTestUsers() {
+    const users = []
+
+    users.push({
+        name: "Testuser1",
+        latitude: 48.33830196724644,
+        longitude: 14.317141245631463,
+    })
+    users.push({
+        name: "Testuser2",
+        latitude: 48.34406412842475,
+        longitude: 14.305296611071041,
+    })
+    users.push({
+        name: "Testuser3",
+        latitude: 48.31627424066361,
+        longitude: 14.312077235203457
+    })
+    return users
+}
 
 export default router;

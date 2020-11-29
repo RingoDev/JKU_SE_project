@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //Import Routes
-import postsRoute from './routes/users';
+import postsRoute, {getTestUsers} from './routes/users';
 import User from "./models/User";
 
 app.use('/users', postsRoute);
@@ -28,6 +28,18 @@ mongoose.connect(
     {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false},)
     .then((_value) => {
         console.log('connected to DB')
+        for (let testUser of getTestUsers()) {
+            User.findOne({name: testUser},
+                (_error, result) => {
+                    console.log("Testuser was in the db ", result)
+                    // if there was no user with the name -> create User
+                    if (result === undefined) {
+                        const newUser = new User(testUser)
+                        newUser.save().then((result) => console.log("Testuser was saved to db ", result))
+
+                    }
+                })
+        }
 
         // run a cleanup every 45 seconds and delete old entries
         const interval = 1000 * 45;
@@ -36,6 +48,7 @@ mongoose.connect(
             console.log("Running cleanup")
             User.find().then((users: any[]) => {
                 for (let user of users) {
+                    if (getTestUsers().find((testUser) => testUser.name === user.name)) continue;
                     const userDate: Date = user.date
                     // if entry is older then a minute
                     const now = Date.now()
@@ -43,7 +56,7 @@ mongoose.connect(
                         User.deleteOne({name: user.name})
                             .then((value) => console.log("Cleaned up " + value.deletedCount + " User"))
                     } else {
-                        console.log("Left a User untouched with age of " + ((now - userDate.getTime())/1000 )+" seconds")
+                        console.log("Left a User untouched with age of " + ((now - userDate.getTime()) / 1000) + " seconds")
                     }
                 }
             })
