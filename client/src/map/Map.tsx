@@ -29,7 +29,6 @@ const Map: React.FC<PropsFromRedux> = (props) => {
     const mapContainerRef = useRef<HTMLDivElement>(null);
     // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
     const [map, setMap] = useState<mapboxgl.Map>()
-    const [myMarker, setMyMarker] = useState<mapboxgl.Marker>()
     const [userMarkers, setUserMarkers] = useState<UserMarker[]>([])
 
     // initialize map when component mounts

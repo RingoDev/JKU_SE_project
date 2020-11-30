@@ -1,17 +1,13 @@
 import React from "react";
-import {AppUser, BaseUser} from "../data/User";
+import {AppUser} from "../data/User";
 import "./User.css"
 import {RootState} from "../redux/rootReducer";
-import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
-import {fetchUsers, postLocation, setUserChecked} from "../redux/user/user.actions";
+import { setUserChecked} from "../redux/user/user.actions";
 import {connect, ConnectedProps} from "react-redux";
 
 interface UserProps {
     user: AppUser
-}
-
-interface UserState {
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector> & UserProps
@@ -39,7 +35,7 @@ const User: React.FC<PropsFromRedux> = (props) => {
 }
 
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (_state: RootState) => {
     return {}
 }
 

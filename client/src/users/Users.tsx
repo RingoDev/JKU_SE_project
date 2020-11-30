@@ -1,9 +1,8 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {AppUser, BaseUser} from "../data/User";
 import "./Users.css"
 
 // axios with baseURL set
-import axios from "../axios/axios";
 import UserComponent from "./User";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
@@ -22,7 +21,7 @@ interface UsersState {
 }
 
 
-class Users extends React.Component<PropsFromRedux, {}> {
+class Users extends React.Component<PropsFromRedux, UsersState> {
 
     private interval: NodeJS.Timeout | undefined;
 
