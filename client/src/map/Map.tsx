@@ -1,24 +1,30 @@
 import React, {useRef, useEffect, useState} from "react";
 import mapboxgl from "mapbox-gl";
 
-import "./App.css";
-import {User} from "./App";
+import "../main/App.css";
+import {AppUser, BaseUser} from "../data/User";
+import {RootState} from "../redux/rootReducer";
+import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
+import {ThunkDispatch} from "redux-thunk";
+import {fetchUsers, postLocation} from "../redux/user/user.actions";
+import {connect, ConnectedProps} from "react-redux";
 
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ? process.env.REACT_APP_MAPBOX_ACCESS_TOKEN : '';
 
 interface MapProps {
-    location: GeolocationPosition,
-    users: User[]
-    myUsername:string
 }
 
 interface UserMarker {
     marker: mapboxgl.Marker,
-    name: string
+    user: AppUser
 }
 
-const Map = (props: MapProps) => {
+
+type PropsFromRedux = ConnectedProps<typeof connector> & MapProps
+
+
+const Map: React.FC<PropsFromRedux> = (props) => {
 
     const mapContainerRef = useRef<HTMLDivElement>(null);
     // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
@@ -33,17 +39,11 @@ const Map = (props: MapProps) => {
             container: mapContainerRef.current ? mapContainerRef.current : 'map',
             // See style options here: https://docs.mapbox.com/api/maps/#styles
             style: "mapbox://styles/mapbox/dark-v10",
-            center: [props.location.coords.longitude, props.location.coords.latitude],
+            center: [14.317141245631463, 48.33830196724644],
             zoom: 12
         });
         setMap(myMap)
-        const myMarker = new mapboxgl.Marker()
-            .setPopup(new mapboxgl.Popup().setText(props.myUsername))
-            .setLngLat({lng: props.location.coords.longitude, lat: props.location.coords.latitude})
-            .addTo(myMap);
-        setMyMarker(myMarker);
 
-        console.log("got here")
         // add navigation control (zoom buttons)
         // map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
         // clean up on unmount
@@ -52,37 +52,37 @@ const Map = (props: MapProps) => {
         }
     }, []);// eslint-disable-line
 
-    // adding myself to map
-    if (map && myMarker) {
-        myMarker.setLngLat({lng: props.location.coords.longitude, lat: props.location.coords.latitude})
-    }
 
-    // adding other users to map
     if (map) {
+
+        // adding users to map
         for (let user of props.users) {
 
-            // dont show myself with others
-            if(user.name === props.myUsername) continue;
-
             let foundMarker = false;
+
             for (let userMarker of userMarkers) {
-                if (userMarker.name === user.name) {
+                if (userMarker.user._id === user._id) {
+                    //user is unchecked so remove marker from array and map
+                    if (!user.checked) {
+                        userMarker.marker.remove()
+                        setUserMarkers(userMarkers.filter(m => m.user._id !== user._id))
+                        break;
+                    }
                     foundMarker = true;
-                    userMarker.marker.setLngLat({lng: user.position.longitude, lat: user.position.latitude})
+                    userMarker.marker.setLngLat({lng: user.longitude, lat: user.latitude})
                     break;
                 }
             }
-            if (!foundMarker) {
-
+            if (!foundMarker && user.checked) {
                 const popUp = new mapboxgl.Popup().setText(user.name)
                 // create a marker for user
                 const marker = new mapboxgl.Marker()
                     .setPopup(popUp)
-                    .setLngLat({lng: user.position.longitude, lat: user.position.latitude})
+                    .setLngLat({lng: user.longitude, lat: user.latitude})
                     .addTo(map)
 
-                const userMarker = {
-                    name: user.name,
+                const userMarker:UserMarker = {
+                    user: user,
                     marker: marker
                 }
                 // add userMarker to userMarkers
@@ -95,4 +95,22 @@ const Map = (props: MapProps) => {
     return <div className="map" ref={mapContainerRef} id={'map'}/>;
 };
 
-export default Map;
+
+const mapStateToProps = (state: RootState) => {
+    return {
+        users: getUsers(state.user),
+        sortedUsers: getSortedUsers(state.user)
+    }
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
+    return {
+        fetchUsers: () => dispatch(fetchUsers()),
+        postLocation: (baseUser: BaseUser) => dispatch(postLocation(baseUser))
+    }
+
+}
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(Map)
