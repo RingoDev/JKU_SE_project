@@ -29,14 +29,17 @@ mongoose.connect(
     .then((_value) => {
         console.log('connected to DB')
         for (let testUser of getTestUsers()) {
-            User.findOne({name: testUser},
+            User.findOne({name: testUser.name},
                 (_error, result) => {
-                    console.log("Testuser was in the db ", result)
+
                     // if there was no user with the name -> create User
                     if (result === undefined) {
+                        console.log("Testuser was not in the db ")
                         const newUser = new User(testUser)
                         newUser.save().then((result) => console.log("Testuser was saved to db ", result))
 
+                    }else{
+                        console.log("Testuser was in the db ", result)
                     }
                 })
         }
