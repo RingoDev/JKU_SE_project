@@ -1,0 +1,10 @@
+export const WS_CONNECT = 'WS_CONNECT'
+export const WS_DISCONNECT = 'WS_DISCONNECT'
+export const NEW_MESSAGE = 'NEW_MESSAGE'
+
+export const SET_CONNECTED = 'SET_CONNECTED'
+export const SET_DISCONNECTED = 'SET_DISCONNECTED'
+
+export const WS_CREATE_USER = 'WS_CREATE_USER'
+
+export const WS_POST_LOCATION = "WS_POST_LOCATION";

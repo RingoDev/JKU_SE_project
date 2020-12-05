@@ -1,45 +1,41 @@
+.map {
+    height: 90%;
+    width: 100%;
+}
+
+html, body, #root, .App {
+    height: 100%
+}
+
+/*removes links bottom right
+not because i dont like contribution but because its buggy*/
+.mapboxgl-ctrl-attrib {
+    display: none;
+}
+
+
+#userContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding:3rem;
+}
+
 #map-container {
     min-height: 300px;
     min-width: 300px;
     flex-grow: 2;
 }
 
-.map{
-    height:100%;
-    width:100%;
-
-}
-
-/*removes links bottom right*/
-.mapboxgl-ctrl-attrib{
-    display: none;
-}
-
-.marker {
-  background-image: url('../map/Location-marker.svg');
-  background-size: cover;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-#userContainer{
+#container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    height: 100%
+    justify-content: space-between;
+    height: 100%;
+    padding: 3rem !important;
+
 }
 
-html,body, #root,.App{
-    height: 100%
-}
-
-#container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    height: 100%
-}
-#container > div{
+#container > div {
     padding: 0.5em;
 }

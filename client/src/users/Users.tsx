@@ -1,5 +1,4 @@
 import React from "react";
-import {AppUser, BaseUser} from "../data/User";
 import "./Users.css"
 
 // axios with baseURL set
@@ -7,14 +6,11 @@ import UserComponent from "./User";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
 import {ThunkDispatch} from "redux-thunk";
-import {fetchUsers, postLocation} from "../redux/user/user.actions";
-import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
+// import {fetchUsers} from "../redux/user/user.actions";
+import {getSortedUsers} from "../redux/user/user.reducer";
 
 interface UsersProps {
     fetchInterval: number
-    users: AppUser[]
-    myUser: BaseUser
-
 }
 
 interface UsersState {
@@ -25,36 +21,44 @@ class Users extends React.Component<PropsFromRedux, UsersState> {
 
     private interval: NodeJS.Timeout | undefined;
 
-    componentDidMount() {
-        this.props.fetchUsers()
+    // componentDidMount() {
+        // this.props.fetchUsers()
+        //
+        // // will run every fetchInterval/1000 seconds
+        // this.interval = setInterval(() => {
+        //     this.props.fetchUsers()
+        // }, this.props.fetchInterval);
 
-        // will run every fetchInterval/1000 seconds
-        this.interval = setInterval(() => {
-            this.props.fetchUsers()
-        }, this.props.fetchInterval);
 
+    // }
 
-    }
-
-    componentWillUnmount() {
-        if (this.interval) {
-            clearInterval(this.interval)
-        }
-    }
+    // componentWillUnmount() {
+    //     if (this.interval) {
+    //         clearInterval(this.interval)
+    //     }
+    // }
 
     render() {
         return (
             <>
-                <div id={"userContainer"}>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>currently online</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
                     {this.props.sortedUsers.map((user) => {
                         return (
-                            <div key={user._id}>
+                            <tr key={user._id}>
                                 <UserComponent
                                     user={user}/>
-                            </div>
+                            </tr>
                         )
                     })}
-                </div>
+                    </tbody>
+                </table>
             </>
         )
     }
@@ -64,15 +68,13 @@ class Users extends React.Component<PropsFromRedux, UsersState> {
 type PropsFromRedux = ConnectedProps<typeof connector> & UsersProps
 const mapStateToProps = (state: RootState) => {
     return {
-        users: getUsers(state.user),
         sortedUsers: getSortedUsers(state.user)
     }
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
     return {
-        fetchUsers: () => dispatch(fetchUsers()),
-        postLocation: (baseUser: BaseUser) => dispatch(postLocation(baseUser))
+        // fetchUsers: () => dispatch(fetchUsers()),
     }
 
 }

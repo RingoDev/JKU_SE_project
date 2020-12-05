@@ -1,12 +1,14 @@
 import express from 'express';
-import User from '../models/User';
+import UserModel from '../models/User';
+import {createUser, updateUser} from "../methods";
+import {WebsocketRequestHandler} from "express-ws";
 
 
 const router = express.Router();
 
 //GETS BACK ALL THE USER/ENTRIES
 router.get('/', (req, res) => {
-    User.find().then((users) => {
+    UserModel.find().then((users) => {
         res.json(users)
     })
         .catch(err => res.json({message: err}))
@@ -14,54 +16,46 @@ router.get('/', (req, res) => {
 });
 
 //SUBMITS A USER/ENTRY
-router.post('/', async (req, res) => {
-    console.log("Somebody posted a user")
-
-    const date = Date.now()
-
-    console.log("Updating user to time:" + date)
+router.post('/', (req, res) => {
     // try to update existing user
-    User.findOneAndUpdate({name: req.body.name}, {
-        date: date,
-        longitude: req.body.longitude,
-        latitude: req.body.latitude
-    }, {new: true}, (_error, doc, _result) => {
-        console.log("Updated user to ", doc)
-        // if there was no user with the name -> create User
-        if (doc === null) {
-            const newUser = new User({
-                name: req.body.name,
-                latitude: req.body.latitude,
-                longitude: req.body.longitude
-            })
-            newUser.save()
+    if (!req.body.name || !req.body._id) {
+        console.log("Posted user didnt have ID or username")
+        res.json({message: "Posted user didnt have ID or username"})
+        return
+    } else {
+
+    }
+
+    updateUser({name: req.body.name, _id: req.body._id})
+        .then((user) => {
+            res.json(user);
+        })
+        .catch(_err => {
+            createUser(req.body.name)
                 .then(value => res.json(value))
                 .catch(err => res.json({message: err}))
-        } else {
-            res.json(doc)
-        }
-    })
+        })
 });
 
-export function getTestUsers() {
-    const users = []
-
-    users.push({
-        name: "Testuser1",
-        latitude: 48.33830196724644,
-        longitude: 14.317141245631463,
-    })
-    users.push({
-        name: "Testuser2",
-        latitude: 48.34406412842475,
-        longitude: 14.305296611071041,
-    })
-    users.push({
-        name: "Testuser3",
-        latitude: 48.31627424066361,
-        longitude: 14.312077235203457
-    })
-    return users
-}
+// export const wsMiddleware: WebsocketRequestHandler = (ws, req) => {
+//     ws.on('open', () => {
+//         // username
+//         if (!req.body.name || typeof req.body.name !== "string") {
+//             ws.close(400, "No name was specified in open Request")
+//             return
+//         } else {
+//             console.log("Creating User with name: " + req.body.name);
+//             createUser(req.body.name)
+//                 .then(user => ws.send(user))
+//                 .catch(err => console.log(err))
+//         }
+//     })
+//     ws.on('message', (msg) => console.log(msg))
+//
+//     ws.on('close',(code,reason)=>{
+//
+//     })
+//
+// }
 
 export default router;

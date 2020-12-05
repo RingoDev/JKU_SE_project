@@ -6,15 +6,12 @@ export interface AppUser extends MongoUser {
 }
 
 export interface MongoUser extends BaseUser{
-    _id: string,
     date: number
-    name: string,
-    latitude: number
-    longitude: number
 }
 
 export interface BaseUser{
+    _id: string,
     name: string,
-    latitude: number
-    longitude: number
+    latitude?: number
+    longitude?: number
 }

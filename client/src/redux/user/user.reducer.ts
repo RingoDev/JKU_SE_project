@@ -1,10 +1,11 @@
 import {
-    FETCH_USERS_ERROR,
-    FETCH_USERS_PENDING,
-    FETCH_USERS_SUCCESS,
-    POST_LOCATION_ERROR,
-    POST_LOCATION_PENDING,
-    POST_LOCATION_SUCCESS, SET_LOCATION, SET_USER_CHECKED, SET_USERNAME
+    // FETCH_USERS_ERROR,
+    // FETCH_USERS_PENDING,
+    // FETCH_USERS_SUCCESS,
+    // POST_LOCATION_ERROR,
+    // POST_LOCATION_PENDING,
+    // POST_LOCATION_SUCCESS,
+    SET_LOCATION, SET_USER_CHECKED, SET_USER_ID, SET_USERNAME, UPDATE_USERS
 } from './user.types';
 import {AxiosError} from 'axios';
 import {MongoUser, AppUser} from "../../data/User";
@@ -16,7 +17,7 @@ const INITIAL_STATE: userState = {
     postLocationPending: false,
     location: undefined,
     userID: undefined,
-    username: undefined,
+    username: 'NONAME',
     postLocationError: undefined,
 };
 
@@ -27,7 +28,7 @@ export interface userState {
     postLocationPending: boolean,
     location: GeolocationPosition | undefined
     userID: string | undefined,
-    username: string | undefined
+    username: string
     postLocationError: AxiosError | undefined,
 }
 
@@ -48,50 +49,61 @@ const reducer = (state = INITIAL_STATE,
                 location: action.location ? action.location : undefined
             }
         }
-        case FETCH_USERS_PENDING:
-            return {
-                ...state,
-                fetchUsersPending: true
-            };
+        // case FETCH_USERS_PENDING:
+        //     return {
+        //         ...state,
+        //         fetchUsersPending: true
+        //     };
+        //
+        // case FETCH_USERS_SUCCESS:
+        //     console.log("Fetched users", action.users)
+        //     return {
+        //         ...state,
+        //         fetchUsersPending: false,
+        //         users: setUsersFromDB(state.users, state.userID, action.users)
+        //     };
 
-        case FETCH_USERS_SUCCESS:
+        case UPDATE_USERS:
             console.log("Fetched users", action.users)
             return {
                 ...state,
-                fetchUsersPending: false,
                 users: setUsersFromDB(state.users, state.userID, action.users)
             };
 
-        case FETCH_USERS_ERROR:
-            return {
-                ...state,
-                fetchUsersPending: false,
-                fetchUsersError: action.error
-            };
-
-        case POST_LOCATION_PENDING:
-            return {
-                ...state,
-                postLocationPending: true,
-            };
-        case POST_LOCATION_SUCCESS:
-            return {
-                ...state,
-                userID: action.userID,
-                postLocationPending: false,
-            };
-        case POST_LOCATION_ERROR:
-            return {
-                ...state,
-                postLocationError: action.error,
-                postLocationPending: false
-            };
+        // case FETCH_USERS_ERROR:
+        //     return {
+        //         ...state,
+        //         fetchUsersPending: false,
+        //         fetchUsersError: action.error
+        //     };
+        //
+        // case POST_LOCATION_PENDING:
+        //     return {
+        //         ...state,
+        //         postLocationPending: true,
+        //     };
+        // case POST_LOCATION_SUCCESS:
+        //     return {
+        //         ...state,
+        //         userID: action.userID,
+        //         postLocationPending: false,
+        //     };
+        // case POST_LOCATION_ERROR:
+        //     return {
+        //         ...state,
+        //         postLocationError: action.error,
+        //         postLocationPending: false
+        //     };
         case SET_USER_CHECKED:
             return {
                 ...state,
                 users: setUserChecked(state.users, action.user, action.checked)
             }
-
+        case SET_USER_ID:
+            return {
+                ...state,
+                userID: action.userID
+            }
         default:
             return state;
     }
@@ -117,8 +129,8 @@ function setUsersFromDB(users: AppUser[], id?: string, newUsers?: MongoUser[]) {
 
     const result: AppUser[] = []
     for (let newUser of newUsers) {
-        const correspondingUser = getUser(newUser, users)
-        if (correspondingUser !== undefined) {
+        const correspondingUser: AppUser | undefined = getUser(newUser, users)
+        if (correspondingUser) {
             // user exists already
             result.push({
                 ...correspondingUser,
@@ -147,6 +159,7 @@ function setUsersFromDB(users: AppUser[], id?: string, newUsers?: MongoUser[]) {
             }
         }
     }
+    console.log("The result", result)
     return result
 }
 
@@ -157,7 +170,7 @@ function getUser(newUser: MongoUser, users: AppUser[]) {
 }
 
 function validateDocument(doc: MongoUser): boolean {
-    if (doc.latitude === undefined || doc.longitude === undefined || doc.name === undefined || doc._id === undefined || doc.date === undefined) return false;
+    if (doc.latitude === undefined || doc.longitude === undefined || doc.name === undefined || doc._id === undefined) return false;
     if (doc.latitude < -90 || doc.latitude > 90) return false;
     if (doc.longitude < -180 || doc.latitude > 180) return false;
     return true
@@ -179,6 +192,7 @@ export const getUsername = (state: userState) => {
     return state.username;
 }
 
+export const getUserID = (state: userState) => state.userID
 export const getLocationPending = (state: userState) => state.postLocationPending;
 export const getLocationError = (state: userState) => state.postLocationError;
 

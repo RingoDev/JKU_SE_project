@@ -3,7 +3,7 @@ import {AppUser} from "../data/User";
 import "./User.css"
 import {RootState} from "../redux/rootReducer";
 import {ThunkDispatch} from "redux-thunk";
-import { setUserChecked} from "../redux/user/user.actions";
+import {setUserChecked} from "../redux/user/user.actions";
 import {connect, ConnectedProps} from "react-redux";
 
 interface UserProps {
@@ -15,9 +15,9 @@ type PropsFromRedux = ConnectedProps<typeof connector> & UserProps
 const User: React.FC<PropsFromRedux> = (props) => {
     return (
         <>
-            <div id={"userWrapper"}>
+            <td className={props.user.isMain ? "mainUser" : "normalUser"} id={"userWrapper"}>
                 <div>
-                    {props.user.name}{props.user.isMain ? " this User" : " not this User"}
+                    {props.user.name}
                 </div>
                 <div>
                     <div className="switch">
@@ -29,7 +29,7 @@ const User: React.FC<PropsFromRedux> = (props) => {
                         </label>
                     </div>
                 </div>
-            </div>
+            </td>
         </>
     )
 }

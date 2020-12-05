@@ -2,11 +2,10 @@ import React, {useRef, useEffect, useState} from "react";
 import mapboxgl from "mapbox-gl";
 
 import "../main/App.css";
-import {AppUser, BaseUser} from "../data/User";
+import {AppUser} from "../data/User";
 import {RootState} from "../redux/rootReducer";
 import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
-import {fetchUsers, postLocation} from "../redux/user/user.actions";
 import {connect, ConnectedProps} from "react-redux";
 
 
@@ -54,39 +53,52 @@ const Map: React.FC<PropsFromRedux> = (props) => {
 
     if (map) {
 
-        // adding users to map
+        // users that have an old marker on the map but are no longer in the users array must be removed too.
+        for (let userMarker of userMarkers) {
+            // user is not in users but still has a marker on the map
+            if (!props.users.map(user => user._id).includes(userMarker.user._id)) {
+                //remove from map and from userMarkers array
+                userMarker.marker.remove();
+                setUserMarkers(userMarkers.filter(um => um.user._id !== userMarker.user._id))
+            }
+        }
+
+        // adding/removing users to/from map
         for (let user of props.users) {
+            if (user.latitude && user.longitude) {
 
-            let foundMarker = false;
 
-            for (let userMarker of userMarkers) {
-                if (userMarker.user._id === user._id) {
-                    //user is unchecked so remove marker from array and map
-                    if (!user.checked) {
-                        userMarker.marker.remove()
-                        setUserMarkers(userMarkers.filter(m => m.user._id !== user._id))
+                let foundMarker = false;
+
+                for (let userMarker of userMarkers) {
+                    if (userMarker.user._id === user._id) {
+                        //user is unchecked so remove marker from array and map
+                        if (!user.checked) {
+                            userMarker.marker.remove()
+                            setUserMarkers(userMarkers.filter(m => m.user._id !== user._id))
+                            break;
+                        }
+                        foundMarker = true;
+                        userMarker.marker.setLngLat({lng: user.longitude, lat: user.latitude})
                         break;
                     }
-                    foundMarker = true;
-                    userMarker.marker.setLngLat({lng: user.longitude, lat: user.latitude})
-                    break;
                 }
-            }
-            if (!foundMarker && user.checked) {
-                const popUp = new mapboxgl.Popup().setText(user.name)
-                // create a marker for user
-                const marker = new mapboxgl.Marker()
-                    .setPopup(popUp)
-                    .setLngLat({lng: user.longitude, lat: user.latitude})
-                    .addTo(map)
+                if (!foundMarker && user.checked) {
+                    const popUp = new mapboxgl.Popup().setText(user.name)
+                    // create a marker for user
+                    const marker = new mapboxgl.Marker()
+                        .setPopup(popUp)
+                        .setLngLat({lng: user.longitude, lat: user.latitude})
+                        .addTo(map)
 
-                const userMarker:UserMarker = {
-                    user: user,
-                    marker: marker
+                    const userMarker: UserMarker = {
+                        user: user,
+                        marker: marker
+                    }
+                    // add userMarker to userMarkers
+                    userMarkers.push(userMarker)
+                    setUserMarkers(userMarkers)
                 }
-                // add userMarker to userMarkers
-                userMarkers.push(userMarker)
-                setUserMarkers(userMarkers)
             }
         }
     }
@@ -103,10 +115,7 @@ const mapStateToProps = (state: RootState) => {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
-    return {
-        fetchUsers: () => dispatch(fetchUsers()),
-        postLocation: (baseUser: BaseUser) => dispatch(postLocation(baseUser))
-    }
+    return {}
 
 }
 

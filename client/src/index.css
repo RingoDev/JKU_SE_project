@@ -1,0 +1,17 @@
+body {
+    background-color: #343436;
+}
+
+#landingcard {
+    min-width: 30rem;
+}
+
+#chooseName {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#nameInput{
+    margin-bottom: 1rem;
+}
+

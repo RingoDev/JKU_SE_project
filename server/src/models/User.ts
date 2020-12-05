@@ -4,7 +4,6 @@ const PostSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique:true
     },
     longitude: {
         type: Number,
