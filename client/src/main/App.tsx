@@ -6,8 +6,8 @@ import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
 import {getLocation, getUsername} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
+
 // import {fetchUsers, postLocation} from "../redux/user/user.actions";
-import {BaseUser} from "../data/User";
 
 
 class App extends React.Component<PropsFromRedux, {}> {

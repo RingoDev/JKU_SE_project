@@ -9,11 +9,11 @@ import {
     SET_USER_CHECKED, SET_USER_ID,
     SET_USERNAME, UPDATE_USERS
 } from './user.types';
-import {AnyAction} from "redux";
-import {AxiosError} from 'axios'
-import axiosInstance from "./../../axios/axios";
+// import {AnyAction} from "redux";
+// import {AxiosError} from 'axios'
+// import axiosInstance from "./../../axios/axios";
 import {AppUser, BaseUser, MongoUser} from "../../data/User";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
+// import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {WS_POST_LOCATION} from "../socket/socket.types";
 
 

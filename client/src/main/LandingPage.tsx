@@ -21,10 +21,8 @@ const LandingPage: React.FC<PropsFromRedux> = (props) => {
 
     useEffect(() => {
         // connect to Websocket
-
         props.wsConnect()
-
-    }, [])
+    }, [])// eslint-disable-line
 
     return (
         <>

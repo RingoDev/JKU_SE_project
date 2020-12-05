@@ -48,19 +48,25 @@ class Location extends React.Component<PropsFromRedux, LocationState> {
         navigator.geolocation.getCurrentPosition((position) => {
                 const userID = this.getID();
                 const currentLocation = this.getLocation();
-                if (userID) {
-                    if (!currentLocation) {
-                        this.props.setLocation(position)
+
+                if (!currentLocation) {
+                    console.log("didnt have location")
+                    this.props.setLocation(position)
+                    if (userID) {
                         this.props.postLocation({
                             _id: userID,
                             name: this.props.username,
                             latitude: position.coords.latitude,
                             longitude: position.coords.longitude
                         });
-                    } else {
-                        // check if our Position changed
-                        if (currentLocation.coords.longitude !== position.coords.longitude && currentLocation.coords.latitude !== position.coords.latitude) {
-                            this.props.setLocation(position)
+                    }
+                } else {
+                    // check if our Position changed
+                    if (currentLocation.coords.latitude !== position.coords.latitude
+                        && currentLocation.coords.longitude !== position.coords.longitude) {
+                        console.log("Location was different", currentLocation, position)
+                        this.props.setLocation(position)
+                        if (userID) {
                             this.props.postLocation({
                                 _id: userID,
                                 name: this.props.username,
@@ -69,11 +75,11 @@ class Location extends React.Component<PropsFromRedux, LocationState> {
                             });
                             this.props.setLocation(position)
                         } else {
-                            console.log("Our Position didn't change")
+                            console.log("We dont have a user id")
                         }
+                    } else {
+                        console.log("Position didn't change")
                     }
-                } else {
-                    console.log("We dont have a user id")
                 }
             }
         );

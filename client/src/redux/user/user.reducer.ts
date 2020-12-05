@@ -67,7 +67,7 @@ const reducer = (state = INITIAL_STATE,
             console.log("Fetched users", action.users)
             return {
                 ...state,
-                users: setUsersFromDB(state.users, state.userID, action.users)
+                users: setUsersFromDB(state.users, state.userID, action.users, state.location)
             };
 
         // case FETCH_USERS_ERROR:
@@ -124,7 +124,7 @@ function setUserChecked(users: AppUser[], user?: AppUser, checked?: boolean) {
     return result
 }
 
-function setUsersFromDB(users: AppUser[], id?: string, newUsers?: MongoUser[]) {
+function setUsersFromDB(users: AppUser[], id?: string, newUsers?: MongoUser[], location?: GeolocationPosition) {
     if (!newUsers) return users;
 
     const result: AppUser[] = []
@@ -156,6 +156,16 @@ function setUsersFromDB(users: AppUser[], id?: string, newUsers?: MongoUser[]) {
                         isMain: false
                     })
                 }
+            } else if (newUser._id === id && location) {
+                // we want to display this user as early as possible
+                result.push({
+                    ...newUser,
+                    checked: true,
+                    groupID: 0,
+                    isMain: true,
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                })
             }
         }
     }

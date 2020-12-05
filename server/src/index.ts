@@ -113,8 +113,8 @@ mongoose.connect(
         }
 
         // run a cleanup every 45 seconds and delete old entries
-        const interval = 1000 * 45;
-        const ageInMilliseconds = 1000 * 60
+        // const interval = 1000 * 45;
+        // const ageInMilliseconds = 1000 * 60
         // setInterval(() => {
         //     console.log("Running cleanup")
         //     UserModel.find().then((users: any[]) => {
