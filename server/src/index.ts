@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import webSocket from "ws";
+import http from 'http'
 //Import Routes
 import postsRoute from './routes/users';
 import UserModel from "./models/User";
@@ -36,11 +37,15 @@ app.get('/', (reg, res) => {
 });
 
 
-//How do we start listening to the server
-const server = app.listen(3001);
+const expressServer = app.listen(3002);
+const websocketServer = http.createServer((req, res) => {
+    console.log((new Date()) + ' Received request for ' + req.url);
+    res.writeHead(404);
+    res.end();
+})
+websocketServer.listen(3001);
 
-const wss = new webSocket.Server({server: server});
-
+const wss = new webSocket.Server({server: websocketServer});
 
 wss.on('connection', (ws, req) => {
 

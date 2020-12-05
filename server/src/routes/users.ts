@@ -1,7 +1,6 @@
 import express from 'express';
 import UserModel from '../models/User';
 import {createUser, updateUser} from "../methods";
-import {WebsocketRequestHandler} from "express-ws";
 
 
 const router = express.Router();
