@@ -15,8 +15,9 @@ export default class Delete extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
+        debugger
         // Delete-Request
-        axios.delete(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/deleteMember?${this.state.id}`)
+        axios.delete(`http://localhost:3001/users/${this.state.id}`)
             .then(res => {
                 // Ergebnis handling
                 console.log(res);

@@ -19,10 +19,10 @@ export class Requests extends React.Component {
             <div>
                 <h1>MyEvents</h1>
 
-                <h3>1. GET-Request</h3>
+                <h3>1. Christinasss GET-Request</h3>
                 <Get></Get>
 
-                <h3>2. POST-Request</h3>
+                <h3>2. POSTsss-Request</h3>
                 <Post></Post>
 
                 <h3>3. Put-Request</h3>

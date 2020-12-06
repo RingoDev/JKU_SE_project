@@ -7,13 +7,18 @@ export default class Get extends React.Component {
         persons: []
     }
 
+    handleSubmit(){
+        this.componentDidMount();
+    }
+
     componentDidMount() {
 
         /*
          * Get-Request
           */
-        axios.get(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/getTeam`)
+        axios.get(`http://localhost:3001/users`)
             .then(res => {
+
                 /*
                  * Ergebnis-Handling
                  *
@@ -39,16 +44,32 @@ export default class Get extends React.Component {
          * Get-Request - mehrerer Parameter
          * - Parameter können auch so mitgegeben werden
          */
-        axios.get('https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/getTeam', {
-            params: {
-                id: 1,
-                Vorname: 'Max',
-            }
+        // - - - FUNKTIONIERT NICHT!!! - - -
+        let myvar = "5fc54c179cf095420cf5554b";
+
+        axios.get('http://localhost:3001/users/5fc54c179cf095420cf5554b', {
+            // params: {
+            //     myqueryparam: 'das isser'
+            // }
         })
         .then(function (response) {
             console.log(response);
         })
+
     }
+
+    // handleChangeID = event => {
+    //     this.setState({ _id: event.target.value });
+    // };
+    //
+    // handleSubmit = event => {
+    //     event.preventDefault();
+    //
+    //     const member = {
+    //         name: this.state.name
+    //     };
+
+
 
     /*
      * Darstellung der Ergebnisse - Werden in eine Liste gemappt
@@ -57,9 +78,21 @@ export default class Get extends React.Component {
      */
     render() {
         return (
-            <ul>
-                { this.state.persons.map(person => <li>{person.Vorname} {person.Nachname}</li>)}
-            </ul>
+            <div>
+
+                <ul>
+                    { this.state.persons.map(person => <li>{person.name} {person._id}</li>)}
+                </ul>
+
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <button type="submit">Refresh</button>
+                    </form>
+                </div>
+
+            </div>
+
+
         )
     }
 }
