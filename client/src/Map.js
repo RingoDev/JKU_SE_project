@@ -16,7 +16,7 @@ const Map = (props) => {
         const map = new mapboxgl.Map({
             container: mapContainerRef.current,
             // See style options here: https://docs.mapbox.com/api/maps/#styles
-            style: "mapbox://styles/mapbox/streets-v11",
+            style: "mapbox://styles/mapbox/dark-v10",
             center: [props.location.coords.longitude, props.location.coords.latitude],
             zoom: 10
         });
@@ -27,6 +27,10 @@ const Map = (props) => {
         // creates a Marker at the Location of the passed in location object
         new mapboxgl.Marker(<Marker />)
             .setLngLat({lng:props.location.coords.longitude,lat:props.location.coords.latitude})
+            .addTo(map);
+
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:props.location.coords.longitude-1,lat:props.location.coords.latitude-1})
             .addTo(map);
 
         // clean up on unmount

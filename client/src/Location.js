@@ -28,6 +28,7 @@ export default class Location extends React.Component {
             while (this.state.grabLocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     this.props.app.setState({location: position})
+                    this.props.app.setState({location: position})
                 });
                 await sleep(this.props.interval)
             }

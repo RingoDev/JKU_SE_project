@@ -4,61 +4,35 @@ import axios from 'axios';
 
 export default class Get extends React.Component {
     state = {
-        persons: []
+        events: []
     }
 
     componentDidMount() {
 
-        /*
-         * Get-Request
+        /**
+         * Get-Request for all Events
           */
-        axios.get(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/getTeam`)
+        axios.get(`http://localhost:3001/events/getEvents`)
             .then(res => {
-                /*
-                 * Ergebnis-Handling
-                 *
-                 * Filtern von Ergebnisdaten
-                 * Außerdem können folgende Informationen mit folgenden Schlüsselwörtern Abgefragt werden
-                 * - Daten: data
-                 * - HTTP-Status Code: status
-                 * - HTTP-Status Text: statusText
-                 * - HTTP Header: headers
-                 * - Konfiguration des Requests: config
-                 * - Request der Ergebnis erzeugt hat: request
-                 */
-                const persons = res.data;
 
-                this.setState({ persons }); // Speichern in Array
+                const events = res.data;
+
+                // this.setState({ events }); // Speichern in Array
             })
             .catch(function (error) {
                 // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
                 console.log(error + ' Fehler! Code: ' + error.staus);
             })
 
-        /*
-         * Get-Request - mehrerer Parameter
-         * - Parameter können auch so mitgegeben werden
-         */
-        axios.get('https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/getTeam', {
-            params: {
-                id: 1,
-                Vorname: 'Max',
-            }
-        })
-        .then(function (response) {
-            console.log(response);
-        })
     }
 
-    /*
-     * Darstellung der Ergebnisse - Werden in eine Liste gemappt
-     * im Beispiel--> jeder Datensatz ein Listeneintrag
-     * da jedes Attribut der Response in das Array gemappt wird, kann es mit dem entsprechenden Schlüsselwort abgefragt werden
+    /**
+     * Darstellung der Ergebnisse in einer Liste
      */
     render() {
         return (
             <ul>
-                { this.state.persons.map(person => <li>{person.Vorname} {person.Nachname}</li>)}
+                { this.state.events.map(event => <li>{event.name} {event.date}</li>)}
             </ul>
         )
     }

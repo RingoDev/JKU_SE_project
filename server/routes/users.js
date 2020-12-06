@@ -26,6 +26,7 @@ router.post('/', async (req,res) => {
         res.json({message: err});
     }
 });
+
 //SPECIFIC USER/ENTRY BY ID
 router.get('/:userId', async (req,res) => {
     try {
@@ -59,6 +60,5 @@ router.patch('/:userId', async (req,res) => {
         res.json({message: err});
 }
 });
-
 
 module.exports = router;

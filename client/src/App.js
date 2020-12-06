@@ -18,7 +18,7 @@ export default class App extends React.Component {
                 <Container className={'p-5'}>
                     <Location
                         app={this}
-                        interval={500}
+                        interval={5000}
                     />
                     <Requests/>
                     {/*render Map if we have location of user*/}

@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 //Import Routes
 const postsRoute = require('./routes/users');
 app.use('/users', postsRoute);
+const postsRouteEvents = require('./routes/events');
+app.use('/events', postsRouteEvents);
 
 //Routes
 app.get('/', (req,res) => {
