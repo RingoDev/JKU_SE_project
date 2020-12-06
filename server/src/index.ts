@@ -47,11 +47,25 @@ websocketServer.listen(3001);
 
 const wss = new webSocket.Server({server: websocketServer});
 
+function validateData(data: any) {
+    if (typeof data !== "object") throw new Error()
+    if (!data.type) throw new Error()
+}
+
 wss.on('connection', (ws, req) => {
 
     //connection is up, let's add a simple simple event
     ws.on('message', (rawData: string) => {
-        const data: WS_MESSAGE_FROM_CLIENT = JSON.parse(rawData);
+
+        try {
+            validateData(JSON.parse(rawData))
+        } catch {
+            ws.send("Could not parse your Request")
+            return
+        }
+
+        const data: WS_MESSAGE_FROM_CLIENT = JSON.parse(rawData)
+
         switch (data.type) {
             case CREATE_USER:
                 if (data.username) {
