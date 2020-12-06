@@ -12,6 +12,7 @@ interface LocationProps {
 }
 
 interface LocationState {
+    sentOnce: boolean
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector> & LocationProps
@@ -20,12 +21,25 @@ class Location extends React.Component<PropsFromRedux, LocationState> {
 
     private intervalID: NodeJS.Timeout | undefined;
 
+    constructor(props: PropsFromRedux) {
+        super(props);
+        this.state = {
+            sentOnce: false
+        }
+
+    }
+
+
     render() {
         return (
             <>
             </>
         )
 
+    }
+
+    getSentOnce() {
+        return this.state.sentOnce
     }
 
     componentDidMount() {
@@ -44,10 +58,12 @@ class Location extends React.Component<PropsFromRedux, LocationState> {
         return this.props.currentLocation
     }
 
+
     tick() {
         navigator.geolocation.getCurrentPosition((position) => {
                 const userID = this.getID();
                 const currentLocation = this.getLocation();
+                const sentOnce = this.getSentOnce()
 
                 if (!currentLocation) {
                     console.log("didnt have location")
@@ -61,6 +77,15 @@ class Location extends React.Component<PropsFromRedux, LocationState> {
                         });
                     }
                 } else {
+                    if (!sentOnce && userID) {
+                        this.props.postLocation({
+                            _id: userID,
+                            name: this.props.username,
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        });
+                        this.setState({sentOnce: true})
+                    }
                     // check if our Position changed
                     if (currentLocation.coords.latitude !== position.coords.latitude
                         && currentLocation.coords.longitude !== position.coords.longitude) {

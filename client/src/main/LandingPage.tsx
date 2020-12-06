@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import './landingPage.css'
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
-import {getLocation, getUsername} from "../redux/user/user.reducer";
+import {getLocation, getUserID, getUsername} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {setUsername} from "../redux/user/user.actions";
 import {createUser, wsConnect} from "../redux/socket/socket.actions";
@@ -18,6 +18,9 @@ const LandingPage: React.FC<PropsFromRedux> = (props) => {
             props.createUser(name.trim())
         }
     }
+
+
+
 
     useEffect(() => {
         // connect to Websocket
@@ -54,7 +57,8 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 const mapStateToProps = (state: RootState) => {
     return {
         username: getUsername(state.user),
-        location: getLocation(state.user)
+        location: getLocation(state.user),
+        userID: getUserID(state.user)
     }
 }
 

@@ -62,6 +62,8 @@ export function updateUser(user: User) {
 export function removeUser(id: string) {
     return new Promise((resolve, reject) => {
         UserModel.findByIdAndRemove(id)
+            .then(val => resolve(val))
+            .catch(err => reject(err))
     })
 }
 

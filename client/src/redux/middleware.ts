@@ -45,7 +45,10 @@ const socketMiddleware = () => {
                 if (data.users) store.dispatch(setUsers(data.users));
                 break;
             case USER_CREATED:
-                if (data.user) store.dispatch(setUserID(data.user._id));
+                if (data.user) {
+                    store.dispatch(setUserID(data.user._id));
+
+                }
                 break;
             default:
                 console.log("No action for ", data.type)

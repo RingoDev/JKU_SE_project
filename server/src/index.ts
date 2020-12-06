@@ -8,7 +8,7 @@ import http from 'http'
 //Import Routes
 import postsRoute from './routes/users';
 import UserModel from "./models/User";
-import {createUser, getAllUsers, getTestUsers, updateUser} from "./methods";
+import {createUser, getAllUsers, getTestUsers, removeUser, updateUser} from "./methods";
 import {
     CREATE_USER,
     MESSAGE,
@@ -45,6 +45,7 @@ const websocketServer = http.createServer((req, res) => {
 })
 websocketServer.listen(3001);
 
+const socketToUser: Map<string, string> = new Map()
 const wss = new webSocket.Server({server: websocketServer});
 
 function validateData(data: any) {
@@ -54,8 +55,12 @@ function validateData(data: any) {
 
 wss.on('connection', (ws, req) => {
 
+    const socketID = req.headers['sec-websocket-key']
+
     //connection is up, let's add a simple simple event
     ws.on('message', (rawData: string) => {
+
+        if (!socketID) return
 
         try {
             validateData(JSON.parse(rawData))
@@ -72,6 +77,8 @@ wss.on('connection', (ws, req) => {
                     console.log("Trying to create User")
                     createUser(data.username)
                         .then((user) => {
+                            // combining client and socket id in map
+                            socketToUser.set(socketID, user._id);
                             console.log("Sending message back")
                             const msg: WS_MESSAGE_FROM_SERVER = {
                                 type: USER_CREATED,
@@ -98,15 +105,21 @@ wss.on('connection', (ws, req) => {
                 }
         }
         ws.on("close", (code, reason) => {
-            // should remove this user, but i don't know his id
-        })
+            const userID = socketToUser.get(socketID)
+            if (!userID) console.log("Didn't have a corresponding userID to Socket ID")
+            else {
+                removeUser(userID)
+                    .then((val) => console.log("Removed User with id " + userID, val))
+                    .catch((err) => console.log("Couldnt remove User with id " + userID, err))
+                socketToUser.delete(socketID)
+                getAllUsers().then(users => updateClients(users))
+            }
+        });
+
+        //send immediatly a feedback to the incoming connection
+        ws.send(JSON.stringify({type: "MESSAGE", msg: 'Hi there, I am a WebSocket server'}));
     });
-
-    //send immediatly a feedback to the incoming connection
-    ws.send(JSON.stringify({type: "MESSAGE", msg: 'Hi there, I am a WebSocket server'}));
-
-});
-
+})
 
 //Connect to Mongo-DB
 mongoose.connect(
@@ -155,6 +168,7 @@ mongoose.connect(
     .catch(err => console.log("Failed Connection to DB", err))
 
 function updateClients(users: User[]) {
+    console.log("Broadcasting to all clients")
     wss.clients.forEach((ws) => {
         const msg: WS_MESSAGE_FROM_SERVER = {
             type: UPDATE_USERS,
