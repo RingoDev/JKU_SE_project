@@ -272,6 +272,11 @@ const tdArray = [
   ["2", "Another Example", "Description ", "2.12.2020"]
 ];
 
+const locationTest = [
+    ["14.3351449", "48.464849900000004", "Test Event", "Description"],
+    ["14.3351449", "48.564849900000004", "Another Test Event", "Description"]
+];
+
 //
 // //
 // // // For icons
@@ -608,5 +613,6 @@ module.exports = {
   dataBar,
   optionsBar,
   responsiveBar,
-  legendBar // For charts (Dashboard view)
+  legendBar, // For charts (Dashboard view)
+  locationTest // locations of Events
 };

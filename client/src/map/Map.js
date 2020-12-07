@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 
 import Marker from "../components/Marker";
 import "../App.css";
+import { locationTest } from "../variables/Variables";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -17,6 +18,7 @@ const Map = (props) => {
             container: mapContainerRef.current,
             // See style options here: https://docs.mapbox.com/api/maps/#styles
             style: "mapbox://styles/mapbox/dark-v10",
+
             center: [props.location.coords.longitude, props.location.coords.latitude],
             zoom: 10
         });
@@ -24,14 +26,21 @@ const Map = (props) => {
         // add navigation control (zoom buttons)
         map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
-        // creates a Marker at the Location of the passed in location object
-        new mapboxgl.Marker(<Marker />)
+        // creates a Marker at the Location of the passed in location object -- HOME
+        new mapboxgl.Marker({ "color": "#b40219" })
             .setLngLat({lng:props.location.coords.longitude,lat:props.location.coords.latitude})
             .addTo(map);
 
-        new mapboxgl.Marker(<Marker />)
-            .setLngLat({lng:props.location.coords.longitude-1,lat:props.location.coords.latitude-1})
-            .addTo(map);
+        // creates Marker for Events
+        for (var i = 0; i < locationTest.length; i++){
+            var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+                locationTest[i][2]
+            );
+            new mapboxgl.Marker(<Marker />)
+                .setLngLat({lng:locationTest[i][0],lat:locationTest[i][1]})
+                .setPopup(popup)
+                .addTo(map);
+        }
 
         // clean up on unmount
         return () => map.remove();
@@ -39,5 +48,6 @@ const Map = (props) => {
 
     return <div className="map-container" ref={mapContainerRef} />;
 };
+
 
 export default Map;

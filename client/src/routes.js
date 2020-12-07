@@ -23,6 +23,7 @@ import Icons from "./views/Icons.jsx";
 import Maps from "./views/Maps.jsx";
 import Notifications from "./views/Notifications.jsx";
 import Upgrade from "./views/Upgrade.jsx";
+import Create from "./views/Create";
 
 const dashboardRoutes = [
   {
@@ -65,6 +66,13 @@ const dashboardRoutes = [
     name: "Maps",
     icon: "pe-7s-map-marker",
     component: Maps,
+    layout: "/admin"
+  },
+  {
+    path: "/create",
+    name: "Create",
+    icon: "pe-7s-science",
+    component: Create,
     layout: "/admin"
   },
   /*{

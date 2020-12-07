@@ -9,13 +9,13 @@ export default class Location extends React.Component {
             app: {},
             grabLocation: true,
         }
+        this.getLocation();
     }
 
     render() {
         return (
             <>
-                <Button onClick={() => this.getLocation()}>Get My Location</Button>
-                <Button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</Button>
+
             </>
         )
 
