@@ -21,12 +21,12 @@ import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/css/animate.min.css";
-import "./assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
-import "./assets/css/demo.css";
-import "./assets/css/pe-icon-7-stroke.css";
+import "../src/assets/css/animate.min.css";
+import "../src/assets/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
+import "../src/assets/css/demo.css";
+import "../src/assets/css/pe-icon-7-stroke.css";
 
-import AdminLayout from "client/bootstrap_src/layouts/Admin.jsx";
+import AdminLayout from "client/src/layouts/Admin.jsx";
 
 ReactDOM.render(
   <BrowserRouter>
