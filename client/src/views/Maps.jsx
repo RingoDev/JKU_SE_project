@@ -16,6 +16,8 @@
 
 */
 import React from "react";
+import Map from "../App";
+
 // react components used to create a google map
 import {
   withScriptjs,
@@ -39,14 +41,18 @@ const CustomMap = withScriptjs(
   ))
 );
 
-export function Maps({ ...prop }) {
-  return (
-    <CustomMap
+/*
+<CustomMap
       googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE"
       loadingElement={<div style={{ height: `100%` }} />}
       containerElement={<div style={{ height: `100vh` }} />}
       mapElement={<div style={{ height: `100%` }} />}
     />
+ */
+
+export function Maps({ ...prop }) {
+  return (
+    <Map></Map>
   );
 }
 

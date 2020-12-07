@@ -24,28 +24,13 @@ export class Footer extends Component {
     return (
       <footer className="footer">
         <Container fluid>
-          <nav className="pull-left">
-            <ul>
-              <li>
-                <a href="#pablo">Home</a>
-              </li>
-              <li>
-                <a href="#pablo">Company</a>
-              </li>
-              <li>
-                <a href="#pablo">Portfolio</a>
-              </li>
-              <li>
-                <a href="#pablo">Blog</a>
-              </li>
-            </ul>
-          </nav>
+
           <p className="copyright pull-right">
-            &copy; {new Date().getFullYear()}{" "}
+            &copy; {new Date().getFullYear()}{" "} MyEvents - Theme by {" "}
             <a href="http://www.creative-tim.com?ref=lbr-footer">
-              Creative Tim
+               Creative Tim
             </a>
-            , made with love for a better web
+            {" - "}Icons by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
           </p>
         </Container>
       </footer>

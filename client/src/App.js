@@ -4,8 +4,6 @@ import Map from "./Map";
 import {Container} from "reactstrap";
 import {Requests} from "./rest_requests/Requests";
 
-//<Route exact path="/" component={home}/>?????
-
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +20,6 @@ export default class App extends React.Component {
                         app={this}
                         interval={5000}
                     />
-                    <Requests/>
                     {/*render Map if we have location of user*/}
 
                     {this.checkLocation() ? <Map location={this.state.location}/> : <></>}

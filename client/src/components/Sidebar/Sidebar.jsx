@@ -20,7 +20,7 @@ import { NavLink } from "react-router-dom";
 
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.jsx";
 
-import logo from "../../assets/img/reactlogo.png";
+import logo from "../../assets/img/myEventImages/logo_blue.svg";
 
 export class Sidebar extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ export class Sidebar extends Component {
           )}
         <div className="logo">
           <a
-            href="https://www.creative-tim.com?ref=lbd-sidebar"
+            href="http://localhost:3000"
             className="simple-text logo-mini"
           >
             <div className="logo-img">
@@ -65,10 +65,10 @@ export class Sidebar extends Component {
             </div>
           </a>
           <a
-            href="https://www.creative-tim.com?ref=lbd-sidebar"
+            href="http://localhost:3000"
             className="simple-text logo-normal"
           >
-            Creative Tim
+            MyEvents
           </a>
         </div>
         <div className="sidebar-wrapper">
