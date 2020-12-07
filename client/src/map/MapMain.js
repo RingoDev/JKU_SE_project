@@ -2,9 +2,9 @@ import React from 'react';
 import Location from './Location'
 import Map from "./Map";
 import {Container} from "reactstrap";
-import {Requests} from "./rest_requests/Requests";
+import {Requests} from "../rest_requests/Requests";
 
-export default class App extends React.Component {
+export default class MapMain extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -19,10 +19,8 @@ import React, { Component } from "react";
 import {Redirect, Route, Switch} from "react-router-dom";
 import NotificationSystem from "react-notification-system";
 
-import AdminNavbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 import Sidebar from "../components/Sidebar/Sidebar";
-import FixedPlugin from "../components/FixedPlugin/FixedPlugin.jsx";
 
 import { style } from "../variables/Variables.jsx";
 
@@ -40,8 +38,6 @@ class Admin extends Component {
       hasImage: true,
       fixedClasses: "dropdown show-dropdown open"
     };
-
-    console.log(AdminNavbar);
   }
   handleNotificationClick = position => {
     var color = Math.floor(Math.random() * 4 + 1);

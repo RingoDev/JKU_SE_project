@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 
-import Marker from "./components/Marker";
-import "./App.css";
+import Marker from "../components/Marker";
+import "../App.css";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 

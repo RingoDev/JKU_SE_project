@@ -4,7 +4,7 @@
 }
 
 .marker {
-  background-image: url('Location-marker.svg');
+  background-image: url('assets/img/myEventImages/Location-marker.svg');
   background-size: cover;
   width: 36px;
   height: 36px;

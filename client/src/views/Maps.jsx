@@ -16,7 +16,7 @@
 
 */
 import React from "react";
-import Map from "../App";
+import Map from "../map/MapMain";
 
 // react components used to create a google map
 import {
