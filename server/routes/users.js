@@ -13,6 +13,18 @@ router.get('/', async (req,res) => {
     }
 });
 
+//SPECIFIC USER/ENTRY BY ID
+router.get('/:userId', async (req,res) => {
+    try {
+        const user =  await User.findById(req.params.userId);
+        //const queryy =  req.query;
+        res.json(user);
+    }catch(err) {
+        res.json({message: err});
+    }
+});
+
+
 //SUBMITS A USER/ENTRY
 router.post('/', async (req,res) => {
     const user = new User({
@@ -26,15 +38,7 @@ router.post('/', async (req,res) => {
         res.json({message: err});
     }
 });
-//SPECIFIC USER/ENTRY BY ID
-router.get('/:userId', async (req,res) => {
-    try {
-    const user =  await User.findById(req.params.userId);
-    res.json(user);
-    }catch(err) {
-        res.json({message: err});
-    }
-});
+
 
 //DELETE USER/ENTRY
 router.delete('/:userId', async (req,res) => {
@@ -49,18 +53,20 @@ router.delete('/:userId', async (req,res) => {
 //UPDATE USER/ENTRY
 router.patch('/:userId', async (req, res) => {
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId); //for testing
+        const body =  req.body; //for testing
         const updatedUser = await User.updateOne(
             {_id: req.params.userId},
             {
                 $set: {
                     gpsposition: req.body.gpsposition ? req.body.gpsposition : user["gpsposition"],
                     time: Date.now,
-                    name: req.body.name
+                    name: req.body.name ? req.body.name : user["name"]
                 }
             }
         );
-        res.json(updatedUser);
+
+        res.json(user);
     } catch (err) {
         res.json({message: err});
     }
