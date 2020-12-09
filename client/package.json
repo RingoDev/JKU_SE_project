@@ -8,9 +8,11 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "chartist": "^0.11.4",
     "dotenv": "^8.2.0",
     "jquery": "^3.5.1",
     "mapbox-gl": "^1.13.0",
+    "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
@@ -44,6 +46,13 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^5.2.0"
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react-chartist": "^0.14.3",
+    "react-google-maps": "^9.4.5",
+    "react-notification-system": "^0.4.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
+    "react-toggle": "^4.1.1"
   }
 }
