@@ -12,9 +12,10 @@ export default class Get extends React.Component {
         /**
          * Get-Request for all Events
           */
-        axios.get(`http://localhost:3001/events/getEvents`)
+        axios.get(`http://localhost:3001/users`)
             .then(res => {
 
+                console.log(res);
                 const events = res.data;
 
                 // this.setState({ events }); // Speichern in Array

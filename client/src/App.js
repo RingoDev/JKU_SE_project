@@ -3,8 +3,8 @@ import Location from './Location'
 import Map from "./Map";
 import {Container} from "reactstrap";
 import {Requests} from "./rest_requests/Requests";
-import React, { Component } from "react";
-import Admin from "bootstrap_src/layouts/Admin";
+//import React, { Component } from "react";
+//import Admin from "bootstrap_src/layouts/Admin";
 //<Route exact path="/" component={home}/>?????
 
 export default class App extends React.Component {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
                     />
                     <Requests/>
                     {/*render Map if we have location of user*/}
-                    <Admin/>
+
 
 
                     {this.checkLocation() ? <Map location={this.state.location}/> : <></>}

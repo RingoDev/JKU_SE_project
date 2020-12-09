@@ -1,8 +1,8 @@
 const express = require('express');
 const { restart } = require('nodemon');
 const router = express.Router();
-const User = require('../models/User');
-const Event = require('../models/Event');
+//const User = require('../models/User');
+let Event = require('../models/Event');
 
 /**
  * get all Events
