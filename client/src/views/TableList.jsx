@@ -20,6 +20,7 @@ import { Container, Row, Col, Table } from "react-bootstrap";
 
 import Card from "../components/Card/Card.jsx";
 import { thArray, tdArray } from "../variables/Variables.jsx";
+import GetTableEvents from "../rest_requests/GetTableEvents";
 
 export class TableList extends Component {
   render() {
@@ -42,17 +43,9 @@ export class TableList extends Component {
                         })}
                       </tr>
                     </thead>
-                    <tbody>
-                      {tdArray.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.map((prop, key) => {
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
+
+                    <GetTableEvents></GetTableEvents>
+
                   </Table>
                 }
               />

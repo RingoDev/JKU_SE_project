@@ -2,6 +2,7 @@ const express = require('express');
 const { restart } = require('nodemon');
 const router = express.Router();
 let User = require('../models/User');
+let ShortEvent = require('../models/ShortEvent');
 const mongo = require('mongodb');
 const assert = require("assert");
 const client = require("../app");
@@ -10,11 +11,8 @@ const client = require("../app");
 //GETS BACK ALL THE USER/ENTRIES
 router.get('/', async (req,res) => {
     try {
-
-        res.json(client.getUser());
-
-        /*const users = await User.find();
-        res.json(users);*/
+        const users = await User.find();
+        res.json(users);
     } catch(err) {
         res.json({message: err});
     }

@@ -1,6 +1,6 @@
 import React from "react";
-import Get from "./Get";
-import Post from "./Post";
+import GetTableEvents from "./GetTableEvents";
+import PostEvent from "./PostEvent";
 import Delete from "./Delete";
 import Put from "./Put";
 
@@ -20,10 +20,10 @@ export class Requests extends React.Component {
                 <h1>MyEvents</h1>
 
                 <h3>1. GET-Request</h3>
-                <Get></Get>
+                <GetTableEvents></GetTableEvents>
 
                 <h3>2. POST-Request</h3>
-                <Post></Post>
+                <PostEvent></PostEvent>
 
                 <h3>3. Put-Request</h3>
                 <Put></Put>

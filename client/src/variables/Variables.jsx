@@ -266,10 +266,10 @@ var style = {
 // // // For tables
 // //
 //
-const thArray = ["ID", "Name", "Description", "Date"];
+const thArray = ["Name", "Description", "Date"];
 const tdArray = [
-  ["1", "Example", "Desc", "1.12.2020"],
-  ["2", "Another Example", "Description ", "2.12.2020"]
+  ["Example", "Desc", "1.12.2020"],
+  ["Another Example", "Description ", "2.12.2020"]
 ];
 
 const locationTest = [

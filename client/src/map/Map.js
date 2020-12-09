@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
+import GetMapEvents from "../rest_requests/GetMapEvents";
 
 import Marker from "../components/Marker";
 import "../App.css";
 import { locationTest } from "../variables/Variables";
+import axios from "axios";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -31,16 +33,26 @@ const Map = (props) => {
             .setLngLat({lng:props.location.coords.longitude,lat:props.location.coords.latitude})
             .addTo(map);
 
-        // creates Marker for Events
-        for (var i = 0; i < locationTest.length; i++){
-            var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-                locationTest[i][2]
-            );
-            new mapboxgl.Marker(<Marker />)
-                .setLngLat({lng:locationTest[i][0],lat:locationTest[i][1]})
-                .setPopup(popup)
-                .addTo(map);
-        }
+
+        axios.get(`http://localhost:3001/events/getEvents`)
+            .then(res => {
+
+                console.log(res);
+                const events = res.data;
+
+                events.map((eve) => {
+                    var popup = new mapboxgl.Popup({ offset: 25 }).setText(eve.name);
+                    console.log(eve.lng);
+                    new mapboxgl.Marker(<Marker />)
+                        .setLngLat({lng:eve.lng,lat:eve.lat})
+                        .setPopup(popup)
+                        .addTo(map);});
+
+            })
+            .catch(function (error) {
+                // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
+                console.log(error + ' Fehler! Code: ' + error.staus);
+            })
 
         // clean up on unmount
         return () => map.remove();

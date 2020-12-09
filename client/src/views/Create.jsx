@@ -16,47 +16,14 @@
 
 */
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
-import { Container, Row, Col } from "react-bootstrap";
-
-import { Card } from "../components/Card/Card.jsx";
-import { StatsCard } from "../components/StatsCard/StatsCard.jsx";
-import { Tasks } from "../components/Tasks/Tasks.jsx";
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar
-} from "../variables/Variables.jsx";
+import PostEvent from "../rest_requests/PostEvent";
 
 export class Create extends Component {
 
   render() {
     return (
       <div className="content">
-        <Container fluid>
-          <Row>
-            <Col md={6}>
-              <Card
-                  title="Create"
-                  category="Create a new Event"
-                  content={
-                    <div className="table-full-width">
-                      <table className="table">
-                        <Tasks />
-                      </table>
-                    </div>
-                  }
-              />
-            </Col>
-          </Row>
-        </Container>
+        <PostEvent></PostEvent>
       </div>
     );
   }

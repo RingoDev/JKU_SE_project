@@ -25,6 +25,7 @@ import Notifications from "./views/Notifications.jsx";
 import Upgrade from "./views/Upgrade.jsx";
 import Create from "./views/Create";
 
+
 const dashboardRoutes = [
   {
     path: "/dashboard",

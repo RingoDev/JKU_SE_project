@@ -1,16 +1,15 @@
 const express = require('express');
-const { restart } = require('nodemon');
 const router = express.Router();
-//const User = require('../models/User');
 let Event = require('../models/Event');
+let ShortEvent = require('../models/ShortEvent');
 
 /**
  * get all Events
  */
 router.get('/getEvents', async (req,res) => {
     try {
-
-        res.json('Test Event Data');
+        const events = await ShortEvent.find();
+        res.json(events);
 
     } catch(err) {
         res.json({message: err});
@@ -21,12 +20,12 @@ router.get('/getEvents', async (req,res) => {
  * post a new event to the DB
  */
 router.post('/', async (req,res) => {
-    const event = new Event({
+    const event = new ShortEvent({
         name: req.body.name,
-        location: req.body.location,
-        date: req.body.date,
-        end: req.body.end,
-        owner: req.body.owner,
+        lng: req.body.lng,
+        lat: req.body.lat,
+        description: req.body.description,
+        date: req.body.date
     });
     try {
     const savedEvent = await event.save();
