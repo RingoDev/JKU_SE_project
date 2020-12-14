@@ -18,6 +18,10 @@ const Map = (props) => {
             // See style options here: https://docs.mapbox.com/api/maps/#styles
             style: "mapbox://styles/mapbox/streets-v11",
             center: [props.location.coords.longitude, props.location.coords.latitude],
+            //  Angepasster Code Zwischenpräsentation
+            //  center: [14.291141
+            //                 , 48.308857
+            //             ],
             zoom: 10
         });
 

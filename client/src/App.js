@@ -26,6 +26,8 @@ export default class App extends React.Component {
                     {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
                 </Container>
             </div>
+            //  Angepasster Code Zwischenpräsentation
+            //  { <Map location={this.state.location}/>}
         );
     }
 
