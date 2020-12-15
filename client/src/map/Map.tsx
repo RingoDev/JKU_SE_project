@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState} from "react";
 import mapboxgl from "mapbox-gl";
 
-import "../main/App.css";
+import "./Map.css";
 import {AppUser} from "../data/User";
 import {RootState} from "../redux/rootReducer";
 import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
@@ -66,10 +66,7 @@ const Map: React.FC<PropsFromRedux> = (props) => {
         // adding/removing users to/from map
         for (let user of props.users) {
             if (user.latitude && user.longitude) {
-
-
                 let foundMarker = false;
-
                 for (let userMarker of userMarkers) {
                     if (userMarker.user._id === user._id) {
                         //user is unchecked so remove marker from array and map
@@ -86,7 +83,14 @@ const Map: React.FC<PropsFromRedux> = (props) => {
                 if (!foundMarker && user.checked) {
                     const popUp = new mapboxgl.Popup().setText(user.name)
                     // create a marker for user
-                    const marker = new mapboxgl.Marker()
+
+                    const markerIcon = document.createElement("i")
+                    markerIcon.className = "marker fas fa-map-marker-alt fa-4x"
+
+                    if (user.isMain) {
+                        markerIcon.id = "main-marker"
+                    }
+                    const marker = new mapboxgl.Marker(markerIcon, {})
                         .setPopup(popUp)
                         .setLngLat({lng: user.longitude, lat: user.latitude})
                         .addTo(map)

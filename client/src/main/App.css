@@ -1,16 +1,5 @@
-.map {
-    height: 90%;
-    width: 100%;
-}
-
 html, body, #root, .App {
     height: 100%
-}
-
-/*removes links bottom right
-not because i dont like contribution but because its buggy*/
-.mapboxgl-ctrl-attrib {
-    display: none;
 }
 
 

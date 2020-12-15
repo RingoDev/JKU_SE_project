@@ -110,7 +110,7 @@ wss.on('connection', (ws, req) => {
             else {
                 removeUser(userID)
                     .then((val) => console.log("Removed User with id " + userID, val))
-                    .catch((err) => console.log("Couldnt remove User with id " + userID, err))
+                    .catch((err) => console.log("Couldn't remove User with id " + userID, err))
                 socketToUser.delete(socketID)
                 getAllUsers().then(users => updateClients(users))
             }

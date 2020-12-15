@@ -1,0 +1,116 @@
+asyncapi: 2.0.0
+info:
+  title: MeetUp
+  version: 1.0.0
+
+servers:
+  backend:
+    url: "backend.ringodev.com:3001"
+    protocol: wss
+
+channels:
+  userCreated:
+    publish:
+      description: Is sent after a client initialized a connection. Contains the id of the client.
+      operationId: userCreated
+      message:
+        $ref: '#/components/messages/user_created'
+  updateUsers:
+    publish:
+      description: Updates data of currently connected clients
+      operationId: updateUsers
+      message:
+        $ref: '#/components/messages/update_users'
+  simpleMessage:
+    publish:
+      description: Sends a simple message to the client for logging reasons
+      operationId: messageClient
+      message:
+        $ref: '#/components/messages/message'
+    subscribe:
+      description: Sends a simple message to the server for logging reasons
+      operationId: messageServer
+      message:
+        $ref: '#/components/messages/message'
+  postLocation:
+    subscribe:
+      description: Update the clients location on the server
+      operationId: postLocation
+      message:
+        $ref: '#/components/messages/post_location'
+  createUser:
+    subscribe:
+      description: Initializes connection with a specified username
+      operationId: createUser
+      message:
+        $ref: '#/components/messages/create_user'
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        longitude:
+          type: integer
+        latitude:
+          type: integer
+  messages:
+    update_users:
+      payload:
+        type: object
+        properties:
+          type: 
+            type: string
+            enum: [UPDATE_USERS]
+          users: 
+            type: array
+            items:
+              - $ref: '#/components/schemas/user'
+    post_location:
+      payload:
+        type: object
+        properties:
+          type: 
+            type: string
+            enum: [POST_LOCATION]
+          user: 
+            $ref: '#/components/schemas/user'
+    message:
+      payload:
+        type: object
+        properties:
+          type: 
+            type: string
+            enum: [MESSAGE]
+          msg: 
+            type: string
+    user_created:
+      payload:
+        type: object
+        properties:
+          type: 
+            type: string
+            enum: [USER_CREATED]
+          user: 
+            $ref: '#/components/schemas/user'
+    create_user:
+      payload:
+        type: object
+        properties:
+          type: 
+            type: string
+            enum: [CREATE_USER]
+          username: 
+            type: string
+         
+
+             
+            
+
+
+  
+   

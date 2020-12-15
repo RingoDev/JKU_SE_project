@@ -1,8 +1,25 @@
-.marker {
-    background-image: url('../map/Location-marker.svg');
-    background-size: cover;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    cursor: pointer;
+/*.mapboxgl-marker {*/
+/*    background-image: url('../map/Location-marker.svg');*/
+/*    background-size: cover;*/
+/*    width: 36px;*/
+/*    height: 36px;*/
+/*    border-radius: 50%;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*removes links bottom right
+not because i dont like contribution but because its buggy*/
+.mapboxgl-ctrl-attrib {
+    display: none;
+}
+
+
+
+#main-marker {
+    background-image: url('../map/red_marker.svg');
+}
+
+.map {
+    height: 90%;
+    width: 100%;
 }

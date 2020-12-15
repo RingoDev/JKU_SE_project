@@ -6,6 +6,7 @@ import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
 import {getLocation, getUsername} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
+import "./App.css"
 
 // import {fetchUsers, postLocation} from "../redux/user/user.actions";
 

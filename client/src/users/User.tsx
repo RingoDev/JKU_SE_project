@@ -22,7 +22,7 @@ const User: React.FC<PropsFromRedux> = (props) => {
                 <div>
                     <div className="switch">
                         <label>
-                            <input checked={props.user.checked}
+                            <input disabled={!props.user.longitude} checked={props.user.checked}
                                    onChange={event => props.setChecked(props.user, event.target.checked)}
                                    type="checkbox"/>
                             <span className="lever"/>

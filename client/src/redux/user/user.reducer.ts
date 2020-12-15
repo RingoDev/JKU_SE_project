@@ -180,7 +180,8 @@ function getUser(newUser: MongoUser, users: AppUser[]) {
 }
 
 function validateDocument(doc: MongoUser): boolean {
-    if (doc.latitude === undefined || doc.longitude === undefined || doc.name === undefined || doc._id === undefined) return false;
+    if (doc.name === undefined || doc._id === undefined) return false;
+    if (doc.latitude === undefined || doc.longitude === undefined) return true
     if (doc.latitude < -90 || doc.latitude > 90) return false;
     if (doc.longitude < -180 || doc.latitude > 180) return false;
     return true
