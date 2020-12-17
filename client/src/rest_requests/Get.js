@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import ReactDOM from "react-dom";
+
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class Get extends React.Component {
@@ -7,67 +9,66 @@ export default class Get extends React.Component {
         persons: []
     }
 
-    handleSubmit(){
-        this.componentDidMount();
+    // handleSubmit(){
+    //     this.componentDidMount();
+    // }
+
+    handleSubmit = event => {
+        event.preventDefault();
+        // this.componentDidMount();
+            axios.get(`http://localhost:3001/users`)
+                .then(res => {
+
+                    const persons = res.data;
+
+                    this.setState({ persons }); // Speichern in Array
+
+                    ReactDOM.render(<p>
+                        { this.state.persons.map(person =>
+                            <li>
+                                NAME: {person.name};;;
+                                ID: {person._id};;;
+                                GPS-POS.: {person.gpsposition}
+                            </li>)}
+                    </p>, document.getElementById('userslist'));
+
+                })
+                .catch(function (error) {
+                    // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
+                    console.log(error + ' Fehler! Code: ' + error.staus);
+                })
     }
 
-    componentDidMount() {
 
-        /*
-         * Get-Request
-          */
-        axios.get(`http://localhost:3001/users`)
-            .then(res => {
-
-                /*
-                 * Ergebnis-Handling
-                 *
-                 * Filtern von Ergebnisdaten
-                 * Außerdem können folgende Informationen mit folgenden Schlüsselwörtern Abgefragt werden
-                 * - Daten: data
-                 * - HTTP-Status Code: status
-                 * - HTTP-Status Text: statusText
-                 * - HTTP Header: headers
-                 * - Konfiguration des Requests: config
-                 * - Request der Ergebnis erzeugt hat: request
-                 */
-                const persons = res.data;
-
-                this.setState({ persons }); // Speichern in Array
-            })
-            .catch(function (error) {
-                // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
-                console.log(error + ' Fehler! Code: ' + error.staus);
-            })
-
-        /*
-         * Get-Request - mehrerer Parameter
-         * - Parameter können auch so mitgegeben werden
-         */
-        // - - - FUNKTIONIERT NICHT!!! - - -
-        let myvar = "5fc54c179cf095420cf5554b";
-
-        axios.get('http://localhost:3001/users/5fc54c179cf095420cf5554b', {
-            // params: {
-            //     myqueryparam: 'das isser'
-            // }
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-
-    }
-
-    // handleChangeID = event => {
-    //     this.setState({ _id: event.target.value });
-    // };
+    // componentDidMount() {
     //
-    // handleSubmit = event => {
-    //     event.preventDefault();
+    //     /*
+    //      * Get-Request
+    //       */
+    //     axios.get(`http://localhost:3001/users`)
+    //         .then(res => {
     //
-    //     const member = {
-    //         name: this.state.name
-    //     };
+    //             /*
+    //              * Ergebnis-Handling
+    //              *
+    //              * Filtern von Ergebnisdaten
+    //              * Außerdem können folgende Informationen mit folgenden Schlüsselwörtern Abgefragt werden
+    //              * - Daten: data
+    //              * - HTTP-Status Code: status
+    //              * - HTTP-Status Text: statusText
+    //              * - HTTP Header: headers
+    //              * - Konfiguration des Requests: config
+    //              * - Request der Ergebnis erzeugt hat: request
+    //              */
+    //             const persons = res.data;
+    //
+    //             this.setState({ persons }); // Speichern in Array
+    //         })
+    //         .catch(function (error) {
+    //             // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
+    //             console.log(error + ' Fehler! Code: ' + error.staus);
+    //         })
+    // }
 
 
 
@@ -80,16 +81,21 @@ export default class Get extends React.Component {
         return (
             <div>
 
-                <ul>
-                    { this.state.persons.map(person => <li>{person.name} {person._id}</li>)}
-                </ul>
+
 
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <button type="submit">Refresh</button>
+                        <button type="submit">Get All Users</button>
                     </form>
                 </div>
-
+            <ul id ="userslist">
+                {/*{ this.state.persons.map(person =>*/}
+                {/*    <li>*/}
+                {/*        NAME: {person.name};;;*/}
+                {/*        ID: {person._id};;;*/}
+                {/*        GPS-POS.: {person.gpsposition}*/}
+                {/*    </li>)}*/}
+            </ul>
             </div>
 
 

@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Get from "./Get";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class Post extends React.Component {
@@ -15,15 +17,19 @@ export default class Post extends React.Component {
     handleChangeName = event => {
         this.setState({ name: event.target.value });
     }
+    handleChangePosition = event => {
+        this.setState({ gpsposition: event.target.value });
+    }
+
 
     handleSubmit = event => {
         event.preventDefault();
 
-        debugger
+        // debugger
 
         const member = {
             name: this.state.name,
-            gpsposition: "48.33733258693079, 14.319351129350906"
+            gpsposition: this.state.gpsposition
         };
 
         // const body = {
@@ -38,31 +44,20 @@ export default class Post extends React.Component {
                 console.log(res);
                 const feedback = res.data;
                 this.setState({feedback: feedback.Message});
+                // alert("hat funktioniert!");
+                debugger
+
+                // ReactDOM.render(<h3>ERFOLG {feedback.name}</h3>, document.getElementById('asdf'))
+                ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('asdf'));
+
+                debugger
+
             })
             .catch(function (error) {
                 // Fehlerbehandlung
                 console.log(error);
             })
 
-        // // Post-Request - Parameter im URL
-        // axios.post('https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/addMember/vorname=Maxa&nachname=Mustermann')
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         // Fehlerbehandlung
-        //         console.log(error);
-        //     })
-        //
-        // // Post-Request mit falschem URL - Triggert Catch
-        // axios.post('http://localhost:3001/users//addMemberXXX?vorname=Maxa&nachname=Mustermann')
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         // Fehlerbehandlung
-        //         console.log(error);
-        //     })
     }
 
     render() {
@@ -78,13 +73,16 @@ export default class Post extends React.Component {
                     <br />
                     <label>
                         Position:
-                        <input type="text" className={"ip-field"} name="gpsposition" onChange={this.handleChangeNachname} />
+                        <input type="text" className={"ip-field"} name="gpsposition" onChange={this.handleChangePosition} />
                     </label>
                     <br />
                     <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
                     <button type="submit">Add</button>
                 </form>
+                <p id="asdf"></p>
             </div>
         )
     }
 }
+
+//"48.33733258693079, 14.319351129350906"

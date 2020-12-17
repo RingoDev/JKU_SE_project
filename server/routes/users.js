@@ -55,6 +55,10 @@ router.patch('/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId); //for testing
         const body =  req.body; //for testing
+        //req.params   req.body    req.query
+
+
+
         const updatedUser = await User.updateOne(
             {_id: req.params.userId},
             {
@@ -63,10 +67,10 @@ router.patch('/:userId', async (req, res) => {
                     time: Date.now,
                     name: req.body.name ? req.body.name : user["name"]
                 }
-            }
+            },
         );
 
-        res.json(user);
+        res.json(req.body);
     } catch (err) {
         res.json({message: err});
     }
