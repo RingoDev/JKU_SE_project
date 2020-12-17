@@ -30,24 +30,105 @@ const Map = (props) => {
 
 
         var marker = new mapboxgl.Marker()
-            .setLngLat([48.33714606104758, 14.320349050272606])
+            .setLngLat([14.320349050272606, 48.33714606104758])
             .addTo(map);
 
-       /* var marker = new mapboxgl.Marker({
+       var marker = new mapboxgl.Marker({
             color: "#FFFFFF",
             draggable: true
-        }).setLngLat([48.33714606104758, 14.320349050272606])
-            .addTo(map);*/
+        }).setLngLat([14.320349050272606, 48.33714606104758])
+            .addTo(map);
 
-       /* var geojson = [
+       var geojson = [
             {
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
-                    coordinates: [48.33714606104758, 14.320349050272606]
+                    coordinates: [14.320349050272606, 48.33714606104758]
                 }
             },
-        ];*/
+        ];
+
+        var marker = new mapboxgl.Marker()
+            .setLngLat([14.321147674299729, 48.33801278833887])
+            .addTo(map);
+
+       var marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+        }).setLngLat([14.321147674299729, 48.33801278833887])
+            .addTo(map);
+
+       var geojson = [
+            {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [14.321147674299729, 48.33801278833887]
+                }
+            },
+        ];
+
+        var marker = new mapboxgl.Marker()
+            .setLngLat([14.324154722323478, 48.33520435055581])
+            .addTo(map);
+
+        var marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+        }).setLngLat([14.324154722323478, 48.33520435055581])
+            .addTo(map);
+
+        var geojson = [
+        {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [14.324154722323478, 48.33520435055581]
+            }
+        },
+    ];
+
+        var marker = new mapboxgl.Marker()
+            .setLngLat([14.321851163500169, 48.33764447645141])
+            .addTo(map);
+
+        var marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+        }).setLngLat([14.321851163500169, 48.33764447645141])
+            .addTo(map);
+
+        var geojson = [
+        {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [14.321851163500169, 48.33764447645141]
+            }
+        },
+    ];
+
+        var marker = new mapboxgl.Marker()
+            .setLngLat([14.319010731912636, 48.338113398830124])
+            .addTo(map);
+
+        var marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+        }).setLngLat([14.319010731912636, 48.338113398830124])
+            .addTo(map);
+
+        var geojson = [
+        {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [14.319010731912636, 48.338113398830124]
+            }
+        },
+    ];
+
 
         /*const Popup = ({ feature }) => {
             const { id, name, description } = feature.properties;
@@ -58,11 +139,32 @@ const Map = (props) => {
                     {description}
                 </div>
             );
-        };*/
+        }; */
 
         // add navigation control (zoom buttons)
         map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
 
+
+        // create the popup
+        var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+        'Teichwerk'
+        );
+        var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
+        'JKU Bibliothek'
+        );
+        var popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
+        'Science Park 3'
+        );
+        var popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
+        'JKU Mensa'
+        );
+        var popup4 = new mapboxgl.Popup({ offset: 25 }).setText(
+        'JKU Chat Cafe'
+        );
+     
+        // create DOM element for the marker
+        var el = document.createElement('div');
+        el.id = 'marker';
 
 
         // creates a Marker at the Location of the passed in location object
@@ -70,14 +172,34 @@ const Map = (props) => {
             .setLngLat({lng:props.location.coords.longitude,lat:props.location.coords.latitude})
             .addTo(map);
 
-        /*new mapboxgl.Marker(<Marker />)
-            .setLngLat({lng:48.33714606104758, lat:14.320349050272606})
-            .addTo(map);*/
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:14.320349050272606, lat:48.33714606104758})
+            .setPopup(popup)
+            .addTo(map);
 
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:14.321147674299729, lat:48.33801278833887})
+            .setPopup(popup1)
+            .addTo(map);
+        
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:14.324154722323478, lat:48.33520435055581})
+            .setPopup(popup2)
+            .addTo(map);
+
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:14.321851163500169, lat:48.33764447645141})
+            .setPopup(popup3)
+            .addTo(map);
+
+        new mapboxgl.Marker(<Marker />)
+            .setLngLat({lng:14.319010731912636, lat:48.338113398830124})
+            .setPopup(popup4)
+            .addTo(map);
 
 
         // add popup when user clicks a point
-       /* map.on("click", "random-points-layer", e => {
+     /*  map.on("click", "random-points-layer", e => {
             if (e.features.length) {
                 const feature = e.features[0];
                 // create popup node
@@ -89,8 +211,7 @@ const Map = (props) => {
                     .setDOMContent(popupNode)
                     .addTo(map);
             }
-        });*/
-
+        }); */
 
         // clean up on unmount
         return () => map.remove();
