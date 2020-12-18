@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Get extends React.Component {
+export default class GetSpecificUser extends React.Component {
     state = {
         person : ''
     }
