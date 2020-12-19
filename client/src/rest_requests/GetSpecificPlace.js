@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class GetSpecificUser extends React.Component {
+export default class GetSpecificPlace extends React.Component {
     state = {
-        person : ''
+        place : ''
     }
 
     handleChange = event => {
@@ -16,18 +16,18 @@ export default class GetSpecificUser extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         // this.componentDidMount();
-        axios.get(`http://localhost:3001/users/${this.state.id}`)//ID HIER AENDERN
+        axios.get(`http://localhost:3001/places/${this.state.id}`)//ID HIER AENDERN
             .then(res => {
 
-                const person = res.data;
+                const place = res.data;
 
-                this.setState({ person }); // Speichern in Array
+                this.setState({ place }); // Speichern in Array
                 debugger
                 // ReactDOM.render(<p>HALLO</p>, document.getElementById('getoneuser'));
                 // document.getElementById("getoneuser").innerHTML = person.name;
                 ReactDOM.render(<p>
-                    NAME: {this.state.person.name};;; ID: {this.state.person._id};;; GPS-POS.: {this.state.person.gpsposition}
-                </p>, document.getElementById('getoneuser'));
+                    NAME: {this.state.place.name};;; ID: {this.state.place._id};;; GPS-POS.: {this.state.place.gpsposition}
+                </p>, document.getElementById('getoneplace'));
                 //NAME: {this.state.person.name};;; ID: {this.state.person._id};;; GPS-POS.: {this.state.person.gpsposition}
             })
             .catch(function (error) {
@@ -65,10 +65,10 @@ export default class GetSpecificUser extends React.Component {
                     </label>
                     <br />
                     {/*<p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>*/}
-                    <button type="submit">Get User Data</button>
+                    <button type="submit">Get Place Data</button>
                 </form>
 
-                <p id="getoneuser"></p>
+                <p id="getoneplace"></p>
            </div>
 
 

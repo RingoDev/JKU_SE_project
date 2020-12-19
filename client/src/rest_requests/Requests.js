@@ -5,7 +5,11 @@ import Delete from "./Delete";
 import Put from "./Put";
 import Patch from "./Patch";
 import GetSpecificUser from "./GetSpecificUser";
-
+import GetPlace from "./GetPlace";
+import PostPlace from "./PostPlace";
+import DeletePlace from "./DeletePlace";
+import PatchPlace from "./PatchPlace";
+import GetSpecificPlace from "./GetSpecificPlace";
 
 export class Requests extends React.Component {
 
@@ -38,8 +42,21 @@ export class Requests extends React.Component {
                 <h3>4. Delete-Request</h3>
                 <Delete></Delete>
 
+                <h3>0. Christians Single GET-Request</h3>
+                <GetSpecificPlace></GetSpecificPlace>
 
 
+                <h3>1. Christians GET-Request</h3>
+                <GetPlace></GetPlace>
+
+                <h3>2. POST-Request</h3>
+                <PostPlace></PostPlace>
+
+                <h3>3. Patch-Request</h3>
+                <PatchPlace></PatchPlace>
+
+                <h3>4. Delete-Request</h3>
+                <DeletePlace></DeletePlace>
 
 
             </div>
