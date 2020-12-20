@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Delete extends React.Component {
+export default class Place_Delete extends React.Component {
     state = {
         id: '',
         feedback: '',
@@ -16,8 +16,8 @@ export default class Delete extends React.Component {
         event.preventDefault();
 
         // debugger
-        // Delete-Request
-        axios.delete(`http://localhost:3001/users/${this.state.id}`)
+        // User_Delete-Request
+        axios.delete(`http://localhost:3001/places/${this.state.id}`)
             .then(res => {
                 // Ergebnis handling
                 console.log(res);
@@ -35,7 +35,7 @@ export default class Delete extends React.Component {
             <div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Person ID:
+                        Place ID:
                         <input className={"ip-field"} type="text" name="id" onChange={this.handleChange} />
                     </label>
                     <br />

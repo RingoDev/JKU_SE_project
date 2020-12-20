@@ -2,7 +2,7 @@ import React from 'react';
 import Location from './Location'
 import Map from "./Map";
 import {Container} from "reactstrap";
-import {Requests} from "./rest_requests/Requests";
+import {All_Requests} from "./rest_requests_test/All_Requests";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -12,6 +12,7 @@ export default class App extends React.Component {
         }
     }
 
+
     render() {
         return (
             <div className="App">
@@ -20,10 +21,14 @@ export default class App extends React.Component {
                         app={this}
                         interval={500}
                     />
-                    <Requests/>
+                    <All_Requests/>
                     {/*render Map if we have location of user*/}
 
+                    {/*ReactDOM.findDOMNode(component)*/}
+                    {/*ReactDOM.unmountComponentAtNode(component);*/}
+                    {/*<Map location={this.state.location}/>*/}
                     {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
+
                 </Container>
             </div>
             //  Angepasster Code Zwischenpräsentation

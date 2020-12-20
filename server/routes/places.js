@@ -29,6 +29,7 @@ router.post('/', async (req,res) => {
     const place = new Place({
         name: req.body.name,
         gpsposition: req.body.gpsposition,
+        link: req.body.link
     });
     try {
         const savedPlace = await place.save();
@@ -55,6 +56,7 @@ router.patch('/:placeId', async (req, res) => {
     try {
         const place = await Place.findById(req.params.placeId); //for testing
         const body =  req.body; //for testing
+
         //req.params   req.body    req.query
 
 
@@ -65,7 +67,7 @@ router.patch('/:placeId', async (req, res) => {
                 $set: {
                     gpsposition: req.body.gpsposition ? req.body.gpsposition : place["gpsposition"],
                     time: Date.now,
-                    name: req.body.name ? req.body.name : place["name"]
+                    link: req.body.link ? req.body.link : place["link"]
                 }
             },
         );

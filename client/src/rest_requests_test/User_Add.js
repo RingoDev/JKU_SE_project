@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Get from "./Get";
+import User_PrintList from "./User_PrintList";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class PostPlace extends React.Component {
+export default class User_Add extends React.Component {
     state = {
         // vorname: '',
         // nachname: '',
-        // feedback: '',
+        feedback: '',
         name: '',
         gpsposition: '',
         date: ''
@@ -37,8 +37,8 @@ export default class PostPlace extends React.Component {
         //     "gpsposition": "48.33733258693079, 14.319351129350906"
         // }
 
-        // Post-Request
-        axios.post(`http://localhost:3001/places/`,  member )
+        // User_Add-Request
+        axios.post(`http://localhost:3001/users/`,  member )
             .then(res => {
                 // Ergebnisbehandlung
                 console.log(res);
@@ -48,7 +48,7 @@ export default class PostPlace extends React.Component {
                 debugger
 
                 // ReactDOM.render(<h3>ERFOLG {feedback.name}</h3>, document.getElementById('asdf'))
-                ReactDOM.render(<p>Meine neue Location: {feedback.name}</p>, document.getElementById('pPlace'));
+                ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('erfolgUserAnlegen'));
 
                 debugger
 
@@ -62,7 +62,7 @@ export default class PostPlace extends React.Component {
 
     render() {
 
-        // Inputfeld für Post-Request
+        // Inputfeld für User_Add-Request
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -72,14 +72,14 @@ export default class PostPlace extends React.Component {
                     </label>
                     <br />
                     <label>
-                        Position:
+                        GPS-Position:
                         <input type="text" className={"ip-field"} name="gpsposition" onChange={this.handleChangePosition} />
                     </label>
                     <br />
                     <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
                     <button type="submit">Add</button>
                 </form>
-                <p id="pPlace"></p>
+                <p id="erfolgUserAnlegen"></p>
             </div>
         )
     }

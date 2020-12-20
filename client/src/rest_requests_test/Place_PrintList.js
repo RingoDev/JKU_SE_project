@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Get extends React.Component {
+export default class Place_PrintList extends React.Component {
     state = {
-        persons: []
+        locations: []
     }
 
     // handleSubmit(){
@@ -16,22 +16,27 @@ export default class Get extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         // this.componentDidMount();
-            axios.get(`http://localhost:3001/users`)
+            axios.get(`http://localhost:3001/places`)
                 .then(res => {
 
-                    const persons = res.data;
+                    const locations = res.data;
 
-                    this.setState({ persons }); // Speichern in Array
+                    this.setState({ locations }); // Speichern in Array
 
                     ReactDOM.render(<p>
-                        { this.state.persons.map(person =>
-                            <li>
-                                NAME: {person.name};;;
-                                ID: {person._id};;;
-                                GPS-POS.: {person.gpsposition}
-                            </li>)}
-                    </p>, document.getElementById('userslist'));
+                        { this.state.locations.map(location =>
+                            <li> {location.name}
+                                <ul>
+                                    {/*<li>NAME: {location.name};;;</li>*/}
+                                    <li>ID: {location._id}</li>
+                                    <li>GPS-POS.: {location.gpsposition}</li>
+                                    <li>LINK(optional): <a href={location.link} target="_blank" rel="noopener noreferrer">{location.link}</a></li>
 
+                                </ul>
+                            </li>
+                        )}
+                    </p>, document.getElementById('placeslist'));
+debugger
                 })
                 .catch(function (error) {
                     // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
@@ -43,7 +48,7 @@ export default class Get extends React.Component {
     // componentDidMount() {
     //
     //     /*
-    //      * Get-Request
+    //      * User_PrintList-Request
     //       */
     //     axios.get(`http://localhost:3001/users`)
     //         .then(res => {
@@ -57,7 +62,7 @@ export default class Get extends React.Component {
     //              * - HTTP-Status Code: status
     //              * - HTTP-Status Text: statusText
     //              * - HTTP Header: headers
-    //              * - Konfiguration des Requests: config
+    //              * - Konfiguration des All_Requests: config
     //              * - Request der Ergebnis erzeugt hat: request
     //              */
     //             const persons = res.data;
@@ -85,10 +90,10 @@ export default class Get extends React.Component {
 
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <button type="submit">Get All Users</button>
+                        <button type="submit">Get All Places</button>
                     </form>
                 </div>
-            <ul id ="userslist">
+            <ul id ="placeslist">
                 {/*{ this.state.persons.map(person =>*/}
                 {/*    <li>*/}
                 {/*        NAME: {person.name};;;*/}

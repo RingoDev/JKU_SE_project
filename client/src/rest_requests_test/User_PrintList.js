@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from "react-dom";
+import Location from "../Location";
 
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class GetPlace extends React.Component {
+export default class User_PrintList extends React.Component {
     state = {
-        locations: []
+        persons: []
     }
 
     // handleSubmit(){
@@ -16,21 +17,23 @@ export default class GetPlace extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         // this.componentDidMount();
-            axios.get(`http://localhost:3001/places`)
+            axios.get(`http://localhost:3001/users`)
                 .then(res => {
 
-                    const locations = res.data;
+                    const persons = res.data;
 
-                    this.setState({ locations }); // Speichern in Array
+                    this.setState({ persons }); // Speichern in Array
 
                     ReactDOM.render(<p>
-                        { this.state.locations.map(location =>
-                            <li>
-                                NAME: {location.name};;;
-                                ID: {location._id};;;
-                                GPS-POS.: {location.gpsposition}
+                        { this.state.persons.map(person =>
+                            <li>{person.name}
+                                <ul>
+                                    {/*<li>NAME: {person.name};;;</li>*/}
+                                    <li>ID: {person._id}</li>
+                                    <li>GPS-POS.: {person.gpsposition}</li>
+                                </ul>
                             </li>)}
-                    </p>, document.getElementById('placeslist'));
+                    </p>, document.getElementById('userslist'));
 
                 })
                 .catch(function (error) {
@@ -43,7 +46,7 @@ export default class GetPlace extends React.Component {
     // componentDidMount() {
     //
     //     /*
-    //      * Get-Request
+    //      * User_PrintList-Request
     //       */
     //     axios.get(`http://localhost:3001/users`)
     //         .then(res => {
@@ -57,7 +60,7 @@ export default class GetPlace extends React.Component {
     //              * - HTTP-Status Code: status
     //              * - HTTP-Status Text: statusText
     //              * - HTTP Header: headers
-    //              * - Konfiguration des Requests: config
+    //              * - Konfiguration des All_Requests: config
     //              * - Request der Ergebnis erzeugt hat: request
     //              */
     //             const persons = res.data;
@@ -80,15 +83,12 @@ export default class GetPlace extends React.Component {
     render() {
         return (
             <div>
-
-
-
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <button type="submit">Get All Places</button>
+                        <button type="submit">Get All Users</button>
                     </form>
                 </div>
-            <ul id ="placeslist">
+            <ul id ="userslist">
                 {/*{ this.state.persons.map(person =>*/}
                 {/*    <li>*/}
                 {/*        NAME: {person.name};;;*/}

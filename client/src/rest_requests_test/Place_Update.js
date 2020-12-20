@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class PatchPlace extends React.Component {
+export default class Place_Update extends React.Component {
     state = {
         id: '',
         // mail: '',
@@ -21,6 +21,9 @@ export default class PatchPlace extends React.Component {
     handleChangeName = event => {
         this.setState({ name: event.target.value });
     }
+    handleChangeLink = event => {
+        this.setState({ link: event.target.value });
+    }
 
 
 
@@ -30,7 +33,8 @@ export default class PatchPlace extends React.Component {
 
         debugger
         let body = {
-            gpsposition: this.state.gpsposition
+            gpsposition: this.state.gpsposition,
+            link: this.state.link
         }
 
         // Put-Request
@@ -67,8 +71,13 @@ export default class PatchPlace extends React.Component {
                     {/*</label>*/}
                     {/*<br />*/}
                     <label>
-                        GPS-Position:
+                        GPS-Position (optional) :
                         <input className={"ip-field"} type="text" name="mail" onChange={this.handleChangePosition} />
+                    </label>
+                    <br />
+                    <label>
+                        Link/Website (optional) :
+                        <input type="text" className={"ip-field"} name="link" onChange={this.handleChangeLink} />
                     </label>
                     <br />
                     <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>

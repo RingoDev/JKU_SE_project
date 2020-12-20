@@ -1,17 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Get from "./Get";
+import User_PrintList from "./User_PrintList";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Post extends React.Component {
+export default class Place_Add extends React.Component {
     state = {
         // vorname: '',
         // nachname: '',
         // feedback: '',
         name: '',
         gpsposition: '',
-        date: ''
+        date: '',
+        link: ''
     }
 
     handleChangeName = event => {
@@ -19,6 +20,9 @@ export default class Post extends React.Component {
     }
     handleChangePosition = event => {
         this.setState({ gpsposition: event.target.value });
+    }
+    handleChangeLink = event => {
+        this.setState({ link: event.target.value });
     }
 
 
@@ -29,7 +33,8 @@ export default class Post extends React.Component {
 
         const member = {
             name: this.state.name,
-            gpsposition: this.state.gpsposition
+            gpsposition: this.state.gpsposition,
+            link: this.state.link
         };
 
         // const body = {
@@ -37,8 +42,8 @@ export default class Post extends React.Component {
         //     "gpsposition": "48.33733258693079, 14.319351129350906"
         // }
 
-        // Post-Request
-        axios.post(`http://localhost:3001/users/`,  member )
+        // User_Add-Request
+        axios.post(`http://localhost:3001/places/`,  member )
             .then(res => {
                 // Ergebnisbehandlung
                 console.log(res);
@@ -48,7 +53,7 @@ export default class Post extends React.Component {
                 debugger
 
                 // ReactDOM.render(<h3>ERFOLG {feedback.name}</h3>, document.getElementById('asdf'))
-                ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('asdf'));
+                ReactDOM.render(<p>Meine neue Location: {feedback.name}</p>, document.getElementById('pPlace'));
 
                 debugger
 
@@ -62,7 +67,7 @@ export default class Post extends React.Component {
 
     render() {
 
-        // Inputfeld für Post-Request
+        // Inputfeld für User_Add-Request
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -76,10 +81,15 @@ export default class Post extends React.Component {
                         <input type="text" className={"ip-field"} name="gpsposition" onChange={this.handleChangePosition} />
                     </label>
                     <br />
+                    <label>
+                        Link/Website (optional) :
+                        <input type="text" className={"ip-field"} name="link" onChange={this.handleChangeLink} />
+                    </label>
+                    <br />
                     <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
                     <button type="submit">Add</button>
                 </form>
-                <p id="asdf"></p>
+                <p id="pPlace"></p>
             </div>
         )
     }
