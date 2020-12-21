@@ -13,6 +13,7 @@ import {User} from "./data";
 
 
 const socketToUser: Map<string, string> = new Map()
+
 // const socketAlive: Map<string, boolean> = new Map();
 
 
@@ -22,11 +23,13 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     if (!socketID) return
 
     // socketAlive.set(socketID, true)
-    ws.on('pong', () => setTimeout( () => {
-        if(ws.readyState === ws.OPEN){
+    ws.on('pong', () => setTimeout(() => {
+        console.log("Received pong to " + socketID)
+        if (ws.readyState === ws.OPEN) {
             ws.ping()
+            console.log("Sending pong to " + socketID)
         }
-    },15*1000));
+    }, 15 * 1000));
 
     // const interval = setInterval(() => {
     //     // if we dont have the socketID in the map anymore, we must have erased it on a close event
