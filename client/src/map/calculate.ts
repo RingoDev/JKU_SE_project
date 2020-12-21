@@ -42,7 +42,7 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
     let coslats = [];
     let hyp;
 
-    if(p.length == 0) return
+    if(p.length === 0) return
     // iterate over the points
     for (let i = 0; i < p.length; i++) {
        const point =  p[i]
@@ -64,11 +64,11 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
     midlat = Math.atan2(z, hyp);
 
     //what is ci?
-    if (cI != 2 && Math.abs(x) < 1.0e-9 && Math.abs(y) < 1.0e-9 && Math.abs(z) < 1.0e-9) {
+    if (cI !== 2 && Math.abs(x) < 1.0e-9 && Math.abs(y) < 1.0e-9 && Math.abs(z) < 1.0e-9) {
         // if (MM) MM = remove(MM);
         console.log('The midpoint is the center of the earth.');
     } else {
-        if (cI == 2) {
+        if (cI === 2) {
             y = 0;
             x = 0;
             for (let i = 0; i < lats1.length; i++) {
@@ -77,7 +77,7 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
             }
             midlat = y;
             midlng = normalizeLongitude(x + midlng);
-        } else if (cI == 1) {
+        } else if (cI === 1) {
             if (lats1.length >= 2) {
                 let tries = 0;
                 lats1[lats1.length] = midlat;
@@ -124,7 +124,7 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
                             pt.lat = lats1[i - 9];
                             pt.lon = lons1[i - 9];
                         }
-                        if (pt.lon != midlng || pt.lat != midlat || testcenter) {
+                        if (pt.lon !== midlng || pt.lat !== midlat || testcenter) {
                             sum = 0;
                             for (let j = 0; j < lats1.length - 1; j++) {
                                 sum += Math.acos(sinlats[j] * Math.sin(pt.lat) + coslats[j] * Math.cos(pt.lat) * Math.cos(pt.lon - lons1[j]));

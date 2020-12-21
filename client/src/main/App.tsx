@@ -7,7 +7,6 @@ import {RootState} from "../redux/rootReducer";
 import {getLocation, getUsername, getUsers} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
 import "./App.css"
-import {calculate} from "../map/calculate";
 
 // import {fetchUsers, postLocation} from "../redux/user/user.actions";
 
