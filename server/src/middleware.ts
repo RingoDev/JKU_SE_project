@@ -14,8 +14,6 @@ import {User} from "./data";
 
 const socketToUser: Map<string, string> = new Map()
 
-// const socketAlive: Map<string, boolean> = new Map();
-
 
 function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage) {
 
@@ -23,33 +21,13 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     if (!socketID) return
 
     ws.ping()
-    // socketAlive.set(socketID, true)
     ws.on('pong', () => setTimeout(() => {
-        console.log("Received pong to " + socketID)
+        console.log("Received pong from " + socketID)
         if (ws.readyState === ws.OPEN) {
             ws.ping()
-            console.log("Sending pong to " + socketID)
+            console.log("Sending ping to " + socketID)
         }
     }, 15 * 1000));
-
-    // const interval = setInterval(() => {
-    //     // if we dont have the socketID in the map anymore, we must have erased it on a close event
-    //     if (socketAlive.get(socketID) === undefined || ws.readyState === ws.CLOSED) {
-    //         clearInterval(interval);
-    //         console.log("Connection was closed by the Client")
-    //         return
-    //     }
-    //     if (socketAlive.get(socketID) === false) {
-    //         console.log("Closing connection to " + socketID + " due to timeout")
-    //         clearInterval(interval);
-    //         ws.close();
-    //         return
-    //     } else {
-    //         socketAlive.set(socketID, false)
-    //         ws.ping();
-    //     }
-    // }, 20 * 1000);
-
 
     ws.on('message', (rawData: string) => {
         if (!socketID) return
@@ -100,15 +78,16 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
 
 const onClosedConnection = (wss: webSocket.Server, socketID: string) => {
     return () => {
-        // socketAlive.delete(socketID)
         const userId = socketToUser.get(socketID)
         if (!userId) console.log("Didn't have a corresponding userID to Socket ID")
         else {
             removeUser(userId)
-                .then((val) => console.log("Removed User with id " + userId, val))
+                .then((val) => {
+                    console.log("Removed User with id " + userId, val)
+                    getAllUsers().then(users => updateClients(wss, users))
+                })
                 .catch((err) => console.log("Couldn't remove User with id " + userId, err))
             socketToUser.delete(socketID)
-            getAllUsers().then(users => updateClients(wss, users))
         }
     };
 }
