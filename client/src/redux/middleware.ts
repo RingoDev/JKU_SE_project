@@ -78,6 +78,7 @@ const socketMiddleware = () => {
 
                 break;
             case WS_DISCONNECT:
+                //todo try to reconnect if connection is lost
                 if (socket !== null) {
                     socket.close();
                 }

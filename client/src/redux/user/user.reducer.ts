@@ -1,10 +1,4 @@
 import {
-    // FETCH_USERS_ERROR,
-    // FETCH_USERS_PENDING,
-    // FETCH_USERS_SUCCESS,
-    // POST_LOCATION_ERROR,
-    // POST_LOCATION_PENDING,
-    // POST_LOCATION_SUCCESS,
     SET_LOCATION, SET_USER_CHECKED, SET_USER_ID, SET_USERNAME, UPDATE_USERS
 } from './user.types';
 import {AxiosError} from 'axios';
@@ -49,19 +43,6 @@ const reducer = (state = INITIAL_STATE,
                 location: action.location ? action.location : undefined
             }
         }
-        // case FETCH_USERS_PENDING:
-        //     return {
-        //         ...state,
-        //         fetchUsersPending: true
-        //     };
-        //
-        // case FETCH_USERS_SUCCESS:
-        //     console.log("Fetched users", action.users)
-        //     return {
-        //         ...state,
-        //         fetchUsersPending: false,
-        //         users: setUsersFromDB(state.users, state.userID, action.users)
-        //     };
 
         case UPDATE_USERS:
             console.log("Fetched users", action.users)
@@ -70,30 +51,6 @@ const reducer = (state = INITIAL_STATE,
                 users: setUsersFromDB(state.users, state.userID, action.users, state.location)
             };
 
-        // case FETCH_USERS_ERROR:
-        //     return {
-        //         ...state,
-        //         fetchUsersPending: false,
-        //         fetchUsersError: action.error
-        //     };
-        //
-        // case POST_LOCATION_PENDING:
-        //     return {
-        //         ...state,
-        //         postLocationPending: true,
-        //     };
-        // case POST_LOCATION_SUCCESS:
-        //     return {
-        //         ...state,
-        //         userID: action.userID,
-        //         postLocationPending: false,
-        //     };
-        // case POST_LOCATION_ERROR:
-        //     return {
-        //         ...state,
-        //         postLocationError: action.error,
-        //         postLocationPending: false
-        //     };
         case SET_USER_CHECKED:
             return {
                 ...state,
