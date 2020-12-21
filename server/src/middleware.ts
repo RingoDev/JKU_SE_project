@@ -22,6 +22,7 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     const socketID = req.headers['sec-websocket-key']
     if (!socketID) return
 
+    ws.ping()
     // socketAlive.set(socketID, true)
     ws.on('pong', () => setTimeout(() => {
         console.log("Received pong to " + socketID)
