@@ -43,9 +43,6 @@ export function updateUser(user: User) {
             },
             {new: true},
             (_error, doc: Document | null, _result) => {
-                console.log(_error)
-                console.log(doc)
-                console.log(_result)
                 if (doc === null) {
                     console.log("User didn't exist in the DB");
                     reject("User didn't exist in the DB")

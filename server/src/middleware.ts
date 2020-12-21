@@ -12,11 +12,32 @@ import {createUser, getAllUsers, removeUser, updateUser} from "./methods";
 import {User} from "./data";
 
 
-const socketToUser: Map<string, string> = new Map()
+const socketToUser: Map<string,string> = new Map()
+const socketAlive: Map<string, boolean> = new Map();
+
+
 
 function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage) {
 
     const socketID = req.headers['sec-websocket-key']
+    if (!socketID) return
+
+    socketAlive.set(socketID, true)
+    ws.on('pong', () =>  socketAlive.set(socketID, true));
+
+    const interval = setInterval(() => {
+            if (socketAlive.get(socketID) === false) {
+                clearInterval(interval);
+                ws.terminate();
+                onClosedConnection(this,socketID)();
+                return
+            }
+            else{
+                socketAlive.set(socketID,true)
+                ws.ping();
+            }
+    }, 30 * 1000);
+
 
     //connection is up, let's add a simple simple event
     ws.on('message', (rawData: string) => {
@@ -62,19 +83,23 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
                         })
                 }
         }
-        ws.on("close", (code, reason) => {
-            const userID = socketToUser.get(socketID)
-            if (!userID) console.log("Didn't have a corresponding userID to Socket ID")
-            else {
-                removeUser(userID)
-                    .then((val) => console.log("Removed User with id " + userID, val))
-                    .catch((err) => console.log("Couldn't remove User with id " + userID, err))
-                socketToUser.delete(socketID)
-                getAllUsers().then(users => updateClients(this, users))
-            }
-        });
+        ws.on("close", onClosedConnection(this, socketID));
     });
 }
+const onClosedConnection = (wss:webSocket.Server,socketID: string) => {
+    return () => {
+        const userId = socketToUser.get(socketID)
+        if (!userId) console.log("Didn't have a corresponding userID to Socket ID")
+        else {
+            removeUser(userId)
+                .then((val) => console.log("Removed User with id " + userId, val))
+                .catch((err) => console.log("Couldn't remove User with id " + userId, err))
+            socketToUser.delete(socketID)
+            getAllUsers().then(users => updateClients(wss, users))
+        }
+    };
+}
+
 
 function updateClients(wss: webSocket.Server, users: User[]) {
     console.log("Broadcasting to all clients")
