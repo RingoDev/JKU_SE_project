@@ -21,13 +21,15 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     if (!socketID) return
 
     ws.ping()
-    ws.on('pong', () => setTimeout(() => {
+    ws.on('pong', () => {
         console.log("Received pong from " + socketID)
-        if (ws.readyState === ws.OPEN) {
-            ws.ping()
-            console.log("Sending ping to " + socketID)
-        }
-    }, 15 * 1000));
+        setTimeout(() => {
+            if (ws.readyState === ws.OPEN) {
+                ws.ping()
+                console.log("Sending ping to " + socketID)
+            }
+        }, 15 * 1000)
+    });
 
     ws.on('message', (rawData: string) => {
         if (!socketID) return
