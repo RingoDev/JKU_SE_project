@@ -4,9 +4,8 @@ import {User} from "./data";
 
 
 /**
- * Creates a User and returns a Promise that resolves to the Userobject
- * Should only be called if the Name doesn't exist in the DB yet
  * @param name the name of the user
+ * @return a {@link Promise} that resolves to the created {@link User}
  */
 export function createUser(name: string) {
     return new Promise<User>((resolve, reject) => {
@@ -32,6 +31,7 @@ export function createUser(name: string) {
 /**
  * Updates a User with certain id in DB
  * @param user
+ * @return a {@link Promise} that resolves to the updated {@link User}
  */
 export function updateUser(user: User) {
     return new Promise<User>((resolve, reject) => {
@@ -58,7 +58,12 @@ export function updateUser(user: User) {
             })
     })
 }
-
+//todo check if val is a User
+/**
+ * Removes a User with certain id in DB
+ * @param id
+ * @return a {@link Promise} that resolves to the deleted {@link User}
+ */
 export function removeUser(id: string) {
     return new Promise((resolve, reject) => {
         UserModel.findByIdAndRemove(id)
@@ -67,6 +72,11 @@ export function removeUser(id: string) {
     })
 }
 
+/**
+ * Returns all  a User with certain id in DB
+ * @param id
+ * @return a {@link Promise} that resolves to all current {@link User}
+ */
 export function getAllUsers() {
     return new Promise<User[]>((resolve, reject) => {
         UserModel.find()
@@ -105,8 +115,9 @@ export function getTestUsers() {
     return users
 }
 
+
 function docToUser(doc: any): User | undefined {
-    if (doc.name && doc._id) {
+    if (doc.name && doc._id && typeof doc.name === "string" && typeof doc._id === "string") {
         return {
             name: doc.name,
             _id: doc._id,
@@ -114,4 +125,27 @@ function docToUser(doc: any): User | undefined {
             longitude: doc.longitude
         }
     } else return
+}
+
+/**
+ * Initializes DB by removing all users and inserting test users if they don't exist
+ */
+export function initializeDB() {
+    // remove all Users on startup
+    UserModel.remove({}, (err) => {
+        for (let testUser of getTestUsers()) {
+            UserModel.findOne({name: testUser.name},
+                (_error, result) => {
+                    // if there was no user with the name -> create User
+                    if (result === null) {
+                        console.log("Testuser was not in the db ")
+                        const newUser = new UserModel(testUser)
+                        newUser.save().then((result) => console.log("Testuser was saved to db ", result))
+
+                    } else {
+                        console.log("Testuser was in the db ", result)
+                    }
+                })
+        }
+    })
 }
