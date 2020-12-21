@@ -13,7 +13,7 @@ import {User} from "./data";
 
 
 const socketToUser: Map<string, string> = new Map()
-const socketAlive: Map<string, boolean> = new Map();
+// const socketAlive: Map<string, boolean> = new Map();
 
 
 function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage) {
@@ -21,26 +21,30 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     const socketID = req.headers['sec-websocket-key']
     if (!socketID) return
 
-    socketAlive.set(socketID, true)
-    ws.on('pong', () => socketAlive.set(socketID, true));
+    // socketAlive.set(socketID, true)
+    ws.on('pong', () => setTimeout( () => {
+        if(ws.readyState === ws.OPEN){
+            ws.ping()
+        }
+    },30*1000));
 
-    const interval = setInterval(() => {
-        // if we dont have the socketID in the map anymore, we must have erased it on a close event
-        if (socketAlive.get(socketID) === undefined) {
-            clearInterval(interval);
-            console.log("Connection was closed by the Client")
-            return
-        }
-        if (socketAlive.get(socketID) === false) {
-            console.log("Closing connection to " + socketID + " due to timeout")
-            clearInterval(interval);
-            ws.close();
-            return
-        } else {
-            socketAlive.set(socketID, false)
-            ws.ping();
-        }
-    }, 20 * 1000);
+    // const interval = setInterval(() => {
+    //     // if we dont have the socketID in the map anymore, we must have erased it on a close event
+    //     if (socketAlive.get(socketID) === undefined || ws.readyState === ws.CLOSED) {
+    //         clearInterval(interval);
+    //         console.log("Connection was closed by the Client")
+    //         return
+    //     }
+    //     if (socketAlive.get(socketID) === false) {
+    //         console.log("Closing connection to " + socketID + " due to timeout")
+    //         clearInterval(interval);
+    //         ws.close();
+    //         return
+    //     } else {
+    //         socketAlive.set(socketID, false)
+    //         ws.ping();
+    //     }
+    // }, 20 * 1000);
 
 
     ws.on('message', (rawData: string) => {
@@ -92,7 +96,7 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
 
 const onClosedConnection = (wss: webSocket.Server, socketID: string) => {
     return () => {
-        socketAlive.delete(socketID)
+        // socketAlive.delete(socketID)
         const userId = socketToUser.get(socketID)
         if (!userId) console.log("Didn't have a corresponding userID to Socket ID")
         else {

@@ -129,7 +129,7 @@ function docToUser(doc: any): User | undefined {
  */
 export function initializeDB() {
     // remove all Users on startup
-    UserModel.remove({}, (err) => {
+    UserModel.deleteMany({}, (err) => {
         for (let testUser of getTestUsers()) {
             UserModel.findOne({name: testUser.name},
                 (_error, result) => {
