@@ -12,9 +12,8 @@ import {createUser, getAllUsers, removeUser, updateUser} from "./methods";
 import {User} from "./data";
 
 
-const socketToUser: Map<string,string> = new Map()
+const socketToUser: Map<string, string> = new Map()
 const socketAlive: Map<string, boolean> = new Map();
-
 
 
 function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage) {
@@ -23,23 +22,27 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
     if (!socketID) return
 
     socketAlive.set(socketID, true)
-    ws.on('pong', () =>  socketAlive.set(socketID, true));
+    ws.on('pong', () => socketAlive.set(socketID, true));
 
     const interval = setInterval(() => {
-            if (socketAlive.get(socketID) === false) {
-                clearInterval(interval);
-                ws.terminate();
-                onClosedConnection(this,socketID)();
-                return
-            }
-            else{
-                socketAlive.set(socketID,true)
-                ws.ping();
-            }
-    }, 30 * 1000);
+        // if we dont have the socketID in the map anymore, we must have erased it on a close event
+        if (socketAlive.get(socketID) === undefined) {
+            clearInterval(interval);
+            console.log("Connection was closed by the Client")
+            return
+        }
+        if (socketAlive.get(socketID) === false) {
+            console.log("Closing connection to " + socketID + " due to timeout")
+            clearInterval(interval);
+            ws.close();
+            return
+        } else {
+            socketAlive.set(socketID, false)
+            ws.ping();
+        }
+    }, 20 * 1000);
 
 
-    //connection is up, let's add a simple simple event
     ws.on('message', (rawData: string) => {
         if (!socketID) return
         try {
@@ -86,8 +89,10 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
         ws.on("close", onClosedConnection(this, socketID));
     });
 }
-const onClosedConnection = (wss:webSocket.Server,socketID: string) => {
+
+const onClosedConnection = (wss: webSocket.Server, socketID: string) => {
     return () => {
+        socketAlive.delete(socketID)
         const userId = socketToUser.get(socketID)
         if (!userId) console.log("Didn't have a corresponding userID to Socket ID")
         else {
