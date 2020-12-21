@@ -117,7 +117,7 @@ export function getTestUsers() {
 
 
 function docToUser(doc: any): User | undefined {
-    if (doc.name && doc._id && typeof doc.name === "string" && typeof doc._id === "string") {
+    if (doc.name && doc._id) {
         return {
             name: doc.name,
             _id: doc._id,
