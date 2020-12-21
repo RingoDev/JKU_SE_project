@@ -4,14 +4,17 @@ import Map from "../map/Map";
 import Users from "../users/Users";
 import {connect, ConnectedProps} from "react-redux";
 import {RootState} from "../redux/rootReducer";
-import {getLocation, getUsername} from "../redux/user/user.reducer";
+import {getLocation, getUsername, getUsers} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
 import "./App.css"
+import {calculate} from "../map/calculate";
 
 // import {fetchUsers, postLocation} from "../redux/user/user.actions";
 
 
 class App extends React.Component<PropsFromRedux, {}> {
+
+
 
     render() {
         return (<>
@@ -39,7 +42,8 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 const mapStateToProps = (state: RootState) => {
     return {
         username: getUsername(state.user),
-        location: getLocation(state.user)
+        location: getLocation(state.user),
+        users: getUsers(state.user)
     }
 }
 

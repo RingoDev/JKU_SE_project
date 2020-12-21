@@ -16,7 +16,11 @@ not because i dont like contribution but because its buggy*/
 
 
 #main-marker {
-    background-image: url('../map/red_marker.svg');
+    color:lightblue;
+}
+
+#mid-point{
+    color:rgb(255, 179, 0);
 }
 
 .map {

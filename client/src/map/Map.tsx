@@ -7,6 +7,7 @@ import {RootState} from "../redux/rootReducer";
 import {getSortedUsers, getUsers} from "../redux/user/user.reducer";
 import {ThunkDispatch} from "redux-thunk";
 import {connect, ConnectedProps} from "react-redux";
+import {calculate} from "./calculate";
 
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ? process.env.REACT_APP_MAPBOX_ACCESS_TOKEN : '';
@@ -29,6 +30,7 @@ const Map: React.FC<PropsFromRedux> = (props) => {
     // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
     const [map, setMap] = useState<mapboxgl.Map>()
     const [userMarkers, setUserMarkers] = useState<UserMarker[]>([])
+    const [midMarker, setMidMarker] = useState<mapboxgl.Marker>();
 
     // initialize map when component mounts
     useEffect(() => {
@@ -85,10 +87,11 @@ const Map: React.FC<PropsFromRedux> = (props) => {
                     // create a marker for user
 
                     const markerIcon = document.createElement("i")
-                    markerIcon.className = "marker fas fa-map-marker-alt fa-4x"
+                    markerIcon.className = "marker fas fa-map-marker-alt fa-3x"
 
                     if (user.isMain) {
                         markerIcon.id = "main-marker"
+                        markerIcon.className = "marker fas fa-map-marker-alt fa-4x"
                     }
                     const marker = new mapboxgl.Marker(markerIcon, {})
                         .setPopup(popUp)
@@ -105,8 +108,34 @@ const Map: React.FC<PropsFromRedux> = (props) => {
                 }
             }
         }
-    }
 
+        // calculate midpoint
+        const response = calculate(props.users.filter(u => u.checked).map(u => {
+            return {latitude: u.latitude, longitude: u.longitude}
+        }))
+        if (midMarker) {
+            if (response) {
+                // change marker
+                midMarker.setLngLat({lng: response.longitude, lat: response.latitude})
+            } else {
+                // remove marker from map
+                midMarker.remove()
+            //    remove marker from state
+                setMidMarker(undefined)
+            }
+        } else {
+            if (response) {
+                //create marker
+                const markerIcon = document.createElement("i")
+                markerIcon.id = "mid-point"
+                markerIcon.className = "marker middle-point fas fa-map-marker-alt fa-5x"
+                const marker = new mapboxgl.Marker(markerIcon, {})
+                    .setLngLat({lng: response.longitude, lat: response.latitude})
+                    .addTo(map)
+                setMidMarker(marker)
+            }
+        }
+    }
     return <div className="map" ref={mapContainerRef} id={'map'}/>;
 };
 
