@@ -26,7 +26,7 @@ function middleware(this: webSocket.Server, ws: webSocket, req: IncomingMessage)
         if(ws.readyState === ws.OPEN){
             ws.ping()
         }
-    },30*1000));
+    },15*1000));
 
     // const interval = setInterval(() => {
     //     // if we dont have the socketID in the map anymore, we must have erased it on a close event
