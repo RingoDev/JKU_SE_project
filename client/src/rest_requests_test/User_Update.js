@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
-export default class Put extends React.Component {
+export default class Patch extends React.Component {
     state = {
         id: '',
         // mail: '',

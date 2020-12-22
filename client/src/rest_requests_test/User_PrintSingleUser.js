@@ -39,23 +39,6 @@ export default class User_PrintSingleUser extends React.Component {
             })
     }
 
-    // componentDidMount() {
-    //
-    //     axios.get(`http://localhost:3001/users/5fccb5e635e8df420436ecb3`)//ID HIER AENDERN
-    //         .then(res => {
-    //
-    //             const person = res.data;
-    //
-    //             this.setState({ person }); // Speichern in Array
-    //
-    //             // document.getElementById("asdf").innerHTML = person.name;
-    //         })
-    //         .catch(function (error) {
-    //             // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
-    //             console.log(error + ' Fehler! Code: ' + error.staus);
-    //         })
-    // }
-
 
     render() {
         return (

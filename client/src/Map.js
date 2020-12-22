@@ -50,20 +50,6 @@ const Map = (props) => {
             .setPopup(testPopup)
             .addTo(map);
 
-        // axios.post(`http://localhost:3001/users/`,  Testuser )
-        //     .then(res => {
-        //         debugger
-        //         // ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('erfolgUserAnlegen'));
-        //
-        //         debugger
-        //
-        //     })
-        //     .catch(function (error) {
-        //         // Fehlerbehandlung
-        //         console.log(error);
-        //     })
-
-
 
 
 
@@ -141,48 +127,6 @@ const Map = (props) => {
                 // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
                 console.log(error + ' Fehler! Code: ' + error.staus);
             })
-
-
-
-
-        // - - - - - - - - - - - - - - HARDCODED POPUPS & MARKER - - - - - - - - - - - - - -
-        //MARKER
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.320349050272606, lat:48.33714606104758})
-        //     .setPopup(popup)
-        //     .addTo(map);
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.321147674299729, lat:48.33801278833887})
-        //     .setPopup(popup1)
-        //     .addTo(map);
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.324154722323478, lat:48.33520435055581})
-        //     .setPopup(popup2)
-        //     .addTo(map);
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.321851163500169, lat:48.33764447645141})
-        //     .setPopup(popup3)
-        //     .addTo(map);
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.319010731912636, lat:48.338113398830124})
-        //     .setPopup(popup4)
-        //     .addTo(map);
-        // new mapboxgl.Marker(<Marker />)
-        //     .setLngLat({lng:14.319010731912636, lat:48.338113398830124})
-        //     .setPopup(popup4)
-        //     .addTo(map);
-
-        // POPUP
-        // var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-        // 'Teichwerk');
-        // var popup1 = new mapboxgl.Popup({ offset: 25 }).setText(
-        // 'JKU Bibliothek');
-        // var popup2 = new mapboxgl.Popup({ offset: 25 }).setText(
-        // 'Science Park 3');
-        // var popup3 = new mapboxgl.Popup({ offset: 25 }).setText(
-        // 'JKU Mensa');
-        // var popup4 = new mapboxgl.Popup({ offset: 25 }).setText(
-        // 'JKU Chat Cafe');
 
 
         // clean up on unmount
