@@ -10,6 +10,7 @@ import Place_Add from "./Place_Add";
 import Place_Delete from "./Place_Delete";
 import Place_Update from "./Place_Update";
 import Place_PrintSinglePlace from "./Place_PrintSinglePlace";
+import User_Actual from "./User_Actual";
 
 export class All_Requests extends React.Component {
 
@@ -23,6 +24,17 @@ export class All_Requests extends React.Component {
     render() {
         return (
             <div id={"DB-Tests"}>
+
+                <div id={"User-DB-Eintragen-Tests"}>
+                    <br/>
+                    ----------------------------------------------------------------------------
+                    <br/><br/>
+                    <h2> USERS </h2>
+                    <br/>
+                    <h3>User Eintragen</h3>
+                    <User_Actual/>
+                </div>
+
                 <div id={"User-DB-Tests"}>
                     <br/>
                     ----------------------------------------------------------------------------
