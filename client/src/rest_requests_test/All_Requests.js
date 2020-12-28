@@ -11,6 +11,7 @@ import Place_Delete from "./Place_Delete";
 import Place_Update from "./Place_Update";
 import Place_PrintSinglePlace from "./Place_PrintSinglePlace";
 import User_Actual from "./User_Actual";
+import UserGPSUpdate from "./UserGPSUpdate";
 
 export class All_Requests extends React.Component {
 

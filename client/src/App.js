@@ -4,6 +4,7 @@ import Map from "./Map";
 import {Container} from "reactstrap";
 import {All_Requests} from "./rest_requests_test/All_Requests";
 import User_Actual from "./rest_requests_test/User_Actual";
+import User_UserGPSUpdate from "./rest_requests_test/UserGPSUpdate";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -30,8 +31,12 @@ export default class App extends React.Component {
                     {/*ReactDOM.unmountComponentAtNode(component);*/}
                     {/*<Map location={this.state.location}/>*/}
                     {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
-                    {this.checkLocation() ? <User_Actual location={this.state.location}/> : <></>}
-
+                    {this.checkLocation() ? <User_Actual app={this} location={this.state.location}/> : <></>}
+                    <div>
+                        {console.log(this.state.id)}
+                        {console.log(this.state.location)}
+                    </div>
+                    {this.checkLocation() ? <User_UserGPSUpdate id = {this.state.id} location={this.state.location}/> : <></>}
                 </Container>
             </div>
             //  Angepasster Code Zwischenpräsentation

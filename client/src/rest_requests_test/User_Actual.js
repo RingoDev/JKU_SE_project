@@ -11,7 +11,7 @@ export default class User_Actual extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            //app: {}
         }
     }
     state = {
@@ -61,6 +61,8 @@ export default class User_Actual extends React.Component {
                 // Ergebnisbehandlung
                 console.log(res);
                 const feedback = res.data;
+                console.log(res.data._id);
+                this.props.app.setState({id: res.data._id});
                 this.setState({feedback: feedback.Message});
                 // alert("hat funktioniert!");
                 debugger
