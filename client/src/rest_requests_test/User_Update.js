@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {Button} from "reactstrap";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class Patch extends React.Component {
@@ -10,7 +9,6 @@ export default class Patch extends React.Component {
         feedback: '',
         name: '',
         gpsposition: '',
-        currentposition: '',
         date: ''
     }
     handleChangeId = event => {
@@ -18,10 +16,6 @@ export default class Patch extends React.Component {
     }
     handleChangePosition = event => {
         this.setState({ gpsposition: event.target.value });
-    }
-
-    handleChangePositionMyLocation = event => {
-        this.setState({ currentposition: event.target.value });
     }
 
     handleChangeName = event => {
@@ -36,8 +30,7 @@ export default class Patch extends React.Component {
 
         debugger
         let body = {
-            gpsposition: this.state.gpsposition,
-
+            gpsposition: this.state.gpsposition
         }
 
         // Put-Request
@@ -56,7 +49,6 @@ export default class Patch extends React.Component {
                 console.log(error);
             })
     }
-
 
     render() {
 
@@ -79,14 +71,6 @@ export default class Patch extends React.Component {
                         <input className={"ip-field"} type="text" name="mail" onChange={this.handleChangePosition} />
                     </label>
                     <br />
-                    <label>
-                        Meine Position abfragen
-                        {/*} <button type="submit">Position abfragen</button>*/}
-
-                        <input className={"ip-field"} type="button" name="userloc" onChange={this.handleChangePositionMyLocation} />
-                        {/*}  <Button onClick={() => this.getPosition()}>Get My Position</Button>*/}
-                    </label>
-                    <br />
                     <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
                     <button type="submit">Update User</button>
                 </form>
@@ -94,4 +78,3 @@ export default class Patch extends React.Component {
         )
     }
 }
-

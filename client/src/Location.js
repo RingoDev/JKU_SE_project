@@ -15,7 +15,6 @@ export default class Location extends React.Component {
         return (
             <>
                 <Button onClick={() => this.getLocation()}>Get My Location</Button>
-                <Button onClick={() =>  this.getID()}> Get My ID</Button>
                 <Button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</Button>
             </>
         )
@@ -36,20 +35,6 @@ export default class Location extends React.Component {
             // Todo show alert
         }
     }
-
-    /*async getID() {
-        if (navigator.geolocation) {
-            this.setState({grabLocation: true})
-            while (this.state.grabLocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    this.props.app.setState({location: position})
-                });
-                await sleep(this.props.interval)
-            }
-        } else {
-            // Todo show alert
-        }
-    }*/
 
 }
 
