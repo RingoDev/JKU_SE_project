@@ -65,12 +65,12 @@ export default class User_Actual extends React.Component {
                 this.props.app.setState({id: res.data._id});
                 this.setState({feedback: feedback.Message});
                 // alert("hat funktioniert!");
-                debugger
+                //debugger
 
                 // ReactDOM.render(<h3>ERFOLG {feedback.name}</h3>, document.getElementById('asdf'))
                 ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('erfolgUserAnlegen'));
 
-                debugger
+                //debugger
 
             })
             .catch(function (error) {

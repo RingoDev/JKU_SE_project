@@ -12,6 +12,7 @@ import Place_Update from "./Place_Update";
 import Place_PrintSinglePlace from "./Place_PrintSinglePlace";
 import User_Actual from "./User_Actual";
 import UserGPSUpdate from "./UserGPSUpdate";
+import Database_Cleanup from "./Database_Cleanup";
 
 export class All_Requests extends React.Component {
 

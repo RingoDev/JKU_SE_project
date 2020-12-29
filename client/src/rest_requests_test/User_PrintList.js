@@ -31,6 +31,7 @@ export default class User_PrintList extends React.Component {
                                     {/*<li>NAME: {person.name};;;</li>*/}
                                     <li>ID: {person._id}</li>
                                     <li>GPS-POS.: {person.gpsposition}</li>
+                                    <li>Date.: {person.date}</li>
                                 </ul>
                             </li>)}
                     </p>, document.getElementById('userslist'));

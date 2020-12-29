@@ -14,7 +14,7 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 
 const Map = (props) => {
-    console.log(props)
+   // console.log(props)
     const mapContainerRef = useRef(null);
     const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
 
@@ -66,7 +66,7 @@ const Map = (props) => {
                         +'</br></br>'
                         // + '<a href="https://oehwin.at/">ÖH Page</a>'
                     );
-                    debugger
+                   // debugger
                     let gpspos = person.gpsposition.split(',');
                     // debugger
                     // new mapboxgl.Marker(<Marker />)
@@ -89,12 +89,12 @@ const Map = (props) => {
         axios.get(`http://localhost:3001/places`)
             .then(res => {
 
-                debugger
+               // debugger
 
                 res.data.forEach(location => {
 
                     if(location.link == null || location.link == "") {
-                        debugger
+                     //   debugger
                         var locationPopup = new mapboxgl.Popup({ offset: 35, maxWidth: "600px"}).setHTML(
                             '<h3>' + location.name + '</h3>'+ '</br>'+ 'ID: ' + location._id + '</br></br>'  + 'GPS-Position: ' +  location.gpsposition
                             +'</br></br>'
@@ -103,7 +103,7 @@ const Map = (props) => {
                         );
 
                     } else {
-                        debugger
+                       // debugger
                         var locationPopup = new mapboxgl.Popup({ offset: 35, maxWidth: "600px"}).setHTML(
                             '<h3>' + location.name + '</h3>'+ '</br>'+ 'ID: ' + location._id + '</br></br>'  + 'GPS-Position: ' +  location.gpsposition
                             +'</br></br>'
@@ -114,7 +114,7 @@ const Map = (props) => {
                     }
 
 
-                    debugger
+                   // debugger
                     let gpspos = location.gpsposition.split(',');
                     new mapboxgl.Marker({color: 'grey'})
                         .setLngLat({lng:Number(gpspos[1]), lat:Number(gpspos[0])})
