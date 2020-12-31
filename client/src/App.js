@@ -6,8 +6,24 @@ import {All_Requests} from "./rest_requests_test/All_Requests";
 import User_Actual from "./rest_requests_test/User_Actual";
 import User_UserGPSUpdate from "./rest_requests_test/UserGPSUpdate";
 import Database_Cleanup from "./rest_requests_test/Database_Cleanup";
+//import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
+//import { Client as Styletron } from "styletron-engine-atomic";
 
-export default class App extends React.Component {
+/*const debug =
+    process.env.NODE_ENV === "production" ? void 0 : new DebugEngine();
+
+// 1. Create a client engine instance
+const engine = new Styletron();
+
+import { Div, StyleReset, ThemeProvider } from "atomize";
+
+const theme = {
+    colors: {
+        black900: "#1d1d1e"
+    }
+};*/
+
+export default class  App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,6 +37,26 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="App">
+                {/*} <StyletronProvider value={engine} debug={debug} debugAfterHydration>
+                    <ThemeProvider theme={theme}>
+                        <StyleReset />
+                        <Div
+                            textColor="black900"
+                            minH="100vh"
+                            w="100vw"
+                            d="flex"
+                            flexDir="column"
+                            justify="center"
+                            align="center"
+                            textSize="display2"
+                            fontFamily="secondary"
+                            textWeight="500"
+                            p={{ x: "1rem", y: "4rem" }}
+                        >
+                            Start from here
+                        </Div>
+                    </ThemeProvider>
+                </StyletronProvider>*/}
                 <Container className={'p-5'}>
                     <Location
                         app={this}
@@ -65,6 +101,8 @@ export default class App extends React.Component {
         );
     }
 
+
+
     // checking if location is available
     checkLocation() {
         return this.state.location.coords
@@ -88,4 +126,9 @@ export default class App extends React.Component {
         }
     }
 }
+
+
+
+
+
 

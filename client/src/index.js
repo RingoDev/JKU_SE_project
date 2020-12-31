@@ -5,6 +5,7 @@ import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import './index.css';
 import App from './App';
+//import FlexDirection from "./FlexDirection";
 
 
 require('dotenv').config();
@@ -16,4 +17,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//render(<App />, document.querySelector("#app"));
 
