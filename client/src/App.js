@@ -2,6 +2,7 @@ import React from 'react';
 import Location from './Location'
 import Map from "./Map";
 import {Container} from "reactstrap";
+import Analysis from "./rest_requests_test/Analysis";
 import {All_Requests} from "./rest_requests_test/All_Requests";
 import User_Actual from "./rest_requests_test/User_Actual";
 import User_UserGPSUpdate from "./rest_requests_test/UserGPSUpdate";
@@ -62,17 +63,18 @@ export default class  App extends React.Component {
                         app={this}
                         interval={500}
                     />
+                    {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
+                    {this.checkLocation() && !(this.state.inDB) ? <User_Actual app={this} location={this.state.location}/> : <></>}
+                    {!(this.state.inDB) && !Object.keys(this.state.id).length == 0 ? this.setState({inDB: true}) : <></>}
+
+                    {this.checkLocation() ? <User_UserGPSUpdate id = {this.state.id} location={this.state.location}/> : <></>}
+                    <Analysis/> 
                     <All_Requests/>
                     {/*render Map if we have location of user*/}
 
                     {/*ReactDOM.findDOMNode(component)*/}
                     {/*ReactDOM.unmountComponentAtNode(component);*/}
                     {/*<Map location={this.state.location}/>*/}
-                    {this.checkLocation() ? <Map location={this.state.location}/> : <></>}
-                    {this.checkLocation() && !(this.state.inDB) ? <User_Actual app={this} location={this.state.location}/> : <></>}
-                    {!(this.state.inDB) && !Object.keys(this.state.id).length == 0 ? this.setState({inDB: true}) : <></>}
-
-                    {this.checkLocation() ? <User_UserGPSUpdate id = {this.state.id} location={this.state.location}/> : <></>}
 
                     <Database_Cleanup/>
                 </Container>

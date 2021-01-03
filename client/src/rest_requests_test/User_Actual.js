@@ -85,6 +85,7 @@ export default class User_Actual extends React.Component {
         // Inputfeld für User_Add-Request
         return (
             <div>
+                <br></br>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Name:

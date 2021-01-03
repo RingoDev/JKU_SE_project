@@ -37,10 +37,10 @@ export class All_Requests extends React.Component {
                     <User_Actual/>
                 </div>
 
-                <div id={"User-DB-Tests"}>
-                    <br/>
+                <div id={"aussendiv"}>
+                    {/* <br/>
                     ----------------------------------------------------------------------------
-                    <br/><br/>
+                    <br/><br/> */}
                     <h2> USERS </h2>
                     <br/>
                     <h3>Einzelne User</h3>
@@ -52,37 +52,47 @@ export class All_Requests extends React.Component {
                     <h3>User anlegen</h3>
                     <User_Add></User_Add>
                     <br/>
+                    <br/>
+                    <br/>
                     <h3>Userdaten ändern</h3>
                     <Patch/>
+                    <br/>
                     <br/>
                     <h3>User löschen</h3>
                     <User_Delete/>
                 </div>
 
 
-                <div id={"Places-DB-Tests"}>
-                    <br/>
+                <div id={"aussendiv"}>
+                    {/* <br/>
                     ----------------------------------------------------------------------------
-                    <br/><br/>
+                    <br/><br/> */}
                     <h2> PLACES </h2>
                     <br/>
                     {/*<h3>0. Christians Single GET-Request</h3>*/}
                     <h3>Einzelne Orte</h3>
                     <Place_PrintSinglePlace/>
                     {/*<h3>1. Christians GET-Request</h3>*/}
+                    <br/>
                     <h3>Ortsliste</h3>
                     <Place_PrintList/>
                     {/*<h3>2. POST-Request</h3>*/}
+                    <br/>
                     <h3>Ort anlegen</h3>
                     <Place_Add/>
                     {/*<h3>3. Patch-Request</h3>*/}
+                    <br/>
                     <h3>Ortsdaten ändern</h3>
                     <Place_Update/>
                     {/*<h3>4. Delete-Request</h3>*/}
+                    <br/>
                     <h3>Ort löschen</h3>
                     <Place_Delete/>
                     <br/>
-                    ----------------------------------------------------------------------------
+                    <br/>
+                    <br/>
+                    {/* <br/>
+                    ---------------------------------------------------------------------------- */}
                 </div>
 
 
