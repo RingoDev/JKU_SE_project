@@ -8,7 +8,7 @@ const Analysis = (props) => {
     var placesCount = 0;
     var RecPlacesCount = 0;
 
-    axios.get(`http://http://http://http://localhost:3001/users`)
+    axios.get(`http://localhost:3001/users`)
         .then(res => {
             const persons = res.data;
 
