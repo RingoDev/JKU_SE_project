@@ -70,7 +70,7 @@ const Analysis = (props) => {
 
         <div>
             <br />
-            <h3>Analysedarstellung</h3>
+            <h2>Analysedarstellung</h2>
             <br />
             <table id="AnalysisTable">
             </table>

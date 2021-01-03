@@ -27,20 +27,23 @@ export class All_Requests extends React.Component {
         return (
             <div id={"DB-Tests"}>
 
-                <div id={"User-DB-Eintragen-Tests"}>
+              {/*  <div id={"User-DB-Eintragen-Tests"}>
                     <br/>
-                    ----------------------------------------------------------------------------
+                    ----------------------------------------------------------------------------------
                     <br/><br/>
                     <h2> USERS </h2>
                     <br/>
                     <h3>User Eintragen</h3>
                     <User_Actual/>
-                </div>
+                </div>*/}
 
                 <div id={"aussendiv"}>
                     {/* <br/>
                     ----------------------------------------------------------------------------
                     <br/><br/> */}
+
+                    <br/>
+                    <br/>
                     <h2> USERS </h2>
                     <br/>
                     <h3>Einzelne User</h3>
@@ -67,6 +70,8 @@ export class All_Requests extends React.Component {
                     {/* <br/>
                     ----------------------------------------------------------------------------
                     <br/><br/> */}
+                    <br/>
+                    <br/>
                     <h2> PLACES </h2>
                     <br/>
                     {/*<h3>0. Christians Single GET-Request</h3>*/}

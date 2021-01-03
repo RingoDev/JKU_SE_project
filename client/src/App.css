@@ -16,4 +16,50 @@
   max-width: 200px;
 }
 
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    color: black;
+    padding: 40px;
+    font-family: monospace;
+    text-align: left;
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+/*h1{
+    color:black;
+    font-size: 80px;
+    font-style: inherit;
+    text-align: left;
+
+}*/
+
+/*
+h2{
+    color:black;
+    font-size: 40px;
+    font-style: inherit;
+    text-align: left;
+
+
+}
+*/
 
