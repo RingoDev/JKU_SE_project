@@ -10,6 +10,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "jquery": "^3.5.1",
     "mapbox-gl": "^1.13.0",
     "popper.js": "^1.16.1",
@@ -43,5 +44,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This app accompanies the article posted here: [https://dev.to/laney/react-mapbox-beginner-tutorial-2e35](https://dev.to/laney/react-mapbox-beginner-tutorial-2e35)",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
