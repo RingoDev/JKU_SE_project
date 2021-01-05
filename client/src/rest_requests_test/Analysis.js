@@ -41,7 +41,7 @@ const Analysis = (props) => {
                             <td>{personCount}</td>
                         </tr>
                         <tr>
-                            <td>Personen in den letzten 60min aktiv</td>
+                            <td>In den letzten 60min angelegte Personen</td>
                             <td>{RecPersonCount}</td>
                         </tr>
                         <tr>
