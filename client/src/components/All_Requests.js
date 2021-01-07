@@ -10,38 +10,19 @@ import Place_Add from "./Place_Add";
 import Place_Delete from "./Place_Delete";
 import Place_Update from "./Place_Update";
 import Place_PrintSinglePlace from "./Place_PrintSinglePlace";
-import User_Actual from "./User_Actual";
-import UserGPSUpdate from "./UserGPSUpdate";
-import Database_Cleanup from "./Database_Cleanup";
 
 export class All_Requests extends React.Component {
 
     constructor(props) {
         super(props)
         this.state = {
-
         }
     }
 
     render() {
         return (
             <div id={"DB-Tests"}>
-
-              {/*  <div id={"User-DB-Eintragen-Tests"}>
-                    <br/>
-                    ----------------------------------------------------------------------------------
-                    <br/><br/>
-                    <h2> USERS </h2>
-                    <br/>
-                    <h3>User Eintragen</h3>
-                    <User_Actual/>
-                </div>*/}
-
                 <div id={"aussendiv"}>
-                    {/* <br/>
-                    ----------------------------------------------------------------------------
-                    <br/><br/> */}
-
                     <br/>
                     <br/>
                     <h2> USERS </h2>
@@ -67,9 +48,6 @@ export class All_Requests extends React.Component {
 
 
                 <div id={"aussendiv"}>
-                    {/* <br/>
-                    ----------------------------------------------------------------------------
-                    <br/><br/> */}
                     <br/>
                     <br/>
                     <h2> PLACES </h2>
@@ -96,12 +74,7 @@ export class All_Requests extends React.Component {
                     <br/>
                     <br/>
                     <br/>
-                    {/* <br/>
-                    ---------------------------------------------------------------------------- */}
                 </div>
-
-
-
             </div>
         )
     }
