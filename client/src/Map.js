@@ -26,10 +26,6 @@ const Map = (props) => {
             style: "mapbox://styles/mapbox/streets-v11",
             // center: [props.location.coords.longitude, props.location.coords.latitude],
             center: [14.31960925483676,48.33705458528547],
-            //  Angepasster Code Zwischenpräsentation
-            //  center: [14.291141
-            //                 , 48.308857
-            //             ],
             zoom: 14
         });
 

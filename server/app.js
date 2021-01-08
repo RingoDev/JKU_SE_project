@@ -42,9 +42,9 @@ var credentials = {key: privateKey, cert: certificate};
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
-var port = 3001;
-var port2 = 3002;
+var portHTTP = 3001;
+var portHTTPS = 3002;
 
 app.use(express.static(__dirname + '/build'));
-httpServer.listen(port, () => console.log('HTTP  webserver running on port %d', port));
-httpsServer.listen(port2, () => console.log('HTTPS webserver running on port %d', port2));
+httpServer.listen(portHTTP, () => console.log('HTTP  webserver running on port %d', portHTTP));
+httpsServer.listen(portHTTPS, () => console.log('HTTPS webserver running on port %d', portHTTPS));

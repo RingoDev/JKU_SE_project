@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
-
-import User_PrintList from "./User_PrintList";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class User_Actual extends React.Component {
@@ -11,7 +8,7 @@ export default class User_Actual extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            //app: {}
+
         }
     }
     state = {
@@ -34,7 +31,6 @@ export default class User_Actual extends React.Component {
 
     setcoordinates = props => {
         console.log(this.props.location.coords.longitude + this.props.location.coords.latitude);
-        //this.setState({ gpsposition: [this.props.location.coords.longitude, this.props.location.coords.latitude] });
     }
 
 
@@ -50,11 +46,6 @@ export default class User_Actual extends React.Component {
 
         };
 
-        // const body = {
-        //     "name": "Max Mustermann",
-        //     "gpsposition": "48.33733258693079, 14.319351129350906"
-        // }
-
         // User_Add-Request
         axios.post(`http://localhost:3001/users/`,  member )
             .then(res => {
@@ -64,13 +55,8 @@ export default class User_Actual extends React.Component {
                 console.log(res.data._id);
                 this.props.app.setState({id: res.data._id});
                 this.setState({feedback: feedback.Message});
-                // alert("hat funktioniert!");
-                //debugger
 
-                // ReactDOM.render(<h3>ERFOLG {feedback.name}</h3>, document.getElementById('asdf'))
                 ReactDOM.render(<p>Mein neuer User: {feedback.name}</p>, document.getElementById('erfolgUserAnlegen'));
-
-                //debugger
 
             })
             .catch(function (error) {
@@ -100,5 +86,3 @@ export default class User_Actual extends React.Component {
         )
     }
 }
-
-//"48.33733258693079, 14.319351129350906"
