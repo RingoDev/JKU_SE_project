@@ -14,8 +14,8 @@ export default class Location extends React.Component {
     render() {
         return (
             <>
-                <Button onClick={() => this.getLocation()}>Get My Location</Button>
-                <Button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</Button>
+                <button onClick={() => this.getLocation()}>Get My Location</button>
+                <button onClick={() =>  this.setState({grabLocation: false})}> Stop It !</button>
             </>
         )
 
