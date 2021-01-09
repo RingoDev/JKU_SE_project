@@ -2,7 +2,6 @@ import React from "react";
 import User_PrintList from "./User_PrintList";
 import User_Add from "./User_Add";
 import User_Delete from "./User_Delete";
-import Put from "./Unused_Put";
 import Patch from "./User_Update";
 import User_PrintSingleUser from "./User_PrintSingleUser";
 import Place_PrintList from "./Place_PrintList";
