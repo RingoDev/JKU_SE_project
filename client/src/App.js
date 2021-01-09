@@ -23,26 +23,6 @@ export default class  App extends React.Component {
     render() {
         return (
             <div className="App">
-                {/*} <StyletronProvider value={engine} debug={debug} debugAfterHydration>
-                    <ThemeProvider theme={theme}>
-                        <StyleReset />
-                        <Div
-                            textColor="black900"
-                            minH="100vh"
-                            w="100vw"
-                            d="flex"
-                            flexDir="column"
-                            justify="center"
-                            align="center"
-                            textSize="display2"
-                            fontFamily="secondary"
-                            textWeight="500"
-                            p={{ x: "1rem", y: "4rem" }}
-                        >
-                            Start from here
-                        </Div>
-                    </ThemeProvider>
-                </StyletronProvider>*/}
                 <Container className={'p-5'}>
                     <Location
                         app={this}
@@ -52,11 +32,11 @@ export default class  App extends React.Component {
                     {this.checkLocation() && !(this.state.inDB) ? <User_Actual app={this} location={this.state.location}/> : <></>}
                     {!(this.state.inDB) && !Object.keys(this.state.id).length == 0 ? this.setState({inDB: true}) : <></>}
 
-                    {this.checkLocation() ? <User_UserGPSUpdate id = {this.state.id} location={this.state.location}/> : <></>}
-                    <Analysis/> 
+                    {this.checkLocation() ? <User_UserGPSUpdate interval={500} id = {this.state.id} location={this.state.location}/> : <></>}
+                    <Analysis interval={500}/>
                     <All_Requests/>
 
-                    <Database_Cleanup/>
+                    <Database_Cleanup interval={500}/>
                 </Container>
 
                 <Container className={'p-6'}>
