@@ -2,7 +2,7 @@ import React from "react";
 import User_PrintList from "./User_PrintList";
 import User_Add from "./User_Add";
 import User_Delete from "./User_Delete";
-import Patch from "./User_Update";
+import User_Update from "./User_Update";
 import User_PrintSingleUser from "./User_PrintSingleUser";
 import Place_PrintList from "./Place_PrintList";
 import Place_Add from "./Place_Add";
@@ -38,7 +38,7 @@ export class All_Requests extends React.Component {
                     <br/>
                     <br/>
                     <h3>Userdaten ändern</h3>
-                    <Patch/>
+                    <User_Update/>
                     <br/>
                     <br/>
                     <h3>User löschen</h3>
