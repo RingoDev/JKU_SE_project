@@ -28,8 +28,6 @@ export default class GetTableEvents extends React.Component {
 
                 this.setState({ events }); // Speichern in Array
 
-
-
             })
             .catch(function (error) {
                 // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
@@ -46,8 +44,9 @@ export default class GetTableEvents extends React.Component {
         Moment.locale('de');
 
         var ev;
+        console.log(Date.now());
         if(this.props.events === 0) {
-            ev = this.state.events.filter((event) => event.date <= Date.now());
+            ev = this.state.events.filter((event) => Date.parse(event.date) > Date.now());
         } else {
             ev = this.state.events;
         }
@@ -61,7 +60,7 @@ export default class GetTableEvents extends React.Component {
                     <tr>
                         <td> {event.name} </td>
                         <td> {event.description} </td>
-                        <td>{Moment(event.date).format('d MMM YYYY')}</td>
+                        <td>{Moment(event.date).format('DD MMM YYYY')}</td>
                         <td><Delete identification={event._id}/></td>
                     </tr>
                 );

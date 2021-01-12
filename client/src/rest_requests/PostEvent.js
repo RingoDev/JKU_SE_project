@@ -2,8 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import {Col, Container, Row} from "react-bootstrap";
 import {Card} from "../components/Card/Card";
-import {DatePicker} from "../components/DatePicker";
-import DateTimePicker from 'react-datetime-picker';
+import DatePicker from 'react-date-picker';
 
 const opencage = require('opencage-api-client');
 
@@ -13,10 +12,9 @@ export default class PostEvent extends React.Component {
         lng: '',
         lat: '',
         desc: '',
-        date: ''
+        date: '',
+        dateExtra: '',
     }
-
-
 
     handleChangeName = event => {
         this.setState({ name: event.target.value });
@@ -42,7 +40,13 @@ export default class PostEvent extends React.Component {
     }
 
     handleChangeDate = event => {
-        this.setState({ date: event.target.value });
+
+        const d = event.toJSON();
+        const dE = event;
+        this.setState({ date: d });
+        this.setState({ dateExtra: dE });
+        console.log(d);
+
     }
 
 
@@ -54,7 +58,7 @@ export default class PostEvent extends React.Component {
             lng: this.state.lng,
             lat: this.state.lat,
             description: this.state.desc,
-            date: this.state.date
+            date: this.state.date,
         };
 
         const json = JSON.stringify(shortevent);
@@ -70,8 +74,8 @@ export default class PostEvent extends React.Component {
             .then(res => {
                 // Ergebnisbehandlung
                 console.log(res);
-                const feedback = res.data;
-                this.setState({feedback: feedback.Message});
+
+                window.location.reload();
             })
             .catch(function (error) {
                 // Fehlerbehandlung
@@ -116,7 +120,10 @@ export default class PostEvent extends React.Component {
                                                 <div className="form-group row">
                                                     <label htmlFor="date" className="col-4 col-form-label">Date</label>
                                                     <div className="col-8">
-                                                        <DatePicker />
+                                                        <DatePicker
+                                                            onChange={this.handleChangeDate}
+                                                            value={this.state.dateExtra}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
@@ -136,3 +143,4 @@ export default class PostEvent extends React.Component {
         )
     }
 }
+
