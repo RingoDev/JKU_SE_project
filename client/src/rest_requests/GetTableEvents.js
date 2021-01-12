@@ -1,9 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import Moment from 'moment';
 import {locationTest} from "../variables/Variables";
+import Delete from "./Delete";
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class GetTableEvents extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         events: [],
         counter: 0
@@ -21,6 +27,9 @@ export default class GetTableEvents extends React.Component {
                 const events = res.data;
 
                 this.setState({ events }); // Speichern in Array
+
+                //TODO
+
             })
             .catch(function (error) {
                 // Fehlerbehandlung - auch hier können Informationen mit Schlüsselwörtern gefiltert werden
@@ -29,10 +38,13 @@ export default class GetTableEvents extends React.Component {
 
     }
 
+
     /**
      * Darstellung der Ergebnisse in einer Liste
      */
     render() {
+        Moment.locale('de');
+
         return (
 
             <tbody>
@@ -42,7 +54,8 @@ export default class GetTableEvents extends React.Component {
 
                         <td> {event.name} </td>
                         <td> {event.description} </td>
-                        <td> {event.date} </td>
+                        <td>{Moment(event.date).format('d MMM YYYY')}</td>
+                        <td><Delete identification={event._id}/></td>
                     </tr>
                 );
             })}

@@ -36,57 +36,15 @@ router.post('/', async (req,res) => {
 });
 
 /**
- * get specific Event by Id //TODO check Path and eventId
- */
-router.get('/:eventId', async (req,res) => {
-    try {
-    const event =  await Event.findById(req.params.eventId);
-    res.json(event);
-    }catch(err) {
-        res.json({message: err});
-    }
-});
-
-/** //TODO check Path and eventId
- * get Events in a radius around a specific location
-  */
-router.get('/:location', async (req,res) => {
-    try {
-        const events =  await Event.findById(req.params.eventId);
-        res.json(user);
-    }catch(err) {
-        res.json({message: err});
-    }
-});
-
-/** //TODO check Path and eventId
  * deletes an Event by id
  */
-router.delete('/:eventId', async (req,res) => {
+router.delete('/delete/:eventId', async (req,res) => {
     try {
-   const removedEvent = await Event.remove({_id: req.params.eventId})
-   res.json(removedEvent);
+       const removedEvent = await ShortEvent.remove({_id: req.params.eventId})
+       res.json(removedEvent);
     }catch(err) {
         res.json({message: err});
 }
 });
-
-/** //TODO check Path and eventId
- * updates an Event with an specific id
- */
-router.patch('/:eventId', async (req,res) => {
-    try {
-    const updatedEvent = await Event.updateOne(
-       {_id: req.params.eventId},
-       {$set: {
-           //TODO add things to update
-           }}
-       );
-   res.json(updatedEvent);
-    }catch(err) {
-        res.json({message: err});
-}
-});
-
 
 module.exports = router;
