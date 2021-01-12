@@ -39,7 +39,6 @@ export function calculate(p: { longitude?: number, latitude?: number }[], method
     let lons1 = [];
     let sinlats = [];
     let coslats = [];
-    let hyp;
 
     if (p.length === 0) return
     // iterate over the points
