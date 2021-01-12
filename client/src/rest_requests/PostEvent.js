@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import {Col, Container, Row} from "react-bootstrap";
 import {Card} from "../components/Card/Card";
+import {DatePicker} from "../components/DatePicker";
+import DateTimePicker from 'react-datetime-picker';
 
 const opencage = require('opencage-api-client');
 
@@ -114,7 +116,7 @@ export default class PostEvent extends React.Component {
                                                 <div className="form-group row">
                                                     <label htmlFor="date" className="col-4 col-form-label">Date</label>
                                                     <div className="col-8">
-                                                        <input id="date" name="date" type="text" className="form-control"  onChange={this.handleChangeDate}/>
+                                                        <DatePicker />
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">

@@ -28,7 +28,7 @@ export default class GetTableEvents extends React.Component {
 
                 this.setState({ events }); // Speichern in Array
 
-                //TODO
+
 
             })
             .catch(function (error) {
@@ -45,13 +45,20 @@ export default class GetTableEvents extends React.Component {
     render() {
         Moment.locale('de');
 
+        var ev;
+        if(this.props.events === 0) {
+            ev = this.state.events.filter((event) => event.date <= Date.now());
+        } else {
+            ev = this.state.events;
+        }
+
         return (
 
             <tbody>
-            {this.state.events.map((event) => {
-                return (
-                    <tr >
 
+            {ev.map((event) => {
+                return (
+                    <tr>
                         <td> {event.name} </td>
                         <td> {event.description} </td>
                         <td>{Moment(event.date).format('d MMM YYYY')}</td>
