@@ -266,7 +266,7 @@ var style = {
 // // // For tables
 // //
 //
-const thArray = ["Name", "Description", "Date"];
+const thArray = ["Name", "Description", "Date", "Delete"];
 const tdArray = [
   ["Example", "Desc", "1.12.2020"],
   ["Another Example", "Description ", "2.12.2020"]

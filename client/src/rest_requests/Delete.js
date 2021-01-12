@@ -3,25 +3,25 @@ import axios from 'axios';
 // Documentation axios: https://www.npmjs.com/package/axios#axios-api
 
 export default class Delete extends React.Component {
-    state = {
-        id: '',
-        feedback: '',
+    constructor(props) {
+        super(props);
     }
 
-    handleChange = event => {
-        this.setState({ id: event.target.value });
+    state = {
+        id: '',
+        identification: '',
+        feedback: '',
     }
 
     handleSubmit = event => {
         event.preventDefault();
 
         // Delete-Request
-        axios.delete(`https://62f04fea-d91c-4309-a2de-3f459811c96c.mock.pstmn.io/deleteMember?${this.state.id}`)
+        axios.delete(`http://localhost:3001/events/delete/${this.props.identification}`)
             .then(res => {
                 // Ergebnis handling
                 console.log(res);
-                const feedback = res.data;
-                this.setState({feedback: feedback.Message});
+                window.location.reload();
             })
             .catch(function (error) {
                 // Fehlerbehandlung
@@ -33,13 +33,8 @@ export default class Delete extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Person ID:
-                        <input className={"ip-field"} type="text" name="id" onChange={this.handleChange} />
-                    </label>
-                    <br />
-                    <p className={"fb-field"} type="text" name="feedback">{this.state.feedback}</p>
-                    <button type="submit">Delete</button>
+                    <button type="submit" className="btn btn-outline-danger pe-7s-close" />
+
                 </form>
             </div>
         )

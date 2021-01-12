@@ -44,7 +44,7 @@ export class TableList extends Component {
                       </tr>
                     </thead>
 
-                    <GetTableEvents></GetTableEvents>
+                    <GetTableEvents events={1}></GetTableEvents>
 
                   </Table>
                 }
