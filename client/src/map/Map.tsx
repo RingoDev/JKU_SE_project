@@ -30,7 +30,7 @@ const Map: React.FC<PropsFromRedux> = (props) => {
     // const popUpRef = useRef(new mapboxgl.Popup({offset: 15}));
     const [map, setMap] = useState<mapboxgl.Map>()
     const [userMarkers, setUserMarkers] = useState<UserMarker[]>([])
-    const [midMarker, setMidMarker] = useState<mapboxgl.Marker>();
+    const [midMarker, setMidMarker] = useState<{ marker: mapboxgl.Marker, popUp: mapboxgl.Popup }>();
 
     // initialize map when component mounts
     useEffect(() => {
@@ -112,19 +112,23 @@ const Map: React.FC<PropsFromRedux> = (props) => {
         // calculate midpoint
         const response = calculate(props.users.filter(u => u.checked).map(u => {
             return {latitude: u.latitude, longitude: u.longitude}
-        }))
+        }), "minDistance")
         if (midMarker) {
             if (response) {
                 // change marker
-                midMarker.setLngLat({lng: response.longitude, lat: response.latitude})
+                midMarker.marker.setLngLat({lng: response.longitude, lat: response.latitude})
+                midMarker.popUp.setText(response.longitude + '\n' + response.latitude)
             } else {
                 // remove marker from map
-                midMarker.remove()
-            //    remove marker from state
+                midMarker.popUp.remove();
+                midMarker.marker.remove()
+                //    remove marker from state
                 setMidMarker(undefined)
             }
         } else {
             if (response) {
+                //create popup
+                const popUp = new mapboxgl.Popup().setText(response.longitude + '\n' + response.latitude)
                 //create marker
                 const markerIcon = document.createElement("i")
                 markerIcon.id = "mid-point"
@@ -132,7 +136,8 @@ const Map: React.FC<PropsFromRedux> = (props) => {
                 const marker = new mapboxgl.Marker(markerIcon, {})
                     .setLngLat({lng: response.longitude, lat: response.latitude})
                     .addTo(map)
-                setMidMarker(marker)
+                marker.setPopup(popUp)
+                setMidMarker({marker,popUp})
             }
         }
     }

@@ -20,8 +20,6 @@ const LandingPage: React.FC<PropsFromRedux> = (props) => {
     }
 
 
-
-
     useEffect(() => {
         // connect to Websocket
         props.wsConnect()
@@ -32,7 +30,7 @@ const LandingPage: React.FC<PropsFromRedux> = (props) => {
             <h1 className={"center"} style={{color: "white"}}>Meet<span style={{color: "rgb(255, 179, 0)"}}>Up</span>
             </h1>
             {props.username !== "NONAME" ? <App/> :
-                <div id={'landingContainer'}>
+                <div id={'landingContainer'} className={"container"}>
                     <div id={'landingcard'} className={'card grey darken-1'}>
                         <div className={'card-content'}><span className="card-title">Choose a Name</span>
                         </div>

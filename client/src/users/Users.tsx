@@ -42,12 +42,6 @@ class Users extends React.Component<PropsFromRedux, UsersState> {
         return (
             <>
                 <table>
-                    <thead>
-                    <tr>
-                        <th>currently online</th>
-                    </tr>
-                    </thead>
-
                     <tbody>
                     {this.props.sortedUsers.map((user) => {
                         return (

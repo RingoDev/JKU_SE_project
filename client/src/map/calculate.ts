@@ -16,20 +16,19 @@ function normalizeLatitude(point: { lon: number, lat: number }) {
 }
 
 function normalizeLongitude(lon: number) {
-    var n = Math.PI;
+    let n = Math.PI;
     if (lon > n) {
-        lon = lon - 2 * n
+        lon -= 2 * n
     } else if (lon < -n) {
-        lon = lon + 2 * n
+        lon += 2 * n
     }
     return lon;
 }
 
-export function calculate(p: { longitude?: number, latitude?: number }[]) {
+export function calculate(p: { longitude?: number, latitude?: number }[], method: "centerGravity" | "minDistance" | "averageLatLng") {
 
-    let parlat = 0,parlng = 0
+    let parlat = 0, parlng = 0
     let par = 0;
-    let cI =1;
     let midlat = 0, midlng = 0;
     let x = 0;
     let y = 0;
@@ -42,11 +41,11 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
     let coslats = [];
     let hyp;
 
-    if(p.length === 0) return
+    if (p.length === 0) return
     // iterate over the points
     for (let i = 0; i < p.length; i++) {
-       const point =  p[i]
-        if(!point.latitude || !point.longitude)continue;
+        const point = p[i]
+        if (!point.latitude || !point.longitude) continue;
 
         lats1[i] = rad(point.latitude);
         lons1[i] = rad(point.longitude);
@@ -60,25 +59,22 @@ export function calculate(p: { longitude?: number, latitude?: number }[]) {
         z += z1;
     }
     midlng = Math.atan2(y, x);
-    hyp = Math.sqrt(x * x + y * y);
-    midlat = Math.atan2(z, hyp);
+    midlat = Math.atan2(z, Math.sqrt(x ** 2 + y ** 2));
 
-    //what is ci?
-    if (cI !== 2 && Math.abs(x) < 1.0e-9 && Math.abs(y) < 1.0e-9 && Math.abs(z) < 1.0e-9) {
-        // if (MM) MM = remove(MM);
+    if (Math.abs(x) < 1.0e-9 && Math.abs(y) < 1.0e-9 && Math.abs(z) < 1.0e-9) {
         console.log('The midpoint is the center of the earth.');
     } else {
-        if (cI === 2) {
+        if (method === "averageLatLng") {
             y = 0;
             x = 0;
             for (let i = 0; i < lats1.length; i++) {
-                y = y + lats1[i];
-                x = x + normalizeLongitude(lons1[i] - midlng);
+                y += lats1[i];
+                x += normalizeLongitude(lons1[i] - midlng);
             }
             midlat = y;
             midlng = normalizeLongitude(x + midlng);
-        } else if (cI === 1) {
-            if (lats1.length >= 2) {
+        } else if (method === "minDistance") {
+            if (p.length >= 2) {
                 let tries = 0;
                 lats1[lats1.length] = midlat;
                 lons1[lons1.length] = midlng;

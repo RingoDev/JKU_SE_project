@@ -1,18 +1,30 @@
-#landingContainer{
+#landingContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%
-}
-#landingContainer > div{
-    width:20em;
-    padding:1em;
+    height: 50%
 }
 
-.card-content{
+#landingContainer > div {
+
+    padding: 1em;
+}
+
+.card-content {
     text-align: center;
 }
-#landingContainer input{
+
+#landingContainer input {
     text-align: center;
+}
+
+#landingcard {
+    max-width: 30rem;
+}
+
+@media(min-width: 992px) {
+    #landingcard {
+        width: 30rem;
+    }
 }
