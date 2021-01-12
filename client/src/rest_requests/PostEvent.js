@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Col, Container, Row} from "react-bootstrap";
 import {Card} from "../components/Card/Card";
 
+const opencage = require('opencage-api-client');
 
 export default class PostEvent extends React.Component {
     state = {
@@ -13,17 +14,26 @@ export default class PostEvent extends React.Component {
         date: ''
     }
 
+
+
     handleChangeName = event => {
         this.setState({ name: event.target.value });
     }
 
-    handleChangeLng = event => {
-        this.setState({ lng: event.target.value });
-    }
+    handleChangeAddress = event => {
+        opencage.geocode({q: event.target.value, key: "cea7ad2df2d840af9721a1df325eb7b7"})
+            .then(response => {
+                console.log(response.results[0].geometry)
+                const { lat, lng } = response.results[0].geometry;
+                this.setState({lat: lat});
+                this.setState({lng: lng});
 
-    handleChangeLat = event => {
-        this.setState({ lat: event.target.value });
-    }
+            })
+            .catch((error) => {
+                console.log('error ' + error.message);
+            })
+        }
+
 
     handleChangeDesc = event => {
         this.setState({ desc: event.target.value });
@@ -90,15 +100,9 @@ export default class PostEvent extends React.Component {
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
-                                                    <label htmlFor="lng" className="col-4 col-form-label">Longitude</label>
+                                                    <label htmlFor="lng" className="col-4 col-form-label">Address</label>
                                                     <div className="col-8">
-                                                        <input id="lng" name="lng" type="text" className="form-control"  onChange={this.handleChangeLng}/>
-                                                    </div>
-                                                </div>
-                                                <div className="form-group row">
-                                                    <label htmlFor="lat" className="col-4 col-form-label">Latitude</label>
-                                                    <div className="col-8">
-                                                        <input id="lat" name="lat" type="text" className="form-control"  onChange={this.handleChangeLat}/>
+                                                        <input id="address" name="address" type="text" className="form-control"  onChange={this.handleChangeAddress}/>
                                                     </div>
                                                 </div>
                                                 <div className="form-group row">
