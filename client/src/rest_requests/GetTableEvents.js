@@ -52,9 +52,7 @@ export default class GetTableEvents extends React.Component {
         }
 
         return (
-
             <tbody>
-
             {ev.map((event) => {
                 return (
                     <tr>
