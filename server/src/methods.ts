@@ -130,19 +130,19 @@ function docToUser(doc: any): User | undefined {
 export function initializeDB() {
     // remove all Users on startup
     UserModel.deleteMany({}, (err) => {
-        for (let testUser of getTestUsers()) {
-            UserModel.findOne({name: testUser.name},
-                (_error, result) => {
-                    // if there was no user with the name -> create User
-                    if (result === null) {
-                        console.log("Testuser was not in the db ")
-                        const newUser = new UserModel(testUser)
-                        newUser.save().then((result) => console.log("Testuser was saved to db ", result))
-
-                    } else {
-                        console.log("Testuser was in the db ", result)
-                    }
-                })
-        }
+        // for (let testUser of getTestUsers()) {
+        //     UserModel.findOne({name: testUser.name},
+        //         (_error, result) => {
+        //             // if there was no user with the name -> create User
+        //             if (result === null) {
+        //                 console.log("Testuser was not in the db ")
+        //                 const newUser = new UserModel(testUser)
+        //                 newUser.save().then((result) => console.log("Testuser was saved to db ", result))
+        //
+        //             } else {
+        //                 console.log("Testuser was in the db ", result)
+        //             }
+        //         })
+        // }
     })
 }
