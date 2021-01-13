@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import Moment from 'moment';
-import {locationTest} from "../variables/Variables";
 import Delete from "./Delete";
-// Documentation axios: https://www.npmjs.com/package/axios#axios-api
+
 
 export default class GetTableEvents extends React.Component {
     constructor(props) {

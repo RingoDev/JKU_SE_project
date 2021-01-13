@@ -2,7 +2,6 @@ import React from 'react';
 import Location from './Location'
 import Map from "./Map";
 import {Container} from "reactstrap";
-import {Requests} from "../rest_requests/Requests";
 
 export default class MapMain extends React.Component {
     constructor(props) {
@@ -33,22 +32,5 @@ export default class MapMain extends React.Component {
         return this.state.location.coords
     }
 
-    getLatitude() {
-        if (this.checkLocation()) {
-            return this.state.location.coords.latitude
-        }
-    }
-
-    getLongitude() {
-        if (this.checkLocation()) {
-            return this.state.location.coords.longitude
-        }
-    }
-
-    getTimeStamp() {
-        if (this.checkLocation()) {
-            return new Date(this.state.location.timestamp).toISOString()
-        }
-    }
 }
 

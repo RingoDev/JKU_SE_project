@@ -10,9 +10,7 @@ require('dotenv/config');
 app.use(cors());
 app.use(bodyParser.json());
 
-//Import Routes
-const postsRoute = require('./routes/users');
-app.use('/users', postsRoute);
+//Import Route
 const postsEventRoute = require('./routes/events');
 app.use('/events', postsEventRoute);
 

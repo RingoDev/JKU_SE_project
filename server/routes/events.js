@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-let Event = require('../models/Event');
 let ShortEvent = require('../models/ShortEvent');
 
 /**

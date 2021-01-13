@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
-import GetMapEvents from "../rest_requests/GetMapEvents";
 
 import Marker from "../components/Marker";
 import "../App.css";
-import { locationTest } from "../variables/Variables";
 import axios from "axios";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;

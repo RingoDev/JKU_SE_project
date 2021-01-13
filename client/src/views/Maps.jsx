@@ -41,18 +41,9 @@ const CustomMap = withScriptjs(
   ))
 );
 
-/*
-<CustomMap
-      googleMapURL="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `100vh` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
- */
-
 export function Maps({ ...prop }) {
   return (
-    <Map></Map>
+    <Map />
   );
 }
 
